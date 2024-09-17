@@ -1,0 +1,24 @@
+﻿@using Radzen
+@using SignalF.Studio.Designer.Components;
+
+@page "/"
+<div style="height: 100%">
+    <RadzenRow Style="width: 100%; height: 100%">
+        <RadzenColumn >
+            <RadzenTabs RenderMode="TabRenderMode.Client" Style="height: 100%; width: 100%">
+                <Tabs>
+                    <RadzenTabsItem Text="Design">
+                        <RadzenRow Style="height: 100%;">
+                            <RadzenColumn>
+                                <MyDiagram></MyDiagram>
+                            </RadzenColumn>
+                        </RadzenRow>
+                    </RadzenTabsItem>
+                    <RadzenTabsItem Text="Tasks"></RadzenTabsItem>
+                    <RadzenTabsItem Text="Templates"></RadzenTabsItem>
+                </Tabs>
+            </RadzenTabs>
+        </RadzenColumn>
+    </RadzenRow>
+
+</div>

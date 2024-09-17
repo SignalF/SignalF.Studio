@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.8" />
+	  <PackageReference Include="SignalF.Datamodel" Version="0.8.0-dev.171" PrivateAssets="contentFiles" />
+	  <PackageReference Include="Radzen.Blazor" Version="*" />
+	  <PackageReference Include="Z.Blazor.Diagrams" Version="3.0.2" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Module\" />
+  </ItemGroup>
+
+</Project>

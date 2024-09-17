@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:SignalF.Studio"
+            xmlns:blazor="clr-namespace:Microsoft.AspNetCore.Components.WebView.Maui;assembly=Microsoft.AspNetCore.Components.WebView.Maui"
+            xmlns:pages="clr-namespace:SignalF.Studio.Designer.Pages"
+            xmlns:pages1="using:SignalF.Studio.Components.Pages"
+            x:Class="SignalF.Studio.MainPage">
+
+    <TabbedPage.ItemTemplate>
+        <DataTemplate>
+            <ContentPage Title="XXXXXXXXX">
+                <StackLayout Padding="5, 25">
+                    <Label Text="XXXXXXXX"
+                           TextColor="Red"
+                           FontAttributes="Bold"
+                           FontSize="28"
+                           HorizontalOptions="Center" />
+                    <!--<Image Source="{Binding PhotoUrl}"
+                           HorizontalOptions="Center"
+                           WidthRequest="200"
+                           HeightRequest="200" />-->
+                </StackLayout>
+            </ContentPage>
+        </DataTemplate>
+    </TabbedPage.ItemTemplate>
+    
+    <ContentPage Title="Home">
+        <blazor:BlazorWebView HostPage="wwwroot/index.html">
+            <blazor:BlazorWebView.RootComponents>
+                <blazor:RootComponent Selector="#app" ComponentType="{x:Type pages1:Home}" />
+            </blazor:BlazorWebView.RootComponents>
+        </blazor:BlazorWebView>
+    </ContentPage>
+
+    <ContentPage Title="Counter">
+        <blazor:BlazorWebView HostPage="wwwroot/index.html">
+            <blazor:BlazorWebView.RootComponents>
+                <blazor:RootComponent Selector="#app" ComponentType="{x:Type pages1:Counter}" />
+            </blazor:BlazorWebView.RootComponents>
+        </blazor:BlazorWebView>
+    </ContentPage>
+
+    <ContentPage Title="Weather">
+        <blazor:BlazorWebView HostPage="wwwroot/index.html">
+            <blazor:BlazorWebView.RootComponents>
+                <blazor:RootComponent Selector="#app" ComponentType="{x:Type pages1:Weather}" />
+            </blazor:BlazorWebView.RootComponents>
+        </blazor:BlazorWebView>
+    </ContentPage>
+
+</TabbedPage>
