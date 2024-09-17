@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.WebView.Maui;
-using SignalF.Studio.Components.Pages;
+using SignalF.Studio.Maui.Server.Components.Pages;
 
-namespace SignalF.Studio
+namespace SignalF.Studio.Maui.Server
 {
     public partial class MainPage : TabbedPage
     {

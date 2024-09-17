@@ -1,4 +1,4 @@
-﻿namespace SignalF.Studio
+﻿namespace SignalF.Studio.Maui.Server
 {
     public partial class App : Application
     {

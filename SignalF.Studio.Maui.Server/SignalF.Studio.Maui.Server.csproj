@@ -14,7 +14,7 @@
         <!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
         <OutputType>Exe</OutputType>
-        <RootNamespace>SignalF.Studio</RootNamespace>
+        <RootNamespace>SignalF.Studio.Maui.Server</RootNamespace>
         <UseMaui>true</UseMaui>
         <SingleProject>true</SingleProject>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -69,6 +69,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\SignalF.Studio.Designer\SignalF.Studio.Designer.csproj" />
+      <ProjectReference Include="..\SignalF.Studio.Maui.Client\SignalF.Studio.Maui.Client.csproj" />
     </ItemGroup>
 
 </Project>

@@ -4,8 +4,8 @@
             xmlns:local="clr-namespace:SignalF.Studio"
             xmlns:blazor="clr-namespace:Microsoft.AspNetCore.Components.WebView.Maui;assembly=Microsoft.AspNetCore.Components.WebView.Maui"
             xmlns:pages="clr-namespace:SignalF.Studio.Designer.Pages"
-            xmlns:pages1="using:SignalF.Studio.Components.Pages"
-            x:Class="SignalF.Studio.MainPage">
+            xmlns:pages1="using:SignalF.Studio.Maui.Server.Components.Pages"
+            x:Class="SignalF.Studio.Maui.Server.MainPage">
 
     <TabbedPage.ItemTemplate>
         <DataTemplate>

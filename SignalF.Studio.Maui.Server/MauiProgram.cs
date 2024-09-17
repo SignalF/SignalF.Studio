@@ -1,10 +1,9 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SignalF.Studio.Designer;
 using SignalF.Studio.Designer.Module;
 
-namespace SignalF.Studio
+namespace SignalF.Studio.Maui.Server
 {
     public static class MauiProgram
     {

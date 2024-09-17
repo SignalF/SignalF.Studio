@@ -2,25 +2,31 @@
 @using Blazor.Diagrams.Components.Renderers;
 
 
+@if (Node == null)
+{
+    <div>Loading...</div>
+}
+else
+{
+    <div class="signal-processor-node" style=@($"width: {Node.Size?.Width}px; height: {Node.Size?.Height}px;")>
+        <input type="text" class="form-control" bind-value="@Node.Name" placeholder="Signal Processor"/>
+        <div>
+            @{
+                int y = 40;
+                foreach (var port in Node.Ports)
+                {
 
-<div class="signal-processor-node" style=@($"width: {Node.Size.Width}px; height: {Node.Size.Height}px;")>
-    <input type="text" class="form-control" @bind-value="Node.Name" placeholder="Signal Processor"/>
-    <div>
-        @{
-            int y = 40;
-            foreach (var port in Node.Ports)
-            {
-
-                @* <div class="rectangle-port" style="position: absolute; left: @(port.Position.X)px; top: @(port.Position.Y)px;"></div> *@
-                <PortRenderer @key="port" Port="port" Class="rectangle-port" Style=@($"top: {y}px;")/>
-                y += 40;
+                    @* <div class="rectangle-port" style="position: absolute; left: @(port.Position.X)px; top: @(port.Position.Y)px;"></div> *@
+                    <PortRenderer @key="port" Port="port" Class="rectangle-port" Style=@($"top: {y}px;")/>
+                    y += 40;
+                }
             }
-        }
+        </div>
     </div>
-</div>
 
+}
 
 @code {
     // This gets filled by the library
-    [Parameter] public SignalProcessorNode Node { get; set; } = null!;
+    [Parameter] public SignalProcessorNode? Node { get; set; }
 }

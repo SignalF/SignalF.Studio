@@ -6,7 +6,7 @@ namespace SignalF.Studio.Designer.Nodes
 {
     public class SignalProcessorNode : NodeModel
     {
-        private string _name;// = "TestName";
+        private string _name = "TestName";
 
         public SignalProcessorNode(string id, Point position, Size size) : base(id, position)
         {
