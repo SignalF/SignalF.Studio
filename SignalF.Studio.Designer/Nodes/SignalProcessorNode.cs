@@ -1,24 +1,30 @@
 ﻿using Blazor.Diagrams.Core.Geometry;
 using Blazor.Diagrams.Core.Models;
 using Microsoft.AspNetCore.Components;
+using SignalF.Datamodel.Signals;
 
 namespace SignalF.Studio.Designer.Nodes
 {
     public class SignalProcessorNode : NodeModel
     {
-        private string _name = "TestName";
+        private readonly ISignalProcessorConfiguration _configuration;
 
-        public SignalProcessorNode(string id, Point position, Size size) : base(id, position)
+        public SignalProcessorNode(ISignalProcessorConfiguration configuration, Point position, Size size) 
+            : base(configuration.Id.ToString("D"), position)
         {
+            _configuration = configuration;
+            //var x = _configuration.SignalSinks.First();
             Size = size;
         }
 
-        [Parameter]
-        public string Name
+        public string? Name
         {
-            get => _name;
-            set => _name = value;
+            get => _configuration.Name;
+            set => _configuration.Name = value;
         }
-
+        public string? DefinitionName
+        {
+            get => _configuration.Definition.Name ?? _configuration.Definition.Template.Name ;
+        }
     }
 }

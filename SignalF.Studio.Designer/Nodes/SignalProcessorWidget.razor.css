@@ -17,9 +17,6 @@ div > input[type=text] {
     text-align: center;
     
     width: 100%;    
-/*        text-transform: uppercase;
-*/        /* ReSharper disable once CssBrowserCompatibility */
-/*        align-content: center;*/
     margin: 0;
     margin-bottom: 0;
     padding: 0.5rem;
@@ -27,6 +24,27 @@ div > input[type=text] {
     box-sizing: border-box;
     border-width: 0 0 0 0;
 }
+
+::deep .rz-textbox {
+    font-family: Arial;
+    font-size: 1.2rem;
+    text-align: center;
+    width: 100%;
+    background-color: lightblue;
+    margin: 0;
+    padding: 5px;
+    border-width: 0;
+    border-radius: 0;
+}
+
+    ::deep .rz-textbox:hover {
+         border-color: red !important;
+    }
+    ::deep .rz-state-focused {
+        border-color: yellow !important;
+         border-width: 0 !important;
+    }
+
 
 /*    div > input[type=number] {
         padding: 3px;

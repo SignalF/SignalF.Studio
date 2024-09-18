@@ -1,0 +1,51 @@
+﻿@* <RadzenSplitter Collapse="@OnCollapse" Expand="@OnExpand">
+    <RadzenSplitterPane Size="10%" Min="10%" Max="40%">
+        Pane A2
+    </RadzenSplitterPane>
+    <RadzenSplitterPane>
+ *@        <RadzenRow Style="height: 100%; width: 100%;">
+            <RadzenColumn >
+                <RadzenTabs RenderMode="TabRenderMode.Client" Style="height: 100%; width: 100%">
+                    <Tabs>
+                        <RadzenTabsItem Text="Design">
+                            <RadzenRow Style="height: 100%;">
+                                <RadzenColumn>
+                                    <SfDiagram></SfDiagram>
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenTabsItem>
+                        <RadzenTabsItem Text="Tasks"></RadzenTabsItem>
+                        <RadzenTabsItem Text="Templates"></RadzenTabsItem>
+                    </Tabs>
+                </RadzenTabs>
+            </RadzenColumn>
+        </RadzenRow>
+@*     </RadzenSplitterPane>
+</RadzenSplitter>
+ *@
+
+@code {
+
+    void OnCollapse(RadzenSplitterEventArgs args)
+    {
+    }
+
+    void OnExpand(RadzenSplitterEventArgs args)
+    {
+    }
+
+    void OnResize(RadzenSplitterResizeEventArgs args)
+    {
+    }
+
+    void OnCollapseDisabled(RadzenSplitterEventArgs args)
+    {
+        args.Cancel = true;
+    }
+
+    void OnResizeDisabled(RadzenSplitterResizeEventArgs args)
+    {
+        args.Cancel = true;
+    }
+
+}

@@ -1,5 +1,7 @@
 ﻿@using Blazor.Diagrams.Components
 @using Blazor.Diagrams.Components.Renderers;
+@using Radzen.Blazor
+@using SignalF.Studio.Designer.Nodes
 
 
 @if (Node == null)
@@ -9,7 +11,7 @@
 else
 {
     <div class="signal-processor-node" style=@($"width: {Node.Size?.Width}px; height: {Node.Size?.Height}px;")>
-        <input type="text" class="form-control" bind-value="@Node.Name" placeholder="Signal Processor"/>
+        <RadzenTextBox @bind-Value="@Node.Name" Placeholder="@Node.DefinitionName" />
         <div>
             @{
                 int y = 40;
@@ -29,4 +31,5 @@ else
 @code {
     // This gets filled by the library
     [Parameter] public SignalProcessorNode? Node { get; set; }
+
 }

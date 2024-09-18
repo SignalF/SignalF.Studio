@@ -33,6 +33,9 @@ namespace SignalF.Studio.Designer.Module
             //builder.RegisterType<ConfigurationFactory>()
             //    .As<IConfigurationFactory>()
             //    .InstancePerLifetimeScope();
+
+            builder.RegisterType<DocumentManager>()
+                .InstancePerLifetimeScope();
         }
     }
 }

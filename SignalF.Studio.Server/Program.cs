@@ -16,7 +16,8 @@ internal static class Program
 // Add services to the container.
         builder.Services.AddRazorComponents()
             .AddInteractiveServerComponents()
-            .AddHubOptions(options => options.MaximumReceiveMessageSize = 10 * 1024 * 1024);
+            .AddHubOptions(options => options.MaximumReceiveMessageSize = 10 * 1024 * 1024)
+            ;
 
         builder.Services.AddControllers();
         builder.Services.AddRadzenComponents();

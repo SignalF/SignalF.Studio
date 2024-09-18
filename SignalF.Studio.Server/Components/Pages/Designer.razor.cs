@@ -12,7 +12,7 @@ using Radzen.Blazor;
 
 namespace SignalF.Studio.Server.Components.Pages
 {
-    public partial class Index
+    public partial class Designer
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }

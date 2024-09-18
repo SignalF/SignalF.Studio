@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?XMLDatabase schemaVersion="1.3.1.0"?>
+<ControllerConfiguration xsi:type="SignalF.Datamodel.Configuration.ControllerConfigurationType" id="ID11d28aba-ac2d-474e-8883-b340d5fae114" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:SignalF.1.0">
+  <SignalProcessorTemplates xsi:type="SignalF.Datamodel.Signals.SignalProcessorTemplateListType">
+    <SignalProcessorTemplate xsi:type="SignalF.Datamodel.Hardware.DeviceTemplateType" id="IDe45c1c07-4f1a-42cf-aab2-1cb39c26c73f" Name="CpuTemperatureTemplate" Type="SignalF.Devices.CpuTemperature;SignalF.Devices.CpuTemperature.CpuTemperature">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+      <SignalSourceDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType">
+        <SignalEndpointDefinition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionType" id="ID4ab9f685-681a-481b-90d8-fcbd39ef7ab1" Name="CpuTemperature" UnitType="Temperature" />
+      </SignalSourceDefinitions>
+      <SignalSinkDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType" />
+    </SignalProcessorTemplate>
+    <SignalProcessorTemplate xsi:type="SignalF.Datamodel.Hardware.DeviceTemplateType" id="ID88f6e2c1-7506-4743-b942-661228afe98c" Name="Bme280Template" Type="SignalF.Devices.IotDevices;SignalF.Devices.IotDevices.Bme280.Bme280">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+      <SignalSourceDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType" />
+      <SignalSinkDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType" />
+    </SignalProcessorTemplate>
+    <SignalProcessorTemplate xsi:type="SignalF.Datamodel.Signals.SignalProcessorTemplateType" id="ID9b6d8941-3a5e-453f-992f-be44a40bb491" Name="DefaultTemplate" Type="SignalF.Controller.Abstractions;SignalF.Controller.Signals.SignalProcessor.ISignalProcessor">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+      <SignalSourceDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType" />
+      <SignalSinkDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType" />
+    </SignalProcessorTemplate>
+    <SignalProcessorTemplate xsi:type="SignalF.Datamodel.Calculation.CalculatorTemplateType" id="IDcc3cb804-dbdb-4748-9470-4be302b25098" Name="DefaultCalculatorTemplate" Type="SignalF.Controller.Abstractions;SignalF.Controller.Signals.Calculators.ICalculator">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+      <SignalSourceDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType" />
+      <SignalSinkDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType" />
+    </SignalProcessorTemplate>
+    <SignalProcessorTemplate xsi:type="SignalF.Datamodel.Hardware.DeviceTemplateType" id="ID4f4a3365-ef39-454a-b0d5-a085b9674301" Name="DefaultDeviceTemplate" Type="SignalF.Controller.Abstractions;SignalF.Controller.Signals.Devices.IDevice">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+      <SignalSourceDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType" />
+      <SignalSinkDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType" />
+    </SignalProcessorTemplate>
+  </SignalProcessorTemplates>
+  <SignalProcessorDefinitions xsi:type="SignalF.Datamodel.Signals.SignalProcessorDefinitionListType">
+    <SignalProcessorDefinition xsi:type="SignalF.Datamodel.Hardware.DeviceDefinitionType" ConnectionType="None" id="ID66b1bd09-c420-472b-a4b2-aa9ec56afced" Name="CpuTemperatureDefinition">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+      <Template xsi:type="SignalF.Datamodel.Signals.SignalProcessorTemplateRefType" idRef="IDe45c1c07-4f1a-42cf-aab2-1cb39c26c73f" />
+      <SignalSourceDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType" />
+      <SignalSinkDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType" />
+    </SignalProcessorDefinition>
+    <SignalProcessorDefinition xsi:type="SignalF.Datamodel.Hardware.GpioPinAccessDefinitionType" ConnectionType="None" id="IDee31dae4-4127-439c-a93e-13777b269530" Name="GpioPinAccessDefinition" Type="SignalF.Controller.Abstractions;SignalF.Controller.Signals.Devices.IGpioPinAccess">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+      <Template xsi:type="SignalF.Datamodel.Signals.SignalProcessorTemplateRefType" idRef="ID9b6d8941-3a5e-453f-992f-be44a40bb491" />
+      <SignalSourceDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType" />
+      <SignalSinkDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType">
+        <SignalEndpointDefinition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionType" id="ID2f9a448d-db16-405f-9a0e-9d98bb6c7be1" Name="OK" UnitType="None" />
+        <SignalEndpointDefinition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionType" id="ID88f77026-3183-42c3-a761-9f633141dd41" Name="Warning" UnitType="None" />
+        <SignalEndpointDefinition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionType" id="IDba6cd517-8b3b-4b4f-a1f8-75719a8acacf" Name="Alarm" UnitType="None" />
+        <SignalEndpointDefinition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionType" id="IDed3b2204-a597-4f84-8123-a4dd9293b797" Name="Fan" UnitType="None" />
+      </SignalSinkDefinitions>
+    </SignalProcessorDefinition>
+    <SignalProcessorDefinition xsi:type="SignalF.Datamodel.Hardware.DeviceDefinitionType" ConnectionType="None" id="ID2ea31cf9-f528-4633-b63d-ab307cec8ff9" Name="Bme280Definition" Type="SignalF.Devices.IotDevices;SignalF.Devices.IotDevices.Bme280.Bme280">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+      <Template xsi:type="SignalF.Datamodel.Signals.SignalProcessorTemplateRefType" idRef="ID88f6e2c1-7506-4743-b942-661228afe98c" />
+      <SignalSourceDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType">
+        <SignalEndpointDefinition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionType" id="IDa0caebfa-782b-4364-b153-a7a45b7dd459" Name="Temperature" UnitType="Temperature" />
+      </SignalSourceDefinitions>
+      <SignalSinkDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType" />
+    </SignalProcessorDefinition>
+    <SignalProcessorDefinition xsi:type="SignalF.Datamodel.Calculation.CalculatorDefinitionType" id="ID2a3d9293-bd46-4215-a6e9-ee80d53dda10" Name="TemperatureMonitoring" Type="Tutorial;Tutorial.Monitoring.TemperatureMonitoring">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+      <Template xsi:type="SignalF.Datamodel.Signals.SignalProcessorTemplateRefType" idRef="ID9b6d8941-3a5e-453f-992f-be44a40bb491" />
+      <SignalSourceDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType">
+        <SignalEndpointDefinition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionType" id="IDe0410d4e-32a6-4ec6-a53e-b02e4fe0c8d9" Name="OK" UnitType="None" />
+        <SignalEndpointDefinition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionType" id="IDddeccdd3-b915-4e26-8414-4abf08121dfc" Name="Warning" UnitType="None" />
+        <SignalEndpointDefinition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionType" id="ID88980784-9855-48f9-9c6d-e6672c32a08e" Name="Alarm" UnitType="None" />
+        <SignalEndpointDefinition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionType" id="IDdefea958-bbe4-40f7-8b81-e47d062765b9" Name="Fan" UnitType="None" />
+      </SignalSourceDefinitions>
+      <SignalSinkDefinitions xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionListType">
+        <SignalEndpointDefinition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionType" id="ID74621a60-e4ba-4716-b858-f6c8335f3394" Name="CpuTemperature" UnitType="Temperature" />
+      </SignalSinkDefinitions>
+    </SignalProcessorDefinition>
+  </SignalProcessorDefinitions>
+  <SignalProcessorConfigurations xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationListType">
+    <SignalProcessorConfiguration xsi:type="SignalF.Datamodel.Hardware.DeviceConfigurationType" id="IDb0556fb2-aa50-4548-931e-5402eaf8f50a" Name="CPU">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+      <Definition xsi:type="SignalF.Datamodel.Signals.SignalProcessorDefinitionRefType" idRef="ID66b1bd09-c420-472b-a4b2-aa9ec56afced" />
+      <SignalSources xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationListType">
+        <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationType" id="IDff921b6c-f84b-4b7e-95a4-ceefd65e51d2" Name="Temperature">
+          <Definition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionRefType" idRef="ID4ab9f685-681a-481b-90d8-fcbd39ef7ab1" />
+          <Unit xsi:type="SignalF.Datamodel.Units.TemperatureUnitType" Unit="DegreeCelsius" />
+        </SignalSource>
+      </SignalSources>
+      <SignalSinks xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationListType" />
+    </SignalProcessorConfiguration>
+    <SignalProcessorConfiguration xsi:type="SignalF.Datamodel.Hardware.GpioPinAccessConfigurationType" id="ID400ce31c-ce1a-46fb-b98a-4099f91ddb5b" Name="GpioPinAccess">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+      <Definition xsi:type="SignalF.Datamodel.Signals.SignalProcessorDefinitionRefType" idRef="IDee31dae4-4127-439c-a93e-13777b269530" />
+      <SignalSources xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationListType" />
+      <SignalSinks xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationListType">
+        <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationType" id="IDc90868a4-48db-4348-b1b8-e71b50fbdc5a" Name="OK">
+          <Definition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionRefType" idRef="ID2f9a448d-db16-405f-9a0e-9d98bb6c7be1" />
+          <Unit xsi:type="SignalF.Datamodel.Units.NumericUnitType" Unit="Any" />
+        </SignalSink>
+        <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationType" id="ID3c8cbcf7-ee33-43f4-9263-11ede08b945f" Name="Warning">
+          <Definition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionRefType" idRef="ID88f77026-3183-42c3-a761-9f633141dd41" />
+          <Unit xsi:type="SignalF.Datamodel.Units.NumericUnitType" Unit="Any" />
+        </SignalSink>
+        <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationType" id="ID771b10c5-28b3-44bd-8649-8e3825407444" Name="Alarm">
+          <Definition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionRefType" idRef="IDba6cd517-8b3b-4b4f-a1f8-75719a8acacf" />
+          <Unit xsi:type="SignalF.Datamodel.Units.NumericUnitType" Unit="Any" />
+        </SignalSink>
+        <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationType" id="IDcd58a976-1416-4081-b1c6-70847dc5c495" Name="Fan">
+          <Definition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionRefType" idRef="IDed3b2204-a597-4f84-8123-a4dd9293b797" />
+          <Unit xsi:type="SignalF.Datamodel.Units.NumericUnitType" Unit="Any" />
+        </SignalSink>
+      </SignalSinks>
+    </SignalProcessorConfiguration>
+    <SignalProcessorConfiguration xsi:type="SignalF.Datamodel.Hardware.DeviceConfigurationType" id="ID66203c32-36f6-493a-8b0f-5d1584455a09" Name="Bme280">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" Data="{&quot;PowerMode&quot;:3,&quot;TemperatureSampling&quot;:1,&quot;HumiditySampling&quot;:1,&quot;PressureSampling&quot;:1,&quot;StandbyTime&quot;:5}" />
+      <Definition xsi:type="SignalF.Datamodel.Signals.SignalProcessorDefinitionRefType" idRef="ID2ea31cf9-f528-4633-b63d-ab307cec8ff9" />
+      <SignalSources xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationListType">
+        <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationType" id="ID4f3bfe7c-2b3b-4574-bdde-5f44cd09b182" Name="Temperature">
+          <Definition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionRefType" idRef="IDa0caebfa-782b-4364-b153-a7a45b7dd459" />
+          <Unit xsi:type="SignalF.Datamodel.Units.TemperatureUnitType" Unit="DegreeCelsius" />
+        </SignalSource>
+      </SignalSources>
+      <SignalSinks xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationListType" />
+    </SignalProcessorConfiguration>
+    <SignalProcessorConfiguration xsi:type="SignalF.Datamodel.Calculation.CalculatorConfigurationType" id="ID4cbcc7e1-51f4-44ac-a305-5c4302a670f8" Name="TemperatureMonitoring" Type="Tutorial;Tutorial.Monitoring.TemperatureMonitoring">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+      <Definition xsi:type="SignalF.Datamodel.Signals.SignalProcessorDefinitionRefType" idRef="ID2a3d9293-bd46-4215-a6e9-ee80d53dda10" />
+      <SignalSources xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationListType">
+        <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationType" id="ID25572a3c-8b23-4d8d-a0e0-2c676f2beef9" Name="OK">
+          <Definition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionRefType" idRef="IDe0410d4e-32a6-4ec6-a53e-b02e4fe0c8d9" />
+          <Unit xsi:type="SignalF.Datamodel.Units.NumericUnitType" Unit="Any" />
+        </SignalSource>
+        <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationType" id="IDba8c4007-7404-48f6-bd8c-508dbacfc61b" Name="Warning">
+          <Definition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionRefType" idRef="IDddeccdd3-b915-4e26-8414-4abf08121dfc" />
+          <Unit xsi:type="SignalF.Datamodel.Units.NumericUnitType" Unit="Any" />
+        </SignalSource>
+        <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationType" id="ID05884905-1ed5-4093-9db3-554c21b3e947" Name="Alarm">
+          <Definition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionRefType" idRef="ID88980784-9855-48f9-9c6d-e6672c32a08e" />
+          <Unit xsi:type="SignalF.Datamodel.Units.NumericUnitType" Unit="Any" />
+        </SignalSource>
+        <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationType" id="ID98b9ed3e-faf7-4393-992c-51e411880728" Name="Fan">
+          <Definition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionRefType" idRef="IDdefea958-bbe4-40f7-8b81-e47d062765b9" />
+          <Unit xsi:type="SignalF.Datamodel.Units.NumericUnitType" Unit="Any" />
+        </SignalSource>
+      </SignalSources>
+      <SignalSinks xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationListType">
+        <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationType" id="ID0f3470ec-be02-4dbb-b70b-bf936dfd67c5" Name="CpuTemperature">
+          <Definition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionRefType" idRef="ID74621a60-e4ba-4716-b858-f6c8335f3394" />
+          <Unit xsi:type="SignalF.Datamodel.Units.TemperatureUnitType" Unit="DegreeCelsius" />
+        </SignalSink>
+      </SignalSinks>
+    </SignalProcessorConfiguration>
+  </SignalProcessorConfigurations>
+  <HardwareConfiguration xsi:type="SignalF.Datamodel.Hardware.HardwareConfigurationType">
+    <ChannelGroups xsi:type="SignalF.Datamodel.Hardware.ChannelGroupConfigurationListType">
+      <ChannelGroup xsi:type="SignalF.Datamodel.Hardware.GpioChannelGroupConfigurationType" id="ID74df039e-5095-4e12-a295-61a4d6b877c2" Name="GPIO" Type="SignalF.Controller.Abstractions;SignalF.Controller.Hardware.Channels.Gpio.IGpioChannelGroup">
+        <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+        <Channels xsi:type="SignalF.Datamodel.Hardware.ChannelConfigurationListType">
+          <Channel xsi:type="SignalF.Datamodel.Hardware.GpioChannelConfigurationType" DriveMode="Output" PinNumber="17" SharingMode="Exclusive" id="IDe0cc288e-b7d0-4dce-9893-d4d3ee1bbc89" Name="GPIO17" Type="SignalF.Controller.Abstractions;SignalF.Controller.Hardware.Channels.Gpio.IGpioChannel">
+            <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" Data="{&quot;PinNumber&quot;:17,&quot;InitialValue&quot;:null,&quot;DriveMode&quot;:1,&quot;SharingMode&quot;:0}" />
+          </Channel>
+          <Channel xsi:type="SignalF.Datamodel.Hardware.GpioChannelConfigurationType" DriveMode="Output" PinNumber="18" SharingMode="Exclusive" id="ID789d72ad-5df2-4d83-9d70-d899117c4874" Name="GPIO18" Type="SignalF.Controller.Abstractions;SignalF.Controller.Hardware.Channels.Gpio.IGpioChannel">
+            <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" Data="{&quot;PinNumber&quot;:18,&quot;InitialValue&quot;:null,&quot;DriveMode&quot;:1,&quot;SharingMode&quot;:0}" />
+          </Channel>
+          <Channel xsi:type="SignalF.Datamodel.Hardware.GpioChannelConfigurationType" DriveMode="Output" PinNumber="22" SharingMode="Exclusive" id="ID47cffe86-9b77-4e3c-8762-7da89c893b3e" Name="GPIO22" Type="SignalF.Controller.Abstractions;SignalF.Controller.Hardware.Channels.Gpio.IGpioChannel">
+            <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" Data="{&quot;PinNumber&quot;:22,&quot;InitialValue&quot;:null,&quot;DriveMode&quot;:1,&quot;SharingMode&quot;:0}" />
+          </Channel>
+          <Channel xsi:type="SignalF.Datamodel.Hardware.GpioChannelConfigurationType" DriveMode="Output" PinNumber="27" SharingMode="Exclusive" id="ID0836b94e-1490-44d5-8169-c880f750fd0c" Name="GPIO27" Type="SignalF.Controller.Abstractions;SignalF.Controller.Hardware.Channels.Gpio.IGpioChannel">
+            <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" Data="{&quot;PinNumber&quot;:27,&quot;InitialValue&quot;:null,&quot;DriveMode&quot;:1,&quot;SharingMode&quot;:0}" />
+          </Channel>
+        </Channels>
+        <DeviceBinding xsi:type="SignalF.Datamodel.Hardware.DeviceBindingConfigurationRefType" idRef="ID7f8c03c5-7eab-477a-a76a-e84e1a3e5c85" />
+      </ChannelGroup>
+      <ChannelGroup xsi:type="SignalF.Datamodel.Hardware.I2cChannelGroupConfigurationType" id="ID41496941-d7ca-45f4-86c5-9c1c4e967963" Name="I2C1" Type="SignalF.Controller.Abstractions;SignalF.Controller.Hardware.Channels.I2c.II2cChannelGroup">
+        <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" Data="{}" />
+        <Channels xsi:type="SignalF.Datamodel.Hardware.ChannelConfigurationListType">
+          <Channel xsi:type="SignalF.Datamodel.Hardware.I2cChannelConfigurationType" DeviceAddress="118" id="IDdb7a5a7e-25c2-490a-afbd-6b47a19cdff0" Name="I2CChannel_76" Type="SignalF.Controller.Abstractions;SignalF.Controller.Hardware.Channels.I2c.II2cChannel">
+            <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+          </Channel>
+        </Channels>
+        <DeviceBinding xsi:type="SignalF.Datamodel.Hardware.DeviceBindingConfigurationRefType" idRef="IDa9476f6a-32f4-4237-8db6-d3ccb3005296" />
+      </ChannelGroup>
+    </ChannelGroups>
+  </HardwareConfiguration>
+  <TaskConfigurations xsi:type="SignalF.Datamodel.Configuration.TaskConfigurationListType">
+    <TaskConfiguration xsi:type="SignalF.Datamodel.Configuration.TaskConfigurationType" id="ID710190c5-34d2-4962-8d77-cfd6350f7698" Name="1s write task" Priority="0" Type="Write">
+      <Raster xsi:type="SignalF.Datamodel.Units.TimeValueType" Unit="Second" SIValue="1" />
+      <SignalProcessorConfigurations xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefListType">
+        <SignalProcessorConfiguration xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefType" idRef="IDb0556fb2-aa50-4548-931e-5402eaf8f50a" />
+        <SignalProcessorConfiguration xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefType" idRef="ID66203c32-36f6-493a-8b0f-5d1584455a09" />
+      </SignalProcessorConfigurations>
+    </TaskConfiguration>
+    <TaskConfiguration xsi:type="SignalF.Datamodel.Configuration.TaskConfigurationType" id="ID5e6b7c64-7a12-4b3c-91ed-054ac24b6b57" Name="1s write task" Priority="0" Type="Write">
+      <Raster xsi:type="SignalF.Datamodel.Units.TimeValueType" Unit="Second" SIValue="1" />
+      <SignalProcessorConfigurations xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefListType" />
+    </TaskConfiguration>
+    <TaskConfiguration xsi:type="SignalF.Datamodel.Configuration.TaskConfigurationType" id="ID478ef5ad-5a19-441e-8680-0e80a195c652" Name="1s read task" Priority="0" Type="Read">
+      <Raster xsi:type="SignalF.Datamodel.Units.TimeValueType" Unit="Second" SIValue="1" />
+      <SignalProcessorConfigurations xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefListType">
+        <SignalProcessorConfiguration xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefType" idRef="ID400ce31c-ce1a-46fb-b98a-4099f91ddb5b" />
+      </SignalProcessorConfigurations>
+    </TaskConfiguration>
+    <TaskConfiguration xsi:type="SignalF.Datamodel.Configuration.TaskConfigurationType" id="ID5a2a410d-5f6f-4f72-90ff-64475b224b6c" Name="1s calculate task" Priority="0" Type="Calculate">
+      <Raster xsi:type="SignalF.Datamodel.Units.TimeValueType" Unit="Second" SIValue="1" />
+      <SignalProcessorConfigurations xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefListType">
+        <SignalProcessorConfiguration xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefType" idRef="ID4cbcc7e1-51f4-44ac-a305-5c4302a670f8" />
+      </SignalProcessorConfigurations>
+    </TaskConfiguration>
+    <TaskConfiguration xsi:type="SignalF.Datamodel.Configuration.TaskConfigurationType" id="ID98d412ec-c699-4fce-bee4-d92acc7dc03c" Name="init task" Priority="0" Type="Init">
+      <Raster xsi:type="SignalF.Datamodel.Units.TimeValueType" Unit="Second" SIValue="0" />
+      <SignalProcessorConfigurations xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefListType">
+        <SignalProcessorConfiguration xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefType" idRef="ID66203c32-36f6-493a-8b0f-5d1584455a09" />
+      </SignalProcessorConfigurations>
+    </TaskConfiguration>
+  </TaskConfigurations>
+  <DataOutputConfigurations xsi:type="SignalF.Datamodel.DataOutput.DataOutputConfigurationListType">
+    <DataOutput xsi:type="SignalF.Datamodel.DataOutput.DataOutputConfigurationType" id="IDcf33155e-2c08-4a7f-bd9d-c87b13a8a087" Name="Measurement">
+      <SignalSources xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationRefListType">
+        <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationRefType" idRef="IDff921b6c-f84b-4b7e-95a4-ceefd65e51d2" />
+        <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationRefType" idRef="ID4f3bfe7c-2b3b-4574-bdde-5f44cd09b182" />
+      </SignalSources>
+      <DataOutputSenders xsi:type="SignalF.Datamodel.DataOutput.DataOutputSenderConfigurationRefListType">
+        <DataOutputSender xsi:type="SignalF.Datamodel.DataOutput.DataOutputSenderConfigurationRefType" idRef="ID15ab328d-cd32-4111-abc9-3523d62b2f4b" />
+      </DataOutputSenders>
+    </DataOutput>
+  </DataOutputConfigurations>
+  <DataOutputSenderConfigurations xsi:type="SignalF.Datamodel.DataOutput.DataOutputSenderConfigurationListType">
+    <DataOutputSender xsi:type="SignalF.Datamodel.DataOutput.DataOutputSenderConfigurationType" id="ID15ab328d-cd32-4111-abc9-3523d62b2f4b" Name="DataOutputSenderConsole" Type="SignalF.DataOutput.Console;SignalF.DataOutput.Console.Console">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" Data="{&quot;ShowTimestamp&quot;:true}" />
+    </DataOutputSender>
+  </DataOutputSenderConfigurations>
+  <Connections xsi:type="SignalF.Datamodel.Signals.SignalConnectionListType">
+    <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionType">
+      <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationRefType" idRef="IDff921b6c-f84b-4b7e-95a4-ceefd65e51d2" />
+      <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationRefType" idRef="ID0f3470ec-be02-4dbb-b70b-bf936dfd67c5" />
+    </Connection>
+    <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionType">
+      <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationRefType" idRef="ID25572a3c-8b23-4d8d-a0e0-2c676f2beef9" />
+      <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationRefType" idRef="IDc90868a4-48db-4348-b1b8-e71b50fbdc5a" />
+    </Connection>
+    <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionType">
+      <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationRefType" idRef="IDba8c4007-7404-48f6-bd8c-508dbacfc61b" />
+      <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationRefType" idRef="ID3c8cbcf7-ee33-43f4-9263-11ede08b945f" />
+    </Connection>
+    <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionType">
+      <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationRefType" idRef="ID05884905-1ed5-4093-9db3-554c21b3e947" />
+      <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationRefType" idRef="ID771b10c5-28b3-44bd-8649-8e3825407444" />
+    </Connection>
+    <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionType">
+      <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationRefType" idRef="ID98b9ed3e-faf7-4393-992c-51e411880728" />
+      <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationRefType" idRef="IDcd58a976-1416-4081-b1c6-70847dc5c495" />
+    </Connection>
+  </Connections>
+  <ChannelToDeviceMappings xsi:type="SignalF.Datamodel.Hardware.ChannelToDevicesMappingListType">
+    <Mapping xsi:type="SignalF.Datamodel.Hardware.ChannelToDevicesMappingType">
+      <Channel xsi:type="SignalF.Datamodel.Hardware.ChannelConfigurationRefType" idRef="IDdb7a5a7e-25c2-490a-afbd-6b47a19cdff0" />
+      <Devices xsi:type="SignalF.Datamodel.Hardware.DeviceConfigurationRefListType">
+        <Device xsi:type="SignalF.Datamodel.Hardware.DeviceConfigurationRefType" idRef="ID66203c32-36f6-493a-8b0f-5d1584455a09" />
+      </Devices>
+    </Mapping>
+  </ChannelToDeviceMappings>
+  <ChannelToSignalEndpointsMappings xsi:type="SignalF.Datamodel.Hardware.ChannelToSignalEndpointsMappingListType">
+    <Mapping xsi:type="SignalF.Datamodel.Hardware.ChannelToSignalEndpointsMappingType">
+      <Channel xsi:type="SignalF.Datamodel.Hardware.ChannelConfigurationRefType" idRef="IDe0cc288e-b7d0-4dce-9893-d4d3ee1bbc89" />
+      <SignalEndpoints xsi:type="SignalF.Datamodel.Signals.SignalEndpointConfigurationRefListType">
+        <SignalEndpoint xsi:type="SignalF.Datamodel.Signals.SignalEndpointConfigurationRefType" idRef="IDc90868a4-48db-4348-b1b8-e71b50fbdc5a" />
+      </SignalEndpoints>
+    </Mapping>
+    <Mapping xsi:type="SignalF.Datamodel.Hardware.ChannelToSignalEndpointsMappingType">
+      <Channel xsi:type="SignalF.Datamodel.Hardware.ChannelConfigurationRefType" idRef="ID47cffe86-9b77-4e3c-8762-7da89c893b3e" />
+      <SignalEndpoints xsi:type="SignalF.Datamodel.Signals.SignalEndpointConfigurationRefListType">
+        <SignalEndpoint xsi:type="SignalF.Datamodel.Signals.SignalEndpointConfigurationRefType" idRef="ID3c8cbcf7-ee33-43f4-9263-11ede08b945f" />
+      </SignalEndpoints>
+    </Mapping>
+    <Mapping xsi:type="SignalF.Datamodel.Hardware.ChannelToSignalEndpointsMappingType">
+      <Channel xsi:type="SignalF.Datamodel.Hardware.ChannelConfigurationRefType" idRef="ID0836b94e-1490-44d5-8169-c880f750fd0c" />
+      <SignalEndpoints xsi:type="SignalF.Datamodel.Signals.SignalEndpointConfigurationRefListType">
+        <SignalEndpoint xsi:type="SignalF.Datamodel.Signals.SignalEndpointConfigurationRefType" idRef="ID771b10c5-28b3-44bd-8649-8e3825407444" />
+      </SignalEndpoints>
+    </Mapping>
+    <Mapping xsi:type="SignalF.Datamodel.Hardware.ChannelToSignalEndpointsMappingType">
+      <Channel xsi:type="SignalF.Datamodel.Hardware.ChannelConfigurationRefType" idRef="ID789d72ad-5df2-4d83-9d70-d899117c4874" />
+      <SignalEndpoints xsi:type="SignalF.Datamodel.Signals.SignalEndpointConfigurationRefListType">
+        <SignalEndpoint xsi:type="SignalF.Datamodel.Signals.SignalEndpointConfigurationRefType" idRef="IDcd58a976-1416-4081-b1c6-70847dc5c495" />
+      </SignalEndpoints>
+    </Mapping>
+  </ChannelToSignalEndpointsMappings>
+  <DeviceBindings xsi:type="SignalF.Datamodel.Hardware.DeviceBindingConfigurationListType">
+    <DeviceBinding xsi:type="SignalF.Datamodel.Hardware.GpioDeviceBindingConfigurationType" id="ID7f8c03c5-7eab-477a-a76a-e84e1a3e5c85" Name="GPIOController" Type="SignalF.Controller.Abstractions;SignalF.Controller.Hardware.DeviceBindings.IGpioDeviceBinding">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+    </DeviceBinding>
+    <DeviceBinding xsi:type="SignalF.Datamodel.Hardware.I2cDeviceBindingConfigurationType" BusId="1" id="IDa9476f6a-32f4-4237-8db6-d3ccb3005296" Name="I2C1" Type="SignalF.Controller.Abstractions;SignalF.Controller.Hardware.DeviceBindings.II2cDeviceBinding">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" Data="{}" />
+    </DeviceBinding>
+  </DeviceBindings>
+</ControllerConfiguration>
