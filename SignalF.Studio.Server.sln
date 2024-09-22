@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalF.Studio.Server", "Si
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalF.Studio.Designer", "SignalF.Studio.Designer\SignalF.Studio.Designer.csproj", "{B6962395-EEA2-4DFA-B5DD-E9C19CCB621A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scotec.Blazor.DragDrop", "..\..\scotec_ssc\Source\Scotec.Ssc\Scotec.Blazor.DragDrop\Scotec.Blazor.DragDrop.csproj", "{32C0741A-088F-403F-A075-605BAA1DAFE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B6962395-EEA2-4DFA-B5DD-E9C19CCB621A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6962395-EEA2-4DFA-B5DD-E9C19CCB621A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6962395-EEA2-4DFA-B5DD-E9C19CCB621A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32C0741A-088F-403F-A075-605BAA1DAFE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32C0741A-088F-403F-A075-605BAA1DAFE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32C0741A-088F-403F-A075-605BAA1DAFE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32C0741A-088F-403F-A075-605BAA1DAFE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

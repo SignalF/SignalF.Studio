@@ -1,7 +1,7 @@
 ﻿@page "/Test"
 
-
-<h3>Test</h3>
+<div ondragstart="event.dataTransfer.setData('text', event.target.id) ;" @ondragover:preventDefault="true"></div>
+<h3 >Test</h3>
 
 @code {
 

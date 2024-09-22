@@ -7,13 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
 	  <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
-	  <PackageReference Include="Radzen.Blazor" Version="*" />
+	  <PackageReference Include="Radzen.Blazor" Version="5.2.2" />
     <PackageReference Include="Z.Blazor.Diagrams" Version="3.0.2" />
 
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\scotec_ssc\Source\Scotec.Ssc\Scotec.Blazor.DragDrop\Scotec.Blazor.DragDrop.csproj" />
     <ProjectReference Include="..\SignalF.Studio.Designer\SignalF.Studio.Designer.csproj" />
   </ItemGroup>
 </Project>

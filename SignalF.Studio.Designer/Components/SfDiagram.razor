@@ -1,15 +1,19 @@
 @using Blazor.Diagrams.Components
+@using Scotec.Blazor.DragDrop.Components
+@using SignalF.Studio.Designer.Nodes
 
-@* <link href="_content/SignalF.Studio.Designer/css/styles.css" rel="stylesheet" /> *@
-  <div class="diagram-container">
-    <CascadingValue Value="Diagram" IsFixed="true">
-        <DiagramCanvas>
-            <AdditionalHtml>
-                <!-- EXTRA HTML -->
-            </AdditionalHtml>
-            <AdditionalSvg>
-                <!-- EXTRA SVG -->
-            </AdditionalSvg>
-        </DiagramCanvas>
-    </CascadingValue>
-</div>
+
+<DragDropZone Id="diagram" CanDrag="false" TItem="DefinitionNode" Items="_nodeTypes" OnItemDrop="OnItemDrop" OnItemDropEnd="OnItemDropEnd" Style="height: 100vH; background-color: white">
+    <ChildContent>
+        <CascadingValue Value="Diagram" IsFixed="false">
+            <DiagramCanvas>
+@*                  <AdditionalHtml>
+                     <!-- EXTRA HTML -->
+                </AdditionalHtml>
+                <AdditionalSvg>
+                    <!-- EXTRA SVG -->
+                </AdditionalSvg> *@
+            </DiagramCanvas>
+        </CascadingValue>
+    </ChildContent>
+</DragDropZone>

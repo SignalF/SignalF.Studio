@@ -24,6 +24,9 @@ namespace SignalF.Studio.Designer
 
             var scheme = PackUriHelper.UriSchemePack;
             document.Schema = new Uri($"{scheme}://application:,,,SignalF.Datamodel;component/Schemas/SignalF.Datamodel.Configuration.xsd");
+
+            using var file = File.OpenRead(@"D:\Projects\scotec\SignalF\SignalF.Studio\TestData\SignalFConfig.xml");
+            OpenConfiguration(file);
         }
 
         public IControllerConfiguration CreateConfiguration()

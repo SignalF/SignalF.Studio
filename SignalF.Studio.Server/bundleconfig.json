@@ -1,0 +1,32 @@
+[
+  {
+    "outputFileName": "wwwroot/css/radzen.blazor/material-base.min.css",
+    "inputFiles": [
+      "wwwroot/css/radzen.blazor/material-base.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/radzen.blazor/material-dark-base.min.css",
+    "inputFiles": [
+      "wwwroot/css/radzen.blazor/material-dark-base.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/z.blazor.diagrams/default.styles.min.css",
+    "inputFiles": [
+      "wwwroot/css/z.blazor.diagrams/default.styles.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/z.blazor.diagrams/style.min.css",
+    "inputFiles": [
+      "wwwroot/css/z.blazor.diagrams/style.css"
+    ]
+  }
+]

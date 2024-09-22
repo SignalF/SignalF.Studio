@@ -1,0 +1,41 @@
+﻿@using SignalF.Studio.Designer.Nodes
+@using Scotec.Blazor.DragDrop.Components
+
+@code {
+
+
+}
+
+<div style="background-color: blanchedalmond; height: 100%;">
+    <RadzenAccordion>
+        <Items>
+            <RadzenAccordionItem Text="Devices" >
+                <DragDropZone TItem="DefinitionNode" Items="_deviceDefinitions" Style="padding: 10px;">
+                    <Template>
+                        <RadzenCard Style="background-color: lightgoldenrodyellow">
+                            <div>
+                                @* <img class="d-block m-auto" src="_content/SharedDemo/img/DefaultNodeWidget.png"/> *@
+                                <span>@context.TypeName</span>
+                            </div>
+                        </RadzenCard>
+                    </Template>
+                </DragDropZone>
+            </RadzenAccordionItem>
+            <RadzenAccordionItem Text="Calculators">
+                <DragDropZone TItem="DefinitionNode" Items="_calculatorDefinitions" Style="padding: 10px;">
+                    <Template>
+                        <RadzenCard Style="background-color: lightgoldenrodyellow">
+                            <div>
+                                @* <img class="d-block m-auto" src="_content/SharedDemo/img/DefaultNodeWidget.png"/> *@
+                                <span>@context.TypeName</span>
+                            </div>
+                        </RadzenCard>
+                    </Template>
+                </DragDropZone>
+            </RadzenAccordionItem>
+            <RadzenAccordionItem Text="Data Output">
+                Data Output
+            </RadzenAccordionItem>
+        </Items>
+    </RadzenAccordion>
+</div>

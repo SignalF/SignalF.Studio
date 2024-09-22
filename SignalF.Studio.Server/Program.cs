@@ -1,6 +1,8 @@
 using Autofac;
+using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using Radzen;
+using Scotec.Blazor.DragDrop.Components;
 using SignalF.Studio.Designer.Module;
 using SignalF.Studio.Server.Components;
 
@@ -17,16 +19,18 @@ internal static class Program
         builder.Services.AddRazorComponents()
             .AddInteractiveServerComponents()
             .AddHubOptions(options => options.MaximumReceiveMessageSize = 10 * 1024 * 1024)
-            ;
+        ;
+
+        builder.Services.AddBlazorDragDrop();
 
         builder.Services.AddControllers();
         builder.Services.AddRadzenComponents();
-
         builder.Services.AddRadzenCookieThemeService(options =>
         {
             options.Name = "SignalF.Studio.ServerTheme";
             options.Duration = TimeSpan.FromDays(365);
         });
+        
         builder.Services.AddHttpClient();
         var app = builder.Build();
 
