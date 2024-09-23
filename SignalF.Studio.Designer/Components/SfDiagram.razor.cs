@@ -1,5 +1,6 @@
 using Blazor.Diagrams;
 using Blazor.Diagrams.Core.Geometry;
+using Blazor.Diagrams.Core.Models;
 using Blazor.Diagrams.Core.PathGenerators;
 using Blazor.Diagrams.Core.Routers;
 using Blazor.Diagrams.Options;
@@ -85,10 +86,22 @@ public partial class SfDiagram
 
     private SignalProcessorNode CreateSignalProcessorNode(ISignalProcessorConfiguration configuration, Point position, Size size)
     {
-        return new SignalProcessorNode(configuration, position, size)
+        var node = new SignalProcessorNode(configuration, position, size)
         {
             Name = configuration.Name
         };
+
+        foreach (var signalSink in configuration.SignalSinks)
+        {
+            var port = node.AddPort(new SignalProcessorPort(signalSink, node, PortAlignment.Left ){});
+        }
+
+        foreach (var signalSource in configuration.SignalSources)
+        {
+            var port = node.AddPort(new SignalProcessorPort(signalSource, node, PortAlignment.Right ){});
+        }
+
+        return node;
     }
 
     private void SessionOnDataChanged(object? sender, DataChangedEventArgs e)
@@ -101,11 +114,9 @@ public partial class SfDiagram
 
     private void OnItemDrop(DropEventArgs<DefinitionNode> args)
     {
-        var relativePoint = Diagram.GetRelativePoint(args.Position.X, args.Position.Y);
-
-        var position = new Point((relativePoint.X - Diagram.Pan.X) / Diagram.Zoom,  (relativePoint.Y - Diagram.Pan.Y) / Diagram.Zoom);
-        var signalProcessorConfiguration = args.Item.CreateItem(args.Position);
-        //_ = Diagram.Nodes.Add(CreateSignalProcessorNode(signalProcessorConfiguration, new Point(args.Position.X, args.Position.Y), new Size(240, 300)));
+        var position = Diagram.GetRelativeMousePoint(args.Position.X, args.Position.Y);
+        
+        var signalProcessorConfiguration = args.Item.CreateItem(position);
         _ = Diagram.Nodes.Add(CreateSignalProcessorNode(signalProcessorConfiguration, position, new Size(240, 300)));
         
     }

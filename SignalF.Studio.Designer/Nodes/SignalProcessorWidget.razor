@@ -19,7 +19,15 @@ else
                 {
 
                     @* <div class="rectangle-port" style="position: absolute; left: @(port.Position.X)px; top: @(port.Position.Y)px;"></div> *@
-                    <PortRenderer @key="port" Port="port" Class="rectangle-port" Style=@($"top: {y}px;")/>
+                    // <PortRenderer @key="port" Port="port" Class="rectangle-port" Style=@($"top: {y}px;")></PortRenderer>
+                    <PortRenderer @key="port" Port="port" Class="" Style=@($"top: {y}px;")>
+                        <RadzenRow>
+                            <RadzenColumn Style="width:20px; height: 20px;background-color: aquamarine"></RadzenColumn>
+                            <RadzenColumn>
+                                <RadzenText Text="abcdeefgh" Style="height: 20px;background-color: beige"></RadzenText>
+                            </RadzenColumn>
+                        </RadzenRow>
+                    </PortRenderer>
                     y += 40;
                 }
             }
