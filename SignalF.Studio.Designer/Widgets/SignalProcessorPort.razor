@@ -1,0 +1,18 @@
+﻿@using Blazor.Diagrams.Components
+@using Blazor.Diagrams.Components.Renderers;
+@using Blazor.Diagrams.Core.Models
+@using Radzen.Blazor
+@using SignalF.Studio.Designer.Nodes
+
+<div style=@($"position: absolute; top: {Port.Offset}px; height: {Port.Size.Height}px;")>
+    <RadzenRow Style="height: 100%; width:100%" JustifyContent="JustifyContent.Right">
+     <RadzenStack Orientation="Orientation.Horizontal" Reverse="@(Port.Alignment==PortAlignment.Right)"
+                  JustifyContent="JustifyContent.Right" 
+                  Style="" Gap="4px">
+        <PortRenderer @key="Port" Port="@Port" Class="" Style="">
+            <div class="@GetPortClasses()" style="height: 100%; "></div>
+     </PortRenderer>
+           <RadzenTextBox class="sf-signal-processor-port-name" @bind-Value="@Port.Name" Placeholder="@Port.DefinitionName" />
+     </RadzenStack>
+</RadzenRow>
+</div>

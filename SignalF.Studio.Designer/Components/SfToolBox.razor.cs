@@ -9,9 +9,9 @@ namespace SignalF.Studio.Designer.Components;
 public partial class SfToolBox
 {
     private readonly BlazorDiagram _blazorDiagram = new();
-    private IList<DefinitionNode>? _calculatorDefinitions;
+    private IList<DefinitionNodeModel>? _calculatorDefinitions;
 
-    private IList<DefinitionNode>? _deviceDefinitions;
+    private IList<DefinitionNodeModel>? _deviceDefinitions;
     private int? _draggedType;
 
     [Inject] private DocumentManager? DocumentManager { get; set; }
@@ -27,12 +27,12 @@ public partial class SfToolBox
         var configuration = DocumentManager.GetConfiguration();
         _deviceDefinitions = configuration.SignalProcessorDefinitions
                                           .OfType<IDeviceDefinition>()
-                                          .Select(DefinitionNode (definition) => new DeviceDefinitionNode(definition))
+                                          .Select(DefinitionNodeModel (definition) => new DeviceDefinitionNodeModel(definition))
                                           .ToList();
 
         _calculatorDefinitions = configuration.SignalProcessorDefinitions
                                               .OfType<ICalculatorDefinition>()
-                                              .Select(DefinitionNode (definition) => new CalculatorDefinitionNode(definition))
+                                              .Select(DefinitionNodeModel (definition) => new CalculatorDefinitionNodeModel(definition))
                                               .ToList();
 
         //LayoutData.Title = "Drag & Drop";

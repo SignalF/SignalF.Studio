@@ -3,9 +3,9 @@ using SignalF.Datamodel.Signals;
 
 namespace SignalF.Studio.Designer.Nodes;
 
-internal abstract class DefinitionNode
+internal abstract class DefinitionNodeModel
 {
-    protected DefinitionNode(Guid id, string typeName)
+    protected DefinitionNodeModel(Guid id, string typeName)
     {
         Id = id;
         TypeName = typeName;

@@ -5,11 +5,11 @@ using SignalF.Datamodel.Signals;
 
 namespace SignalF.Studio.Designer.Nodes;
 
-internal class DeviceDefinitionNode : DefinitionNode
+internal class DeviceDefinitionNodeModel : DefinitionNodeModel
 {
     private readonly IDeviceDefinition _deviceDefinition;
 
-    public DeviceDefinitionNode(IDeviceDefinition deviceDefinition)
+    public DeviceDefinitionNodeModel(IDeviceDefinition deviceDefinition)
         : base(deviceDefinition.Id, deviceDefinition.GetName())
     {
         _deviceDefinition = deviceDefinition;

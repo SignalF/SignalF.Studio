@@ -1,0 +1,38 @@
+﻿.signal-processor-node {
+    outline: 1px solid black;
+    padding: 0;
+    background-color: aliceblue;;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+::deep input::placeholder {
+    color: #999999;
+    }
+
+::deep .sf-signal-processor-header {
+    font-family: Arial;
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 0;
+    padding: 0.5rem;
+    background-color: lightblue;
+    box-sizing: border-box;
+    border-width: 0;
+    border-radius: 0;
+}
+
+::deep .sf-signal-processor-body {
+    width: 100%
+}
+
+    ::deep .rz-textbox:hover {
+         border-color: red !important;
+    }
+    ::deep .rz-state-focused {
+        border-color: yellow !important;
+         border-width: 0 !important;
+    }
+

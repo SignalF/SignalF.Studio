@@ -5,11 +5,11 @@ using SignalF.Datamodel.Signals;
 
 namespace SignalF.Studio.Designer.Nodes;
 
-internal class CalculatorDefinitionNode : DefinitionNode
+internal class CalculatorDefinitionNodeModel : DefinitionNodeModel
 {
     private readonly ICalculatorDefinition _calculatorDefinition;
 
-    public CalculatorDefinitionNode(ICalculatorDefinition calculatorDefinition)
+    public CalculatorDefinitionNodeModel(ICalculatorDefinition calculatorDefinition)
         : base(calculatorDefinition.Id, calculatorDefinition.GetName())
     {
         _calculatorDefinition = calculatorDefinition;

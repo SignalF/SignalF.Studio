@@ -5,18 +5,21 @@ using Blazor.Diagrams.Core.PathGenerators;
 using Blazor.Diagrams.Core.Routers;
 using Blazor.Diagrams.Options;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Logging;
 using Scotec.Blazor.DragDrop.Components;
 using Scotec.XMLDatabase;
 using SignalF.Datamodel.Configuration;
 using SignalF.Datamodel.Hardware;
 using SignalF.Datamodel.Signals;
 using SignalF.Studio.Designer.Nodes;
+using SignalF.Studio.Designer.Nodes;
+using SignalF.Studio.Designer.Widgets;
 
 namespace SignalF.Studio.Designer.Components;
 
 public partial class SfDiagram
 {
-    private IList<DefinitionNode> _nodeTypes = new List<DefinitionNode>();
+    private IList<DefinitionNodeModel> _nodeTypes = new List<DefinitionNodeModel>();
 
     public BlazorDiagram Diagram { get; set; } = null!;
 
@@ -47,9 +50,16 @@ public partial class SfDiagram
             }
         };
         Diagram = new BlazorDiagram(options);
-        Diagram.RegisterComponent<SignalProcessorNode, SignalProcessorWidget>();
-
+        Diagram.RegisterComponent<SignalProcessorNodeModel, SignalProcessor>();
         FillDiagram(configuration);
+
+        Diagram.Links.Added += (link) =>
+        {
+            //link.Segmentable = true;
+            link.Router = new OrthogonalRouter();
+            link.PathGenerator = new StraightPathGenerator();
+        };
+
 #else
         Diagram = new BlazorDiagram();
 #endif
@@ -84,22 +94,22 @@ public partial class SfDiagram
         //var rightPort = secondNode.AddPort(PortAlignment.Right);
     }
 
-    private SignalProcessorNode CreateSignalProcessorNode(ISignalProcessorConfiguration configuration, Point position, Size size)
+    private SignalProcessorNodeModel CreateSignalProcessorNode(ISignalProcessorConfiguration configuration, Point position, Size size)
     {
-        var node = new SignalProcessorNode(configuration, position, size)
+        var node = new SignalProcessorNodeModel(configuration, position, size)
         {
             Name = configuration.Name
         };
 
-        foreach (var signalSink in configuration.SignalSinks)
-        {
-            var port = node.AddPort(new SignalProcessorPort(signalSink, node, PortAlignment.Left ){});
-        }
+        //foreach (var signalSink in configuration.SignalSinks)
+        //{
+        //    var port = node.AddPort(new SignalProcessorPortModel(signalSink, node, PortAlignment.Left ){});
+        //}
 
-        foreach (var signalSource in configuration.SignalSources)
-        {
-            var port = node.AddPort(new SignalProcessorPort(signalSource, node, PortAlignment.Right ){});
-        }
+        //foreach (var signalSource in configuration.SignalSources)
+        //{
+        //    var port = node.AddPort(new SignalProcessorPortModel(signalSource, node, PortAlignment.Left ){});
+        //}
 
         return node;
     }
@@ -112,7 +122,7 @@ public partial class SfDiagram
         }
     }
 
-    private void OnItemDrop(DropEventArgs<DefinitionNode> args)
+    private void OnItemDrop(DropEventArgs<DefinitionNodeModel> args)
     {
         var position = Diagram.GetRelativeMousePoint(args.Position.X, args.Position.Y);
         
