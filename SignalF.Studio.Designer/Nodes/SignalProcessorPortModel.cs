@@ -29,7 +29,7 @@ public class SignalProcessorPortModel : PortModel
 
     public PortType Type => _signalConfiguration is ISignalSourceConfiguration ? PortType.SignalSource : PortType.SignalSink;
 
-    public double Offset { get; set; }
+    public Point Offset { get; set; }
 }
 
 public enum PortType

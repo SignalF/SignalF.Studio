@@ -3,17 +3,20 @@
 @using SignalF.Studio.Designer.Nodes
 
 
-<DragDropZone Id="diagram" CanDrag="false" TItem="DefinitionNodeModel" Items="_nodeTypes" OnItemDrop="OnItemDrop" OnItemDropEnd="OnItemDropEnd" Style="height: 100vH; background-color: white">
-    <ChildContent>
-        <CascadingValue Value="Diagram" IsFixed="false">
-            <DiagramCanvas>
-@*                  <AdditionalHtml>
+<div style="height: 100%; width: 100%; background-color: red">
+    <DragDropZone Id="diagram" CanDrag="false" TItem="DefinitionNodeModel" Items="_nodeTypes" OnItemDrop="OnItemDrop" OnItemDropEnd="OnItemDropEnd" Style="height: 100%; background-color: white">
+        <ChildContent>
+            <CascadingValue Value="Diagram" IsFixed="false">
+                <DiagramCanvas>
+                    @*                  <AdditionalHtml>
                      <!-- EXTRA HTML -->
                 </AdditionalHtml>
                 <AdditionalSvg>
                     <!-- EXTRA SVG -->
                 </AdditionalSvg> *@
-            </DiagramCanvas>
-        </CascadingValue>
-    </ChildContent>
-</DragDropZone>
+                </DiagramCanvas>
+            </CascadingValue>
+        </ChildContent>
+    </DragDropZone>
+
+</div>

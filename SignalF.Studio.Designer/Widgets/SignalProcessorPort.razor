@@ -1,18 +1,22 @@
-﻿@using Blazor.Diagrams.Components
+﻿@using System.Globalization
+@using Blazor.Diagrams.Components
 @using Blazor.Diagrams.Components.Renderers;
 @using Blazor.Diagrams.Core.Models
 @using Radzen.Blazor
 @using SignalF.Studio.Designer.Nodes
 
-<div style=@($"position: absolute; top: {Port.Offset}px; height: {Port.Size.Height}px;")>
-    <RadzenRow Style="height: 100%; width:100%" JustifyContent="JustifyContent.Right">
-     <RadzenStack Orientation="Orientation.Horizontal" Reverse="@(Port.Alignment==PortAlignment.Right)"
-                  JustifyContent="JustifyContent.Right" 
-                  Style="" Gap="4px">
-        <PortRenderer @key="Port" Port="@Port" Class="" Style="">
-            <div class="@GetPortClasses()" style="height: 100%; "></div>
-     </PortRenderer>
-           <RadzenTextBox class="sf-signal-processor-port-name" @bind-Value="@Port.Name" Placeholder="@Port.DefinitionName" />
-     </RadzenStack>
-</RadzenRow>
+<div style="@($"position: absolute; top: {Port.Offset.Y.ToString(CultureInfo.InvariantCulture)}px; height: {Port.Size.Height.ToString(CultureInfo.InvariantCulture)}px; width: 100%")">
+    @* <PortRenderer @key="Port" Port="@Port" Class="" Style="height: 100%"> *@
+    <RadzenRow Style="height: 100%;" >
+        <RadzenStack Orientation="Orientation.Horizontal" Reverse="@(Port.Alignment==PortAlignment.Right)" Style="height: 100%">
+            <PortRenderer @key="Port" Port="@Port" Class="" Style="">
+                <div class="@GetPortClasses()" style="@($"height: {Port.Size.Height.ToString(CultureInfo.InvariantCulture)}px; width: {Port.Size.Width.ToString(CultureInfo.InvariantCulture)}px; ")"></div>
+            </PortRenderer>
+            @* <div class="@GetPortClasses()"/> *@
+            <div style="display: flex; align-items: center;" @onpointerdown:stopPropagation="true">
+                <RadzenTextBox class="@($"sf-signal-processor-port-name {(Port.Alignment==PortAlignment.Left?"left":"right")}" )" @bind-Value="@Port.Name" Placeholder="@Port.DefinitionName" />
+            </div>
+        </RadzenStack>
+    </RadzenRow>
+    @* </PortRenderer> *@
 </div>

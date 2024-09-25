@@ -24,21 +24,21 @@ public class SignalProcessorNodeModel : NodeModel
 
     private void AddPorts()
     {
-        var offset = 60.0;
+        var offset = 20.0;
         foreach (var signalSink in _configuration.SignalSinks)
         {
-            var port = new SignalProcessorPortModel(signalSink, this, PortAlignment.Left) { Size = PortSize };
-            port.Offset = offset;
+            var port = new SignalProcessorPortModel(signalSink, this, PortAlignment.Left) { Size = new(10, 20) };
+            port.Offset = new Point(0, offset);
             AddPort(port);
 
             offset += 40.0;
         }
 
-        offset = 60.0;
+        offset = 20.0;
         foreach (var signalSource in _configuration.SignalSources)
         {
-            var port = new SignalProcessorPortModel(signalSource, this, PortAlignment.Right) { Size = PortSize };
-            port.Offset = offset;
+            var port = new SignalProcessorPortModel(signalSource, this, PortAlignment.Right) { Size = new(10, 20) };
+            port.Offset = new Point(120,offset);
             AddPort(port);
 
             offset += 40.0;

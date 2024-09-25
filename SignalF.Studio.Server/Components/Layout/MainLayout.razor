@@ -17,7 +17,7 @@
         </RadzenRow>
     </RadzenHeader>
     <RadzenBody Expanded="@sidebarExpanded" Style="padding: 0">
-        <RadzenRow Style="height: 100%; width: 100%;">
+        <RadzenRow Style="height: 100%">
             <RadzenColumn Size="12">
                 @Body
             </RadzenColumn>
@@ -25,13 +25,13 @@
     </RadzenBody>
     <RadzenSidebar Expanded="@sidebarExpanded" style="z-index: 2">
         <RadzenRow Style="display: flex; flex-direction: column; height: 100vh;">
-            <RadzenColumn Size="12" Style="flex: 0 0 auto !important;">
+            <RadzenColumn Size="12" Style="flex: 0 0 !important;">
                 <RadzenStack AlignItems="AlignItems.Center" class="rz-py-4 rz-py-lg-6" Style="border-bottom: var(--rz-panel-menu-item-border); padding: var(--rz-panel-menu-item-padding);">
                     <RadzenImage Path="images/logo.png" style="height: 48px; width: 48px;" AlternateText="Application logo"></RadzenImage>
                     <RadzenText Text="SignalF Studio" TextStyle="TextStyle.Subtitle1" class="rz-mb-0" style="color: var(--rz-sidebar-color);"/>
                 </RadzenStack>
             </RadzenColumn>
-            <RadzenColumn Size="12" Style="flex: 1 0 auto !important; flex-grow: 1">
+            <RadzenColumn Size="12" Style="flex: 1 0 auto !important; ">
                 <RadzenPanelMenu>
                     <SfToolBox/>
                     @*<RadzenPanelMenuItem Text="Designer" Path=""/>

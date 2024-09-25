@@ -7,6 +7,10 @@
 
 }
 
+.diagram-svg-layer {
+    z-index: 1 !important;
+}
+
 .diagram-container {
     height: 100%
 }
@@ -19,4 +23,8 @@
 
 .plk-dd-inprogess > * {
     pointer-events: none;
+}
+
+.rz-tabview-panel {
+    height: 100% !important;
 }

@@ -25,7 +25,8 @@
 }
 
 ::deep .sf-signal-processor-body {
-    width: 100%
+    width: 100%;
+    height: 100%;
 }
 
     ::deep .rz-textbox:hover {

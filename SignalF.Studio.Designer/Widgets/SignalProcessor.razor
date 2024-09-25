@@ -1,4 +1,5 @@
-﻿@using Microsoft.CodeAnalysis.Elfie.Diagnostics
+﻿@using Blazor.Diagrams.Core.Models
+@using Microsoft.CodeAnalysis.Elfie.Diagnostics
 @using SignalF.Studio.Designer.Nodes
 @using Point = Blazor.Diagrams.Core.Geometry.Point
 
@@ -12,21 +13,28 @@ else
     <div class="signal-processor-node" style=@($"width: {Node.Size?.Width}px; height: {Node.Size?.Height}px;")>
         <RadzenStack Orientation="Orientation.Vertical" Style="height: 100%" Gap="0">
             <RadzenRow Style="" Gap="0">
-                <RadzenTextBox Class="sf-signal-processor-header" @bind-Value="@Node.Name" Placeholder="@Node.DefinitionName"/>
+                <RadzenTextBox Class="sf-signal-processor-header" @onpointerdown:stopPropagation="true" @bind-Value="@Node.Name" Placeholder="@Node.DefinitionName" />
             </RadzenRow>
-            <RadzenRow Style="height: 100%;">
-                <div class="sf-signal-processor-body" style="height: 100%">
+            <RadzenRow class="sf-signal-processor-body">
+                <RadzenColumn Size="6" Style="position: relative;">
                     @{
-                        double y = 60;
-                        foreach (var port in Node.Ports.OfType<SignalProcessorPortModel>())
+                        foreach (var port in Node.Ports.OfType<SignalProcessorPortModel>()
+                                                 .Where(node => node.Alignment == PortAlignment.Left))
                         {
-                            // port.Offset = y;
-                            // port.Position = new Point(Node.Position.X, Node.Position.Y + y);
-                            <SignalProcessorPort Port="port"/>
-                            y += 40;
+                            <SignalProcessorPort Port="port" />
                         }
                     }
-                </div>
+                </RadzenColumn>
+                <RadzenColumn Size="6" Style="position: relative" >
+                    @{
+                        foreach (var port in Node.Ports.OfType<SignalProcessorPortModel>()
+                        .Where(node => node.Alignment == PortAlignment.Right))
+                        {
+                            <SignalProcessorPort Port="port" />
+                        }
+                    }
+
+                </RadzenColumn>
             </RadzenRow>
         </RadzenStack>
     </div>
