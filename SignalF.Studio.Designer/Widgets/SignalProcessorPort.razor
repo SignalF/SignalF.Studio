@@ -3,14 +3,14 @@
 @using Blazor.Diagrams.Components.Renderers;
 @using Blazor.Diagrams.Core.Models
 @using Radzen.Blazor
-@using SignalF.Studio.Designer.Nodes
+@using SignalF.Studio.Designer.Model
 
-<div style="@($"position: absolute; top: {Port.Offset.Y.ToString(CultureInfo.InvariantCulture)}px; height: {Port.Size.Height.ToString(CultureInfo.InvariantCulture)}px; width: 100%")">
+<div style="@($"position: absolute; top: {Port.Offset.GetY()}px; height: {Port.Size.GetHeight()}px; width: 100%")">
     @* <PortRenderer @key="Port" Port="@Port" Class="" Style="height: 100%"> *@
     <RadzenRow Style="height: 100%;" >
         <RadzenStack Orientation="Orientation.Horizontal" Reverse="@(Port.Alignment==PortAlignment.Right)" Style="height: 100%">
             <PortRenderer @key="Port" Port="@Port" Class="" Style="">
-                <div class="@GetPortClasses()" style="@($"height: {Port.Size.Height.ToString(CultureInfo.InvariantCulture)}px; width: {Port.Size.Width.ToString(CultureInfo.InvariantCulture)}px; ")"></div>
+                <div class="@GetPortClasses()" style="@($"height: {Port.Size.GetHeight()}px; width: {Port.Size.GetWidth()}px; ")"></div>
             </PortRenderer>
             @* <div class="@GetPortClasses()"/> *@
             <div style="display: flex; align-items: center;" @onpointerdown:stopPropagation="true">

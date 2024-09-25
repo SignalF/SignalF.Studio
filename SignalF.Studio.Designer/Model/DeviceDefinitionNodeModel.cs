@@ -3,7 +3,7 @@ using SignalF.Datamodel.Configuration;
 using SignalF.Datamodel.Hardware;
 using SignalF.Datamodel.Signals;
 
-namespace SignalF.Studio.Designer.Nodes;
+namespace SignalF.Studio.Designer.Model;
 
 internal class DeviceDefinitionNodeModel : DefinitionNodeModel
 {

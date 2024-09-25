@@ -1,7 +1,7 @@
 ﻿using Blazor.Diagrams.Core.Geometry;
 using SignalF.Datamodel.Signals;
 
-namespace SignalF.Studio.Designer.Nodes;
+namespace SignalF.Studio.Designer.Model;
 
 internal abstract class DefinitionNodeModel
 {

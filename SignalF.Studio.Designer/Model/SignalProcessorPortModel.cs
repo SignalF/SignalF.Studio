@@ -2,7 +2,7 @@
 using Blazor.Diagrams.Core.Models;
 using SignalF.Datamodel.Signals;
 
-namespace SignalF.Studio.Designer.Nodes;
+namespace SignalF.Studio.Designer.Model;
 
 public class SignalProcessorPortModel : PortModel
 {

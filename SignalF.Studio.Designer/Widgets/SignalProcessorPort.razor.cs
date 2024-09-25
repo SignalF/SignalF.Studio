@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Blazor.Diagrams.Core.Geometry;
 using Microsoft.AspNetCore.Components;
-using SignalF.Studio.Designer.Nodes;
+using SignalF.Studio.Designer.Model;
 
 namespace SignalF.Studio.Designer.Widgets
 {

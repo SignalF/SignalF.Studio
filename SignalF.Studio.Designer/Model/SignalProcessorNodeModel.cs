@@ -3,7 +3,7 @@ using Blazor.Diagrams.Core.Models;
 using SignalF.Datamodel.Signals;
 using System.Xml.Linq;
 
-namespace SignalF.Studio.Designer.Nodes;
+namespace SignalF.Studio.Designer.Model;
 
 public class SignalProcessorNodeModel : NodeModel
 {

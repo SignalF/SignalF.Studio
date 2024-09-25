@@ -11,8 +11,8 @@ using Scotec.XMLDatabase;
 using SignalF.Datamodel.Configuration;
 using SignalF.Datamodel.Hardware;
 using SignalF.Datamodel.Signals;
-using SignalF.Studio.Designer.Nodes;
-using SignalF.Studio.Designer.Nodes;
+using SignalF.Studio.Designer.Model;
+using SignalF.Studio.Designer.Model;
 using SignalF.Studio.Designer.Widgets;
 
 namespace SignalF.Studio.Designer.Components;
