@@ -46,8 +46,14 @@ public partial class SfDiagram
             Links =
             {
                 DefaultRouter = new NormalRouter(),
-                DefaultPathGenerator = new SmoothPathGenerator()
-            }
+                DefaultPathGenerator = new SmoothPathGenerator(),
+                EnableSnapping = true,
+                //SnappingRadius = 40, 
+                RequireTarget = true
+            }, 
+            
+            LinksLayerOrder = 1,
+            
         };
         Diagram = new BlazorDiagram(options);
         Diagram.RegisterComponent<SignalProcessorNodeModel, SignalProcessor>();

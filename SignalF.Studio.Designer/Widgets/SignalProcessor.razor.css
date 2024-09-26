@@ -1,5 +1,5 @@
 ﻿.signal-processor-node {
-    outline: 1px solid black;
+    outline: 1px solid darkgray;
     padding: 0;
     background-color: aliceblue;;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -22,6 +22,7 @@
     box-sizing: border-box;
     border-width: 0;
     border-radius: 0;
+    border-style: none;
 }
 
 ::deep .sf-signal-processor-body {
@@ -30,10 +31,9 @@
 }
 
     ::deep .rz-textbox:hover {
-         border-color: red !important;
+         border-color: darkgray !important;
     }
     ::deep .rz-state-focused {
-        border-color: yellow !important;
          border-width: 0 !important;
     }
 

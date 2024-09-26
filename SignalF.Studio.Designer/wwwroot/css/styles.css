@@ -7,14 +7,6 @@
 
 }
 
-.diagram-svg-layer {
-    z-index: 1 !important;
-}
-
-.diagram-container {
-    height: 100%
-}
-
 .rz-accordion-header > a {
     font-size: 14px !important;
     letter-spacing: 1.25px;
@@ -25,6 +17,6 @@
     pointer-events: none;
 }
 
-.rz-tabview-panel {
-    height: 100% !important;
+.diagram-node.selected {
+    outline: 2px solid ActiveCaption;
 }

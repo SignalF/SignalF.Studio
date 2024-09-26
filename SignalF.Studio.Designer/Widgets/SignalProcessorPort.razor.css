@@ -1,12 +1,11 @@
 ﻿
 
 ::deep .sf-signal-processor-port {
-/*    width: 10px;
-    height: 20px;
-*/    border-top-width: 1px;
-    border-bottom-width: 1px;
-    border-color: black;
-    border-style: solid;
+    outline: 1px solid darkgray;
+}
+
+::deep .selected .sf-signal-processor-port {
+    outline: 1px solid black !important;
 }
 
 ::deep .sf-signal-processor-port-signal-source {
@@ -17,19 +16,17 @@
     background-color: lightcoral;
 }
 
-::deep .left .sf-signal-processor-port {
+/*::deep .left .sf-signal-processor-port {
     border-right-width: 1px;
     border-left-width: 0;
-    /*margin-right: -10px;*/
 }
 
 ::deep .right .sf-signal-processor-port {
     border-right-width: 0;
     border-left-width: 1px;
     height: 100%;
-    /*margin-left: -10px;*/
 }
-
+*/
 ::deep .left.sf-signal-processor-port-name {
     text-align: left;
 }

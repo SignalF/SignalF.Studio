@@ -6,8 +6,8 @@
 }
 else
 {
-    <div class="signal-processor-node" style=@($"width: {Node.Size?.GetWidth()}px; height: {Node.Size?.GetHeight()}px;")>
-        <RadzenStack Orientation="Orientation.Vertical" Style="height: 100%" Gap="0">
+    <div class="signal-processor-node" style="@($"width: {Node.Size?.GetWidth()}px; height: {Node.Size?.GetHeight()}px;")">
+        <RadzenStack Orientation="Orientation.Vertical" Style="height: 100%;" Gap="0">
             <RadzenRow Style="" Gap="0">
                 <RadzenTextBox Class="sf-signal-processor-header" @onpointerdown:stopPropagation="true" @bind-Value="@Node.Name" Placeholder="@Node.DefinitionName"/>
             </RadzenRow>
