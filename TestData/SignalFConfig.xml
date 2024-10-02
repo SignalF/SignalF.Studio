@@ -224,23 +224,23 @@
     </DataOutputSender>
   </DataOutputSenderConfigurations>
   <Connections xsi:type="SignalF.Datamodel.Signals.SignalConnectionListType">
-    <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionType">
+    <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionType" id="ID014907f9-dcd5-484d-8e19-70c50822d966">
       <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationRefType" idRef="IDff921b6c-f84b-4b7e-95a4-ceefd65e51d2" />
       <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationRefType" idRef="ID0f3470ec-be02-4dbb-b70b-bf936dfd67c5" />
     </Connection>
-    <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionType">
+    <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionType" id="IDd817aa27-a8f6-41ed-8f01-d554bee942f8">
       <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationRefType" idRef="ID25572a3c-8b23-4d8d-a0e0-2c676f2beef9" />
       <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationRefType" idRef="IDc90868a4-48db-4348-b1b8-e71b50fbdc5a" />
     </Connection>
-    <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionType">
+    <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionType" id="ID1070db74-066d-4dfc-a5b3-429526fd129c">
       <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationRefType" idRef="IDba8c4007-7404-48f6-bd8c-508dbacfc61b" />
       <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationRefType" idRef="ID3c8cbcf7-ee33-43f4-9263-11ede08b945f" />
     </Connection>
-    <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionType">
+    <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionType" id="ID7b158b2e-0a28-4433-9380-255b827ed650">
       <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationRefType" idRef="ID05884905-1ed5-4093-9db3-554c21b3e947" />
       <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationRefType" idRef="ID771b10c5-28b3-44bd-8649-8e3825407444" />
     </Connection>
-    <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionType">
+    <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionType" id="ID243da407-f21b-4672-8925-c7cc3cb2e32b">
       <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationRefType" idRef="ID98b9ed3e-faf7-4393-992c-51e411880728" />
       <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationRefType" idRef="IDcd58a976-1416-4081-b1c6-70847dc5c495" />
     </Connection>

@@ -57,5 +57,6 @@ internal static class Program
     private static void ConfigureContainer(ContainerBuilder builder)
     {
         builder.RegisterModule(new DatamodelModule());
+        builder.RegisterModule(new DiagramModule());
     }
 }

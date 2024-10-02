@@ -3,7 +3,7 @@ using SignalF.Datamodel.Signals;
 
 namespace SignalF.Studio.Designer.Model;
 
-internal abstract class DefinitionNodeModel
+public abstract class DefinitionNodeModel
 {
     protected DefinitionNodeModel(Guid id, string typeName)
     {

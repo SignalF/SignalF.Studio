@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <!--<Nullable>enable</Nullable>-->
     <ImplicitUsings>enable</ImplicitUsings>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
   </PropertyGroup>
@@ -21,16 +21,16 @@
 	  <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
 	  <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.5" />
 	  <PackageReference Include="Radzen.Blazor" Version="5.2.2" />
-	  <PackageReference Include="SignalF.Datamodel" Version="0.8.0-dev.171" PrivateAssets="contentFiles" />
-	  <PackageReference Include="Z.Blazor.Diagrams" Version="3.0.2" />
+	  <PackageReference Include="Scotec.Extensions.Linq" Version="1.0.3" />
+	  <PackageReference Include="SignalF.Datamodel" Version="0.8.0-dev.179" PrivateAssets="contentFiles" />
+	  <!--<PackageReference Include="Z.Blazor.Diagrams" Version="3.0.2" />-->
 	  <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.8" />
 
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\scotec_ssc\Source\Scotec.Ssc\Scotec.Blazor.DragDrop\Scotec.Blazor.DragDrop.csproj" />
+    <ProjectReference Include="..\..\Scotec.Blazor.Diagrams\src\Blazor.Diagrams\Blazor.Diagrams.csproj" />
   </ItemGroup>
-
-
 
 </Project>

@@ -1,4 +1,6 @@
-﻿
+﻿.diagram-node.selected {
+    outline: 1px solid ActiveCaption;
+}
 
 .rz-tabview-panel {
     height: 100% !important;
@@ -15,8 +17,4 @@
 
 .plk-dd-inprogess > * {
     pointer-events: none;
-}
-
-.diagram-node.selected {
-    outline: 2px solid ActiveCaption;
 }
