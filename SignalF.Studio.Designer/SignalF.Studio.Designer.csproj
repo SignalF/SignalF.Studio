@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Components\SfToolBox.razor.cs" />
     <Compile Remove="Widgets\SignalProcessorPort.razor.cs" />
   </ItemGroup>
 
@@ -18,15 +17,12 @@
 
 	<ItemGroup>
     <Content Remove="bundleconfig.json" />
-    <Content Remove="Components\SfToolBox.razor" />
     <Content Remove="Widgets\SignalProcessorPort.razor" />
   </ItemGroup>
 
   <ItemGroup>
 	  <FrameworkReference Include="Microsoft.AspNetCore.App" />
 	  <None Include="bundleconfig.json" />
-	  <None Include="Components\SfToolBox.razor" />
-	  <None Include="Components\SfToolBox.razor.cs" />
 	  <None Include="Widgets\SignalProcessorPort.razor" />
 	  <None Include="Widgets\SignalProcessorPort.razor.cs" />
 	  <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />

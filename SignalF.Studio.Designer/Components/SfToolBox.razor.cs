@@ -1,5 +1,4 @@
-﻿using Blazor.Diagrams;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using SignalF.Datamodel.Calculation;
 using SignalF.Datamodel.Hardware;
 using SignalF.Studio.Designer.Models;
@@ -8,13 +7,11 @@ namespace SignalF.Studio.Designer.Components;
 
 public partial class SfToolBox
 {
-    private readonly BlazorDiagram _blazorDiagram = new();
-    private IList<DefinitionNodeModel>? _calculatorDefinitions;
+    private IList<DefinitionNodeModel> _calculatorDefinitions;
 
-    private IList<DefinitionNodeModel>? _deviceDefinitions;
-    private int? _draggedType;
+    private IList<DefinitionNodeModel> _deviceDefinitions;
 
-    [Inject] private DocumentManager? DocumentManager { get; set; }
+    [Inject] private DocumentManager DocumentManager { get; set; }
 
     protected override void OnInitialized()
     {
@@ -35,10 +32,5 @@ public partial class SfToolBox
                                               .Select(DefinitionNodeModel (definition) => new CalculatorDefinitionNodeModel(definition))
                                               .ToList();
 
-        //LayoutData.Title = "Drag & Drop";
-        //LayoutData.Info = "A very simple drag & drop implementation using the HTML5 events.";
-        //LayoutData.DataChanged();
-
-        //_blazorDiagram.RegisterComponent<BotAnswerNode, BotAnswerWidget>();
     }
 }

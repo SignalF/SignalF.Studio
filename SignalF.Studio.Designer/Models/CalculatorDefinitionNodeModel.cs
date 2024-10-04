@@ -1,5 +1,4 @@
 ﻿using Scotec.Blazor.Diagrams.Core.Geometry;
-using Scotec.Blazor.Diagrams.Core.Geometry;
 using SignalF.Datamodel.Calculation;
 using SignalF.Datamodel.Configuration;
 using SignalF.Datamodel.Signals;

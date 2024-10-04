@@ -139,7 +139,7 @@ public class DesignerDiagramModel : BlazorDiagramModel
         //           .First(node => node.SignalConfiguration == signalConfiguration);
         //}
 
-        private void SessionOnDataChanged(object? sender, DataChangedEventArgs e)
+        private void SessionOnDataChanged(object sender, DataChangedEventArgs e)
     {
         foreach (var signalProcessorConfiguration in e.GetChanges<ISignalProcessorConfiguration>(EChangeType.Added))
         {
