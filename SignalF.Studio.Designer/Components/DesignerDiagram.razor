@@ -1,12 +1,12 @@
-@using Blazor.Diagrams.Components
+@using Scotec.Blazor.Diagrams.Components
 @using Scotec.Blazor.DragDrop.Components
-@using SignalF.Studio.Designer.Model
+@using SignalF.Studio.Designer.Models
 
 
 <div style="height: 100%; width: 100%;">
     <DragDropZone Id="diagram" CanDrag="false" TItem="DefinitionNodeModel" Items="_nodeTypes" OnItemDrop="OnItemDrop" OnItemDropEnd="OnItemDropEnd" Style="height: 100%; background-color: white">
         <ChildContent>
-            <CascadingValue Value="Diagram" IsFixed="false">
+            <CascadingValue Value="DiagramModel" IsFixed="false">
                 <DiagramCanvas>
                     @*                  <AdditionalHtml>
                      <!-- EXTRA HTML -->

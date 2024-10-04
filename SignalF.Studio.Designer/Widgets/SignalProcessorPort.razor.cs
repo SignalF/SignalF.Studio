@@ -1,6 +1,6 @@
 ﻿using Blazor.Diagrams.Core.Geometry;
 using Microsoft.AspNetCore.Components;
-using SignalF.Studio.Designer.Model;
+using SignalF.Studio.Designer.Models;
 
 namespace SignalF.Studio.Designer.Widgets;
 

@@ -1,0 +1,16 @@
+﻿@using Scotec.Blazor.Diagrams.Renderer
+@using Scotec.Blazor.Diagrams.Components
+@using Scotec.Blazor.Diagrams.Core.Layer
+@using SignalF.Studio.Designer.Models   
+
+
+@inherits NodeLayer<ConfigurationLayerModel, SignalProcessorNodeModel, SignalProcessorLinkModel>
+
+<h3>ConfigurationLayer</h3>
+
+<div class="" style="height: 100%; width: 100%">
+    @foreach (var node in LayerModel.Nodes)
+    {
+        <NodeRenderer @key="node" Model="node"/>
+    }
+</div>

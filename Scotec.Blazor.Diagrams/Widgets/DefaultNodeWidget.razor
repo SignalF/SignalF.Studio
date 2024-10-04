@@ -1,0 +1,12 @@
+﻿@using Scotec.Blazor.Diagrams.Core.Models
+
+<div class="default-node @(Node.IsSelected ? "selected" : "")">
+    Error
+</div>
+
+@code {
+
+    [Parameter]
+    public NodeModel Node { get; set; } = null!;
+
+}

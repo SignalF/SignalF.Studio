@@ -1,0 +1,32 @@
+﻿@using Scotec.Blazor.Diagrams.Core.Models
+<div class="diagram-canvas "
+     tabindex="-1"
+     @ref="ElementReference"
+     @onpointerdown="OnPointerDown"
+     @onpointermove="OnPointerMove"
+     @onpointerup="OnPointerUp"
+     @onkeydown="OnKeyDown"
+     @onwheel="OnWheel"
+     @onpointermove:preventDefault
+     @onwheel:stopPropagation>
+
+    <div class="diagram-canvas" style="background-color: beige">
+        <DrawingLayer>
+
+        </DrawingLayer>
+        @* @foreach (var model in BlazorDiagram.OrderedSelectables)
+        {
+            if (model is GroupModel group)
+            {
+                if (group.Group == null && group is not SvgGroupModel)
+                {
+                    <GroupRenderer @key="group" Group="group" />
+                }
+            }
+            else if (model is NodeModel node && node.Group == null && node is not SvgNodeModel)
+            {
+                <NodeRenderer @key="node" Node="node" />
+            }
+        } *@
+    </div>
+</div>

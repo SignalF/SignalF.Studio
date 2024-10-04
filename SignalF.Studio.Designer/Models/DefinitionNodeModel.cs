@@ -1,7 +1,7 @@
-﻿using Blazor.Diagrams.Core.Geometry;
+﻿using Scotec.Blazor.Diagrams.Core.Geometry;
 using SignalF.Datamodel.Signals;
 
-namespace SignalF.Studio.Designer.Model;
+namespace SignalF.Studio.Designer.Models;
 
 public abstract class DefinitionNodeModel
 {

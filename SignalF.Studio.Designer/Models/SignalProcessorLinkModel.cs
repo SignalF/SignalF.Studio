@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Scotec.Blazor.Diagrams.Core.Layer;
+using Scotec.Blazor.Diagrams.Core.Models;
 
-namespace Scotec.Blazor.Diagrams.Core
+namespace SignalF.Studio.Designer.Models
 {
-    public class Diagram<TLayer> where TLayer : LayerBase
+    public class SignalProcessorLinkModel : LinkModel
     {
     }
 }

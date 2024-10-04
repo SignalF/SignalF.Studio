@@ -1,12 +1,13 @@
-﻿@using Blazor.Diagrams.Core.Models
-@using SignalF.Studio.Designer.Model
+﻿@using SignalF.Studio.Designer.Models
+@using Scotec.Blazor.Diagrams
+
 @if (Node == null)
 {
     <div>Loading...</div>
 }
 else
 {
-    <div class="signal-processor-node" style="@($"width: {Node.InitialSize?.GetWidth()}px; height: {Node.InitialSize?.GetHeight()}px;")">
+    <div class="signal-processor-node" style="@($"width: {Node.Size.Width.ToInvariantString()}px; height: {Node.Size.Height.ToInvariantString()}px;")">
     @* <div class="signal-processor-node" style=""> *@
         <RadzenStack Orientation="Orientation.Vertical" Style="height: 100%;" Gap="0">
             <RadzenRow Style="" Gap="0">
@@ -14,22 +15,22 @@ else
             </RadzenRow>
             <RadzenRow class="sf-signal-processor-body">
                 <RadzenColumn Size="6" Style="position: relative;">
-                    @{
+                    @* @{
                         foreach (var port in Node.Ports.OfType<SignalProcessorPortModel>()
                                                  .Where(node => node.Alignment == PortAlignment.Left))
                         {
                             <SignalProcessorPort Port="port"/>
                         }
-                    }
+                    } *@
                 </RadzenColumn>
                 <RadzenColumn Size="6" Style="position: relative">
-                    @{
+                    @* @{
                         foreach (var port in Node.Ports.OfType<SignalProcessorPortModel>()
                                                  .Where(node => node.Alignment == PortAlignment.Right))
                         {
                             <SignalProcessorPort Port="port"/>
                         }
-                    }
+                    } *@
 
                 </RadzenColumn>
             </RadzenRow>

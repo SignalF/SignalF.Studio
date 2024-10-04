@@ -1,9 +1,10 @@
-﻿using Blazor.Diagrams.Core.Geometry;
+﻿using Scotec.Blazor.Diagrams.Core.Geometry;
 using SignalF.Datamodel.Configuration;
 using SignalF.Datamodel.Hardware;
 using SignalF.Datamodel.Signals;
+using SignalF.Studio.Designer.Models;
 
-namespace SignalF.Studio.Designer.Model;
+namespace SignalF.Studio.Designer.Models;
 
 internal class DeviceDefinitionNodeModel : DefinitionNodeModel
 {

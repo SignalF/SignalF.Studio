@@ -5,42 +5,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Scotec.Blazor.Diagrams.Core.Models;
 using Microsoft.AspNetCore.Components.Web;
 using System.Xml.Linq;
+using Scotec.Blazor.Diagrams.Core.Models;
+using Scotec.Blazor.Diagrams.Widgets;
 
 namespace Scotec.Blazor.Diagrams.Renderer
 {
-    public class NodeRenderer : Renderer
+    public class NodeRenderer : Renderer<NodeModel>
     {
-        [Parameter] public NodeModel Node { get; set; } = null!;
+        private const string DiagramNodeClass = "diagram-node";
+        private ElementReference _element;
+
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            if (!Node.Visible)
+            if (!Model.IsVisible)
                 return;
 
-            var componentType = BlazorDiagram.GetComponent(Node) ??
-                                (_isSvg ? typeof(SvgNodeWidget) : typeof(NodeWidget));
-            var classes = new StringBuilder("diagram-node")
-                .AppendIf(" locked", Node.Locked)
-                .AppendIf(" selected", Node.Selected)
-                .AppendIf(" grouped", Node.Group != null);
-
-            builder.OpenElement(0, _isSvg ? "g" : "div");
-            builder.AddAttribute(1, "class", classes.ToString());
-            builder.AddAttribute(2, "data-node-id", Node.Id);
-
-            if (_isSvg)
-            {
-                builder.AddAttribute(3, "transform",
-                    $"translate({Node.Position.X.ToInvariantString()} {Node.Position.Y.ToInvariantString()})");
-            }
-            else
-            {
-                builder.AddAttribute(3, "style",
-                    $"top: {Node.Position.Y.ToInvariantString()}px; left: {Node.Position.X.ToInvariantString()}px");
-            }
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(1, "class", string.Join(' ', GetClasses()));
+            builder.AddAttribute(2, "model-id", Model.Id);
+            builder.AddAttribute(3, "style", $"top: {Model.Position.Y.ToInvariantString()}px; left: {Model.Position.X.ToInvariantString()}px; " +
+                                             $"width: {Model.Size.Width.ToInvariantString()}px; height: {Model.Size.Height.ToInvariantString()}px; background-color: red;");
 
             builder.AddAttribute(4, "onpointerdown", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerDown));
             builder.AddEventStopPropagationAttribute(5, "onpointerdown", true);
@@ -49,12 +36,34 @@ namespace Scotec.Blazor.Diagrams.Renderer
             builder.AddAttribute(8, "onmouseenter", EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseEnter));
             builder.AddAttribute(9, "onmouseleave", EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseLeave));
             builder.AddElementReferenceCapture(10, value => _element = value);
-            builder.OpenComponent(11, componentType);
-            builder.AddAttribute(12, "Node", Node);
+            builder.OpenComponent(11, ComponentRegistration.GetComponentType(Model.GetType()) ?? typeof(DefaultNodeWidget));
+            builder.AddAttribute(12, "Node", Model);
             builder.CloseComponent();
 
             builder.CloseElement();
 
         }
+
+        protected override IList<string> GetClasses()
+        {
+            return base.GetClasses().InsertIf(0, DiagramNodeClass, () => true) ;
+        }
+
+        private void OnPointerDown(PointerEventArgs e)
+        {
+        }
+
+        private void OnPointerUp(PointerEventArgs e)
+        {
+        }
+
+        private void OnMouseEnter(MouseEventArgs e)
+        {
+        }
+
+        private void OnMouseLeave(MouseEventArgs e)
+        {
+        }
+
     }
 }

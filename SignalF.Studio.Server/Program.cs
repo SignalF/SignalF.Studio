@@ -2,6 +2,7 @@ using Autofac;
 using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using Radzen;
+using Scotec.Blazor.Diagrams;
 using Scotec.Blazor.DragDrop.Components;
 using SignalF.Studio.Designer.Module;
 using SignalF.Studio.Server.Components;
@@ -25,6 +26,8 @@ internal static class Program
 
         builder.Services.AddControllers();
         builder.Services.AddRadzenComponents();
+        builder.Services.AddBlazorDiagrams();
+
         builder.Services.AddRadzenCookieThemeService(options =>
         {
             options.Name = "SignalF.Studio.ServerTheme";

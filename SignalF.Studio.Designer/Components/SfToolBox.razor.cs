@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using SignalF.Datamodel.Calculation;
 using SignalF.Datamodel.Hardware;
-using SignalF.Studio.Designer.Model;
+using SignalF.Studio.Designer.Models;
 
 namespace SignalF.Studio.Designer.Components;
 

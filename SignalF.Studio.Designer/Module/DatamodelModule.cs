@@ -2,7 +2,7 @@
 using Scotec.Transactions;
 using Scotec.XMLDatabase;
 using Scotec.XMLDatabase.ReaderWriter.Xml;
-using SignalF.Studio.Designer.Model;
+using SignalF.Studio.Designer.Models;
 
 namespace SignalF.Studio.Designer.Module;
 
@@ -29,6 +29,9 @@ public class DatamodelModule : Autofac.Module
                        c.ResolveNamed<IDataDocument>("XMLDatabase.ControllerConfigurationDataDocument")))
                //.Named<IBusinessDocument>("XMLDatabase.ControllerConfigurationInfoBusinessDocument")
                .As<IBusinessDocument>()
+               .InstancePerLifetimeScope();
+
+        builder.RegisterType<DesignerModel>()
                .InstancePerLifetimeScope();
 
         //builder.RegisterType<ConfigurationFactory>()
