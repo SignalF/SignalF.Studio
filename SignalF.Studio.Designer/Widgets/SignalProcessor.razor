@@ -24,8 +24,14 @@ else
                         {
                             <div style="position: absolute; top: @(port.Position.Y.ToInvariantString())px; left: @(port.Size.Width.ToInvariantString())px; width: @((Node.Size.Width / 2.0 - port.Size.Width).ToInvariantString())px; height: @(port.Size.Height.ToInvariantString())px">
                                 @* <RadzenText Text="abc" class="sf-signal-processor-port-name" /> *@
-                                <RadzenTextBox Class="sf-signal-processor-port-name" @onpointerdown:stopPropagation="true" @bind-Value="@port.Name" Placeholder="@port.DefinitionName" />
-
+                                <RadzenTextBox Class="sf-signal-processor-port-name left" @onpointerdown:stopPropagation="true" @bind-Value="@port.Name" Placeholder="@port.DefinitionName" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div style="position: absolute; top: @(port.Position.Y.ToInvariantString())px; left: @((Node.Size.Width / 2.0).ToInvariantString())px; width: @((Node.Size.Width / 2.0 - port.Size.Width).ToInvariantString())px; height: @(port.Size.Height.ToInvariantString())px">
+                                @* <RadzenText Text="abc" class="sf-signal-processor-port-name" /> *@
+                                <RadzenTextBox Class="sf-signal-processor-port-name right" @onpointerdown:stopPropagation="true" @bind-Value="@port.Name" Placeholder="@port.DefinitionName" />
                             </div>
                         }
                     }

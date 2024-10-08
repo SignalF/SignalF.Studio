@@ -1,4 +1,9 @@
-﻿.diagram-layer {
+﻿
+.diagram-canvas {
+    clip-path: inset(0 0 0 0);
+}
+
+.diagram-layer {
 }
 
 .diagram-layer-error {
