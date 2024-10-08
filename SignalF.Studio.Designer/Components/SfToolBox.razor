@@ -1,12 +1,9 @@
-﻿@using SignalF.Studio.Designer.Models
-@using Scotec.Blazor.DragDrop.Components
-@using Radzen.Blazor
-
+﻿@using Scotec.Blazor.DragDrop.Components
 
 <div style="background-color: blanchedalmond; height: 100%;">
-     <RadzenAccordion>
+    <RadzenAccordion>
         <Items>
-            <RadzenAccordionItem Text="Devices" >
+            <RadzenAccordionItem Text="Devices">
                 <DragDropZone TItem="DefinitionNodeModel" Items="_deviceDefinitions" Style="padding: 10px;">
                     <Template>
                         <RadzenCard Style="background-color: lightgoldenrodyellow">
@@ -33,5 +30,4 @@
             </RadzenAccordionItem>
         </Items>
     </RadzenAccordion>
- </div>
-
+</div>

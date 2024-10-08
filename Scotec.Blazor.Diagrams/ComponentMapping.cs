@@ -19,6 +19,7 @@ public class ComponentMapping<TModel, TComponent> : IComponentMapping
         return GetComponentType(model.GetType());
     }
 }
+
 public class ComponentMapping : IComponentMapping
 {
     private readonly Type _componentType;
@@ -28,6 +29,7 @@ public class ComponentMapping : IComponentMapping
         ModelType = modelType;
         _componentType = componentType;
     }
+
     public Type ModelType { get; }
 
     public Type? GetComponentType(Type modelType)

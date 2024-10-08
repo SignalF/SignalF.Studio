@@ -33,10 +33,33 @@
     height: 100%;
 }
 
-    ::deep .rz-textbox:hover {
-         border-color: darkgray !important;
-    }
-    ::deep .rz-state-focused {
-         border-width: 0 !important;
-    }
+::deep .rz-textbox:hover {
+    border-color: darkgray !important;
+}
+::deep .rz-state-focused {
+    border-width: 0 !important;
+}
+
+::deep .left.sf-signal-processor-port-name {
+    text-align: left;
+}
+
+::deep .right.sf-signal-processor-port-name {
+    text-align: right;
+}
+
+::deep .sf-signal-processor-port-name {
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    line-height: 100%;
+    font-size: 12px;
+    height: 100%;
+    width: 100%;
+    padding: 0 3px 0 3px;
+    margin: 0;
+    border-width: 0;
+    border-radius: 0;
+    box-sizing: border-box;
+}
 

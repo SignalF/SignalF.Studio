@@ -2,26 +2,36 @@
 
 namespace Scotec.Blazor.Diagrams.Core.Models;
 
-public abstract class NodeModel : Model
+public class NodeModel : Model
 {
-    private readonly List<PortModel> _ports = [];
-
     protected NodeModel(string id, Point position) : base(id)
     {
         Position = position;
     }
-    public IReadOnlyList<PortModel> Ports => _ports;
 
     public Point Position { get; set; }
 
     public Size Size { get; set; }
+}
 
-    public void AddPort(PortModel port)
+
+public abstract class NodeModel<TPortModel> : NodeModel
+where TPortModel : PortModel
+{
+    private readonly List<TPortModel> _ports = [];
+
+    protected NodeModel(string id, Point position) : base(id, position)
+    {
+        Position = position;
+    }
+    public IReadOnlyList<TPortModel> Ports => _ports;
+
+    public void AddPort(TPortModel port)
     {
         _ports.Add(port);
     }
 
-    public void RemovePort(PortModel port)
+    public void RemovePort(TPortModel port)
     {
         _ports.Remove(port);
     }

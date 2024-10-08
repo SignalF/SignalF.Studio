@@ -1,20 +1,9 @@
-﻿@using System.Globalization
-@using Blazor.Diagrams.Components
-@using Blazor.Diagrams.Components.Renderers;
-@using Blazor.Diagrams.Core.Extensions
-@using Blazor.Diagrams.Core.Models
-@using Radzen.Blazor
-@using SignalF.Studio.Designer.Models
+﻿
 
-<div style="@($"position: absolute; top: {Port.Offset.GetY()}px; height: {Port.Size.GetHeight()}px; width: 100%")">
-    <RadzenRow Style="height: 100%;" >
-        <RadzenStack Orientation="Orientation.Horizontal" Reverse="@(Port.Alignment==PortAlignment.Right)" Style="height: 100%">
-            <PortRenderer @key="Port" Port="@Port" Class="" Style="">
-                <div class="@GetPortClasses()" style="@($"height: {Port.Size.GetHeight()}px; width: {Port.Size.GetWidth()}px; ")"></div>
-            </PortRenderer>
-            <div style="display: flex; align-items: center;" @onpointerdown:stopPropagation="true">
-                <RadzenTextBox class="@($"sf-signal-processor-port-name {(Port.Alignment==PortAlignment.Left?"left":"right")}" )" @bind-Value="@Port.Name" Placeholder="@Port.DefinitionName" />
-            </div>
-        </RadzenStack>
+<div class="@GetPortClasses()" style="width: 100%; height: 100%;">
+    <RadzenRow Style="width: 100%; height: 100%;">
+        <RadzenColumn Style="width: 100%; height: 100%;">
+
+        </RadzenColumn>
     </RadzenRow>
 </div>

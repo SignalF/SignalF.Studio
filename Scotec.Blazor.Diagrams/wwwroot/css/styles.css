@@ -1,0 +1,34 @@
+﻿.diagram-layer {
+}
+
+.diagram-layer-error {
+    background-color: red;
+}
+
+.diagram-node {
+    position: absolute;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: move;
+    pointer-events: all;
+}
+
+.diagram-node.selected {
+    outline: 1px solid ActiveCaption;
+}
+
+.diagram-node-error {
+    background-color: red;
+}
+
+.diagram-port {
+    position: absolute;
+    background-color: gray;
+}
+
+.diagram-port-error {
+    background-color: red;
+}
+

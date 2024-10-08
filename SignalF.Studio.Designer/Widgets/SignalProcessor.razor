@@ -1,5 +1,7 @@
 ﻿@using SignalF.Studio.Designer.Models
+@using SignalF.Studio.Designer.Widgets
 @using Scotec.Blazor.Diagrams
+@using Scotec.Blazor.Diagrams.Renderer
 
 @if (Node == null)
 {
@@ -14,25 +16,32 @@ else
                 <RadzenTextBox Class="sf-signal-processor-header" @onpointerdown:stopPropagation="true" @bind-Value="@Node.Name" Placeholder="@Node.DefinitionName"/>
             </RadzenRow>
             <RadzenRow class="sf-signal-processor-body">
-                <RadzenColumn Size="6" Style="position: relative;">
-                    @* @{
-                        foreach (var port in Node.Ports.OfType<SignalProcessorPortModel>()
-                                                 .Where(node => node.Alignment == PortAlignment.Left))
+                <RadzenColumn Style="position: relative;">
+                    @foreach (var port in Node.Ports)
+                    {
+                        <PortRenderer Model="port"></PortRenderer>
+                        @if (port.Alignment == PortAlignment.Left)
                         {
-                            <SignalProcessorPort Port="port"/>
+                            <div style="position: absolute; top: @(port.Position.Y.ToInvariantString())px; left: @(port.Size.Width.ToInvariantString())px; width: @((Node.Size.Width / 2.0 - port.Size.Width).ToInvariantString())px; height: @(port.Size.Height.ToInvariantString())px">
+                                @* <RadzenText Text="abc" class="sf-signal-processor-port-name" /> *@
+                                <RadzenTextBox Class="sf-signal-processor-port-name" @onpointerdown:stopPropagation="true" @bind-Value="@port.Name" Placeholder="@port.DefinitionName" />
+
+                            </div>
                         }
-                    } *@
+                    }
+                </RadzenColumn>
+                @* <RadzenColumn Size="6" Style="position: relative;">
+                    @foreach (var port in Node.Ports.Where(port => port.Alignment == PortAlignment.Left))
+                    {
+                        <PortRenderer Model="port"></PortRenderer>
+                    }
                 </RadzenColumn>
                 <RadzenColumn Size="6" Style="position: relative">
-                    @* @{
-                        foreach (var port in Node.Ports.OfType<SignalProcessorPortModel>()
-                                                 .Where(node => node.Alignment == PortAlignment.Right))
-                        {
-                            <SignalProcessorPort Port="port"/>
-                        }
-                    } *@
-
-                </RadzenColumn>
+                    @foreach (var port in Node.Ports.Where(node => node.Alignment == PortAlignment.Right))
+                    {
+                        <PortRenderer Model="port"/>
+                    }
+                </RadzenColumn> *@
             </RadzenRow>
         </RadzenStack>
     </div>

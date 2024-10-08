@@ -7,24 +7,17 @@
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Widgets\SignalProcessorPort.razor.cs" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
 
 	<ItemGroup>
-    <Content Remove="bundleconfig.json" />
-    <Content Remove="Widgets\SignalProcessorPort.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
+		<Content Remove="bundleconfig.json" />
+	    <None Include="bundleconfig.json" />
+    </ItemGroup>
+	
+	<ItemGroup>
 	  <FrameworkReference Include="Microsoft.AspNetCore.App" />
-	  <None Include="bundleconfig.json" />
-	  <None Include="Widgets\SignalProcessorPort.razor" />
-	  <None Include="Widgets\SignalProcessorPort.razor.cs" />
 	  <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
 	  <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.5" />
 	  <PackageReference Include="Radzen.Blazor" Version="5.2.2" />

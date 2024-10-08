@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
-using Scotec.Blazor.Diagrams.Core.Layer;
 using Scotec.Blazor.Diagrams.Widgets;
 
 namespace Scotec.Blazor.Diagrams.Components;
@@ -54,7 +53,7 @@ public class DiagramCanvas : ComponentBase
                 childBuilder.AddAttribute(childSequence++, "class", "diagram-layer");
                 childBuilder.AddAttribute(childSequence++, "style", $"z-index: {zIndex++}; height: 100%; width: 100%;");
 
-                childBuilder.OpenComponent(childSequence, ComponentRegistration.GetComponentType(layer) ?? typeof(DefaultLayer));
+                childBuilder.OpenComponent(childSequence, ComponentRegistration.GetComponentType(layer) ?? typeof(ErrorLayer));
                 childBuilder.CloseComponent();
 
                 childBuilder.CloseElement();

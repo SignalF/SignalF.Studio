@@ -39,4 +39,3 @@ public class ComponentRegistration
         return GetComponentType(model.GetType());
     }
 }
-

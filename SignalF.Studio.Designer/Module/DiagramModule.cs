@@ -33,5 +33,9 @@ public class DiagramModule : Autofac.Module
                .As<IComponentMapping>()
                .SingleInstance();
 
+        builder.RegisterType<ComponentMapping<SignalProcessorPortModel, SignalProcessorPort>>()
+               .As<IComponentMapping>()
+               .SingleInstance();
+
     }
 }
