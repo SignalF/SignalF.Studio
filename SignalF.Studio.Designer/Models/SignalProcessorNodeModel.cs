@@ -6,11 +6,14 @@ namespace SignalF.Studio.Designer.Models;
 
 public class SignalProcessorNodeModel : NodeModel<SignalProcessorPortModel>
 {
-    public SignalProcessorNodeModel(ISignalProcessorConfiguration configuration, Point position, Size size)
-        : base(configuration.Id.ToString("D"), position)
+    private readonly Func<ISignalConfiguration, SignalProcessorNodeModel, Point, Size, SignalProcessorPortModel> _portModelFactory;
+
+    public SignalProcessorNodeModel(ISignalProcessorConfiguration configuration, Point position, Size size, Func<ISignalConfiguration, SignalProcessorNodeModel, Point, Size, SignalProcessorPortModel> portModelFactory)
+        : base(configuration.Id.ToString("D"), position, size)
     {
+        _portModelFactory = portModelFactory;
         Configuration = configuration;
-        Size = size;
+
 
         AddPorts();
     }
@@ -33,9 +36,10 @@ public class SignalProcessorNodeModel : NodeModel<SignalProcessorPortModel>
         var offsetY = 20.0;
         foreach (var signalSink in Configuration.SignalSinks)
         {
-            var port = new SignalProcessorPortModel(signalSink, this, PortAlignment.Left, new Point(offsetX, offsetY), new Size(10, 20))
-            {
-            };
+            var port = _portModelFactory(signalSink, this, new Point(offsetX, offsetY), new Size(10, 20));
+            port.Name = signalSink.Name;
+            port.Alignment = PortAlignment.Left;
+ 
             AddPort(port);
 
             offsetY += 40.0;
@@ -46,9 +50,10 @@ public class SignalProcessorNodeModel : NodeModel<SignalProcessorPortModel>
         offsetY = 20.0;
         foreach (var signalSource in Configuration.SignalSources)
         {
-            var port = new SignalProcessorPortModel(signalSource, this, PortAlignment.Right, new Point(offsetX, offsetY), new Size(10, 20))
-            {
-            };
+            var port = _portModelFactory(signalSource, this, new Point(offsetX, offsetY), new Size(10, 20));
+            port.Name = signalSource.Name;
+            port.Alignment = PortAlignment.Right;
+
             AddPort(port);
 
             offsetY += 40.0;

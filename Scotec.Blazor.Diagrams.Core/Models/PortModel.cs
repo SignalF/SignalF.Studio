@@ -3,29 +3,18 @@ using SignalF.Studio.Designer.Models;
 
 namespace Scotec.Blazor.Diagrams.Core.Models;
 
-public abstract class PortModel: Model 
+public abstract class PortModel: AreaModel 
 {
     public NodeModel Parent { get; }
-    public PortAlignment Alignment { get; }
+    public PortAlignment Alignment { get; set; } = PortAlignment.None;
 
-    protected PortModel(NodeModel parent, PortAlignment alignment, Point position, Size size ) : base()
+    protected PortModel(NodeModel parent, Point position = default, Size size = default) : base(position, size)
     {
         Parent =parent;
-        Alignment = alignment;
-        Position = position;
-        Size = size;
     }
 
-    protected PortModel(string id, NodeModel parent, PortAlignment alignment, Point position, Size size) : base(id)
+    protected PortModel(string id, NodeModel parent, Point position = default, Size size = default) : base(id, position, size)
     {
         Parent = parent;
-        Alignment = alignment;
-        Position = position;
-        Size = size;
     }
-
-
-    public Point Position { get; set; }
-    
-    public Size Size { get; set; }
 }

@@ -12,7 +12,7 @@ namespace SignalF.Studio.Designer.Components
         {
             await base.OnInitializedAsync();
 
-            await LayerModel.OnInitializedAsync();
+            //await LayerModel.OnInitializedAsync();
         }
     }
 }

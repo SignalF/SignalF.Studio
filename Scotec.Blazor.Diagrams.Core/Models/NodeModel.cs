@@ -2,16 +2,16 @@
 
 namespace Scotec.Blazor.Diagrams.Core.Models;
 
-public class NodeModel : Model
+public class NodeModel : AreaModel
 {
-    protected NodeModel(string id, Point position) : base(id)
+    protected NodeModel(Point position = default, Size size = default) : base(position, size)
     {
-        Position = position;
     }
 
-    public Point Position { get; set; }
-
-    public Size Size { get; set; }
+    
+    protected NodeModel(string id, Point position = default, Size size = default) : base(id, position, size)
+    {
+    }
 }
 
 
@@ -20,9 +20,12 @@ where TPortModel : PortModel
 {
     private readonly List<TPortModel> _ports = [];
 
-    protected NodeModel(string id, Point position) : base(id, position)
+    protected NodeModel(Point position = default, Size size = default) : base(position, size)
     {
-        Position = position;
+    }
+
+    protected NodeModel(string id, Point position = default, Size size = default) : base(id, position, size)
+    {
     }
     public IReadOnlyList<TPortModel> Ports => _ports;
 

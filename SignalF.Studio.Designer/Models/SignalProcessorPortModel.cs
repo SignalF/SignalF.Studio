@@ -6,19 +6,13 @@ namespace SignalF.Studio.Designer.Models;
 
 public class SignalProcessorPortModel : PortModel
 {
-    public ISignalConfiguration SignalConfiguration { get; }
-
-    public SignalProcessorPortModel(ISignalConfiguration signalConfiguration, SignalProcessorNodeModel parent, PortAlignment alignment,
-                                    Point position, Size size) 
-        : this(signalConfiguration, signalConfiguration.Id.ToString("D"), parent, alignment, position, size)
-    {
-    }
-
-    public SignalProcessorPortModel(ISignalConfiguration signalConfiguration, string id, SignalProcessorNodeModel parent, PortAlignment alignment, Point position, Size size) 
-        : base(id, parent, alignment, position, size)
+    public SignalProcessorPortModel(ISignalConfiguration signalConfiguration, SignalProcessorNodeModel parent, Point position, Size size)
+        : base(parent, position, size)
     {
         SignalConfiguration = signalConfiguration;
     }
+
+    public ISignalConfiguration SignalConfiguration { get; }
 
     public string DefinitionName => SignalConfiguration.Definition.Name;
 
@@ -30,14 +24,13 @@ public class SignalProcessorPortModel : PortModel
 
     public PortType Type => SignalConfiguration is ISignalSourceConfiguration ? PortType.SignalSource : PortType.SignalSink;
 
-
     //public override bool CanAttachTo(ILinkable other)
     //{
     //    if (other is not SignalProcessorPortModel port || port.Id == Id)
     //    {
     //        return false;
     //    }
-        
+
     //    return Type != port.Type;
     //}
 }

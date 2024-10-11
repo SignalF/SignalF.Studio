@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
 using Scotec.Blazor.Diagrams.Core.Models;
+using Scotec.Blazor.Diagrams.EventArgs;
 using Scotec.Blazor.Diagrams.Widgets;
 
 namespace Scotec.Blazor.Diagrams.Renderer;
@@ -10,6 +11,8 @@ public class NodeRenderer : Renderer<NodeModel>
 {
     private const string DiagramNodeClass = "diagram-node";
     private ElementReference _element;
+
+    [CascadingParameter] protected DiagramModel DiagramModel { get; set; } = null!;
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
@@ -43,19 +46,23 @@ public class NodeRenderer : Renderer<NodeModel>
         return base.GetClasses().InsertIf(0, DiagramNodeClass, () => true);
     }
 
-    private void OnPointerDown(PointerEventArgs e)
+    private void OnPointerDown(PointerEventArgs args)
     {
+        DiagramModel.RaisePointerDownEvent(Model, (BlazorPointerEventArgs)args);
     }
 
-    private void OnPointerUp(PointerEventArgs e)
+    private void OnPointerUp(PointerEventArgs args)
     {
+        DiagramModel.RaisePointerUpEvent(Model, (BlazorPointerEventArgs)args);
     }
 
-    private void OnMouseEnter(MouseEventArgs e)
+    private void OnMouseEnter(MouseEventArgs args)
     {
+        DiagramModel.RaisePointerEnterEvent(Model, (BlazorPointerEventArgs)args);
     }
 
-    private void OnMouseLeave(MouseEventArgs e)
+    private void OnMouseLeave(MouseEventArgs args)
     {
+        DiagramModel.RaisePointerLeaveEvent(Model, (BlazorPointerEventArgs)args);
     }
 }

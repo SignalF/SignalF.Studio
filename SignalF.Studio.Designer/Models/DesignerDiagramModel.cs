@@ -11,16 +11,12 @@ namespace SignalF.Studio.Designer.Models;
 public class DesignerDiagramModel : BlazorDiagramModel
 {
     private readonly DocumentManager _documentManager;
-    private readonly List<SignalProcessorNodeModel> _nodeModels = [];
 
-    public DesignerDiagramModel(DocumentManager documentManager, IEnumerable<LayerModel> layers)
+    public DesignerDiagramModel(DocumentManager documentManager, Func<IEnumerable<LayerModel>> layerFactory) 
+        : base(layerFactory)
     {
         _documentManager = documentManager;
-        
-        AddLayers(layers);
     }
-
-    public IReadOnlyList<SignalProcessorNodeModel> NodeModels => _nodeModels;
 
     public override async Task OnInitializedAsync()
     {

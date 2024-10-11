@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace Scotec.Blazor.Diagrams.Core.Models
@@ -31,6 +32,10 @@ namespace Scotec.Blazor.Diagrams.Core.Models
         {
             return Task.CompletedTask;
         }
+
+        public event Action<Model>? Changed;
+
+        public virtual void Refresh() => Changed?.Invoke(this);
 
     }
 }
