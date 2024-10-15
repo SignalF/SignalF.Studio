@@ -1,48 +1,46 @@
-﻿using Scotec.Blazor.Diagrams.Core.Models;
+﻿using Scotec.Blazor.Diagrams.Core.Behaviours;
+using Scotec.Blazor.Diagrams.Core.Models;
 
 namespace Scotec.Blazor.Diagrams.Core.Layer;
 
 public class NodeLayerModel : LayerModel
 {
-    private readonly ModelCollection _models = [];
+    public NodeLayerModel(Func<LayerModel, IEnumerable<INodeLayerBehaviour>> behaviours) : base(behaviours)
+    {
+    }
 
     public void AddNode(NodeModel node)
     {
-        _models.Add(node);
+        AddModel(node);
     }
 
     public void AddNodes(IEnumerable<NodeModel> nodes)
     {
-        foreach (var node in nodes)
-        {
-            _models.Add(node);
-        }
+        AddModels(nodes);
     }
 
     public void RemoveNode(NodeModel node)
     {
-        _models.Remove(node.Id);
+        RemoveModel(node);
     }
 
     public void AddLink(LinkModel link)
     {
-        _models.Add(link);
+        AddModel(link);
     }
 
     public void AddLinks(IEnumerable<LinkModel> links)
     {
-        foreach (var link in links)
-        {
-            AddLink(link);
-        }
+        AddModels(links);
     }
 
     public void RemoveLink(LinkModel link)
     {
-        _models.Remove(link.Id);
+        RemoveModel(link);
     }
 
-    public IList<NodeModel> Nodes => _models.OfType<NodeModel>().ToList();
+    public IReadOnlyList<NodeModel> GetNodes() => GetModels<NodeModel>().ToList();
+    public IReadOnlyList<LinkModel> GetLinks() => GetModels<LinkModel>().ToList();
 
 }
 
@@ -50,5 +48,8 @@ public abstract class NodeLayerModel<TNodeModel, TLinkModel> : NodeLayerModel
     where TNodeModel : NodeModel
     where TLinkModel : LinkModel
 {
+    protected NodeLayerModel(Func<LayerModel, IEnumerable<INodeLayerBehaviour>> behaviours) : base(behaviours)
+    {
+    }
 }
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis.Elfie.Diagnostics;
+using Scotec.Blazor.Diagrams.Core.Behaviours;
 using Scotec.Blazor.Diagrams.Core.Geometry;
 using Scotec.Blazor.Diagrams.Core.Layer;
 using SignalF.Datamodel.Configuration;
@@ -11,7 +12,8 @@ public class ConfigurationLayerModel : NodeLayerModel<SignalProcessorNodeModel, 
     private readonly DocumentManager _documentManager;
     private readonly Func<ISignalProcessorConfiguration, Point, Size, SignalProcessorNodeModel> _nodeModelFactory;
 
-    public ConfigurationLayerModel(DocumentManager documentManager, Func<ISignalProcessorConfiguration, Point, Size, SignalProcessorNodeModel> nodeModelFactory)
+    public ConfigurationLayerModel(Func<LayerModel, IEnumerable<INodeLayerBehaviour>> behaviours, DocumentManager documentManager, Func<ISignalProcessorConfiguration, Point, Size, SignalProcessorNodeModel> nodeModelFactory)
+    : base(behaviours)
     {
         _documentManager = documentManager;
         _nodeModelFactory = nodeModelFactory;
@@ -55,8 +57,8 @@ public class ConfigurationLayerModel : NodeLayerModel<SignalProcessorNodeModel, 
     private void CreateSignalProcessorNodes(IControllerConfiguration configuration)
     {
         //TODO: Get position from configuration.
-        var x = 100;
-        var y = 100;
+        var x = 10;
+        var y = 10;
 
         AddNodes(configuration.SignalProcessorConfigurations
                               .Select(signalProcessor =>

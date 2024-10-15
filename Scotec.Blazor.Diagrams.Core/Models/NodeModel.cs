@@ -1,8 +1,9 @@
-﻿using Scotec.Blazor.Diagrams.Core.Geometry;
+﻿using Scotec.Blazor.Diagrams.Core.Behaviours;
+using Scotec.Blazor.Diagrams.Core.Geometry;
 
 namespace Scotec.Blazor.Diagrams.Core.Models;
 
-public class NodeModel : AreaModel
+public class NodeModel : AreaModel, IMovable
 {
     protected NodeModel(Point position = default, Size size = default) : base(position, size)
     {

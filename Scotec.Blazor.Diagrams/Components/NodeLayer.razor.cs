@@ -15,9 +15,6 @@ public class NodeLayer<TLayerModel, TNodeModel, TLinkModel> : Layer<TLayerModel>
     where TNodeModel : NodeModel
     where TLinkModel : LinkModel
 {
-    [CascadingParameter] protected DiagramModel DiagramModel { get; set; } = null!;
-    [CascadingParameter] protected TLayerModel LayerModel { get; set; } = null!;
-
     protected override Task OnInitializedAsync()
     {
         return base.OnInitializedAsync();

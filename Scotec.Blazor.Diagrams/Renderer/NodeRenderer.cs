@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
+using Scotec.Blazor.Diagrams.Core.Layer;
 using Scotec.Blazor.Diagrams.Core.Models;
 using Scotec.Blazor.Diagrams.EventArgs;
 using Scotec.Blazor.Diagrams.Widgets;
@@ -13,6 +14,7 @@ public class NodeRenderer : Renderer<NodeModel>
     private ElementReference _element;
 
     [CascadingParameter] protected DiagramModel DiagramModel { get; set; } = null!;
+    [CascadingParameter] protected NodeLayerModel LayerModel { get; set; } = null!;
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
@@ -33,6 +35,7 @@ public class NodeRenderer : Renderer<NodeModel>
         builder.AddEventStopPropagationAttribute(7, "onpointerup", true);
         builder.AddAttribute(8, "onmouseenter", EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseEnter));
         builder.AddAttribute(9, "onmouseleave", EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseLeave));
+        builder.AddAttribute(9, "onmousemove", EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseMove));
         builder.AddElementReferenceCapture(10, value => _element = value);
         builder.OpenComponent(11, ComponentRegistration.GetComponentType(Model.GetType()) ?? typeof(ErrorNodeWidget));
         builder.AddAttribute(12, "Node", Model);
@@ -64,5 +67,10 @@ public class NodeRenderer : Renderer<NodeModel>
     private void OnMouseLeave(MouseEventArgs args)
     {
         DiagramModel.RaisePointerLeaveEvent(Model, (BlazorPointerEventArgs)args);
+    }
+
+    private void OnMouseMove(MouseEventArgs args)
+    {
+        DiagramModel.RaisePointerMoveEvent(Model, (BlazorPointerEventArgs)args);
     }
 }

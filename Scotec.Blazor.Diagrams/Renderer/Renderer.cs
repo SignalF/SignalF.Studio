@@ -45,7 +45,7 @@ public abstract class Renderer<TModel> : ComponentBase, IDisposable
     private void ReRender()
     {
         _shouldRender = true;
-        InvokeAsync(StateHasChanged);
+        //InvokeAsync(StateHasChanged);
 
     }
 

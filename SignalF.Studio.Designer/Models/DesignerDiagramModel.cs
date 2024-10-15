@@ -1,4 +1,5 @@
 ﻿using Scotec.Blazor.Diagrams;
+using Scotec.Blazor.Diagrams.Core.Behaviours;
 using Scotec.Blazor.Diagrams.Core.Geometry;
 using Scotec.Blazor.Diagrams.Core.Layer;
 using Scotec.Blazor.Diagrams.Core.Models;
@@ -12,8 +13,8 @@ public class DesignerDiagramModel : BlazorDiagramModel
 {
     private readonly DocumentManager _documentManager;
 
-    public DesignerDiagramModel(DocumentManager documentManager, Func<IEnumerable<LayerModel>> layerFactory) 
-        : base(layerFactory)
+    public DesignerDiagramModel(DocumentManager documentManager, Func<IEnumerable<LayerModel>> layerFactory, Func<DiagramModel, IEnumerable<IDiagramBehaviour>> behavioursFactory) 
+        : base(layerFactory, behavioursFactory)
     {
         _documentManager = documentManager;
     }

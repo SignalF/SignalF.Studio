@@ -15,6 +15,8 @@ public record PointerEventArgs(
     float TiltX,
     float TiltY,
     string PointerType,
-    bool IsPrimary)
+    bool IsPrimary
+)
 {
+    public bool IsCancelled { get; set; }
 }

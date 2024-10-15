@@ -1,11 +1,11 @@
-﻿@using Scotec.Blazor.Diagrams.Core.Layer
-@using Scotec.Blazor.Diagrams.Renderer
+﻿@using Scotec.Blazor.Diagrams.Renderer
+
 @inherits NodeLayer<NodeLayerModel, NodeModel, LinkModel>
 
 <h3>NodeLayer</h3>
 
 <div class="diagram-layer-node" style="">
-    @foreach (var node in LayerModel.Nodes)
+    @foreach (var node in LayerModel.GetNodes())
     {
         <NodeRenderer @key="node" Node="node"/>
     }

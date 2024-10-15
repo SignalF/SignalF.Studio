@@ -9,4 +9,5 @@ public record MouseEventArgs(
     bool ShiftKey,
     bool AltKey)
 {
+    public bool IsCancelled { get; set; }
 }

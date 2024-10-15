@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.AspNetCore.Components.Web;
+using Scotec.Blazor.Diagrams.EventArgs;
 using Scotec.Blazor.Diagrams.Widgets;
 
 namespace Scotec.Blazor.Diagrams.Components;
@@ -23,7 +24,7 @@ public class DiagramCanvas : ComponentBase
 
         builder.AddAttribute(sequence++, "Model", BlazorDiagram);
 
-        builder.AddAttribute(sequence++, "style", "height: 100%; width: 100%;");
+        builder.AddAttribute(sequence++, "style", "height: 100%; width: 100%;position: relative;");
 
         builder.AddAttribute(sequence++, "onpointerdown", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerDown));
         builder.AddAttribute(sequence++, "onpointerup", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerUp));
@@ -42,7 +43,7 @@ public class DiagramCanvas : ComponentBase
             var l = layer;
             builder.OpenRegion(sequence++);
 
-            // Create a CascadingValue for the current type. This allows us to use a CascadingParameter of the same type or of a base type.
+            // Create the CascadingValue for the current layer type. This allows us to use a CascadingParameter of the same type or of a base type.
             builder.OpenComponent(sequence++, typeof(CascadingValue<>).MakeGenericType(layer.GetType()));
             builder.AddAttribute(sequence++, "Value", l);
 
@@ -51,9 +52,19 @@ public class DiagramCanvas : ComponentBase
                 var childSequence = 0;
                 childBuilder.OpenElement(childSequence++, "div");
                 childBuilder.AddAttribute(childSequence++, "class", "diagram-layer");
-                childBuilder.AddAttribute(childSequence++, "style", $"z-index: {zIndex++}; height: 100%; width: 100%;");
+                childBuilder.AddAttribute(childSequence++, "style", $"z-index: {zIndex++}; height: 100%; width: 100%; position: absolute; top: 0; left: 0;");
+                
+                var layerType = ComponentRegistration.GetComponentType(layer);
+                if (layerType is not null)
+                {
+                    childBuilder.OpenComponent(childSequence++, layerType);
+                    childBuilder.AddAttribute(childSequence, "LayerModel", layer);
+                }
+                else
+                {
+                    childBuilder.OpenComponent(childSequence, typeof(ErrorLayer));
+                }
 
-                childBuilder.OpenComponent(childSequence, ComponentRegistration.GetComponentType(layer) ?? typeof(ErrorLayer));
                 childBuilder.CloseComponent();
 
                 childBuilder.CloseElement();
@@ -70,14 +81,17 @@ public class DiagramCanvas : ComponentBase
 
     private void OnPointerDown(PointerEventArgs e)
     {
+        BlazorDiagram.RaisePointerDownEvent(null, (BlazorPointerEventArgs)e);
     }
 
     private void OnPointerMove(PointerEventArgs e)
     {
+        BlazorDiagram.RaisePointerMoveEvent(null, (BlazorPointerEventArgs)e);
     }
 
     private void OnPointerUp(PointerEventArgs e)
     {
+        BlazorDiagram.RaisePointerUpEvent(null, (BlazorPointerEventArgs)e);
     }
 
     private void OnKeyDown(KeyboardEventArgs e)
@@ -86,5 +100,6 @@ public class DiagramCanvas : ComponentBase
 
     private void OnWheel(WheelEventArgs e)
     {
+        BlazorDiagram.RaisePointerMoveEvent(null, (BlazorPointerEventArgs)e);
     }
 }

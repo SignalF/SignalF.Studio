@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using Microsoft.Extensions.DependencyInjection;
 using Scotec.Blazor.Diagrams.Components;
+using Scotec.Blazor.Diagrams.Core.Behaviours;
 using Scotec.Blazor.Diagrams.Core.Layer;
 
 namespace Scotec.Blazor.Diagrams;
@@ -35,6 +36,9 @@ public static class Extensions
     public static IServiceCollection AddBlazorDiagrams(this IServiceCollection services)
     {
         return services.AddScoped<ComponentRegistration>()
-                       .AddSingleton<IComponentMapping, ComponentMapping<NodeLayerModel, NodeLayer>>();
+                       .AddSingleton<IComponentMapping, ComponentMapping<NodeLayerModel, NodeLayer>>()
+                       .AddTransient<IDiagramBehaviour, SelectionBehaviour>()
+                       .AddTransient<IDiagramBehaviour, MoveBehaviour>()
+                       ;
     }
 }
