@@ -47,6 +47,12 @@ public class DiagramModel : Model
     }
     
 
+    public Point GetDiagramCanvasMousePoint(double clientX, double clientY)
+    {
+        return new Point((clientX - Bounds.Left - Pan.X) / Zoom, (clientY - Bounds.Top - Pan.Y) / Zoom);
+    }
+    
+
     public override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();

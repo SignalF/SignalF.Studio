@@ -1,5 +1,4 @@
-﻿using System.Data.SqlTypes;
-using Scotec.Blazor.Diagrams.Core.EventArgs;
+﻿using Scotec.Blazor.Diagrams.Core.EventArgs;
 using Scotec.Blazor.Diagrams.Core.Geometry;
 using Scotec.Blazor.Diagrams.Core.Models;
 
@@ -9,13 +8,13 @@ public class SelectionBehaviour : DiagramBehaviour
 {
     private readonly IList<Model> _selected = new List<Model>();
 
+    private Point _clickPosition;
+
     public SelectionBehaviour(DiagramModel diagramModel) : base(diagramModel)
     {
         DiagramModel.PointerDown += OnPointerDown;
         DiagramModel.PointerUp += OnPointerUp;
     }
-
-    private Point _clickPosition;
 
     private void OnPointerDown(Model? model, PointerEventArgs args)
     {
@@ -33,7 +32,7 @@ public class SelectionBehaviour : DiagramBehaviour
         if (model is null)
         {
             DeselectAll();
-            //DiagramModel.Refresh();
+            DiagramModel.Refresh();
             return;
         }
 
@@ -78,6 +77,5 @@ public class SelectionBehaviour : DiagramBehaviour
 
     public void Dispose()
     {
-        // TODO release managed resources here
     }
 }

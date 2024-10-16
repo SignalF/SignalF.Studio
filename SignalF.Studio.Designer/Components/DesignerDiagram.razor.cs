@@ -18,7 +18,7 @@ public partial class DesignerDiagram
 
     private void OnItemDrop(DropEventArgs<DefinitionNodeModel> args)
     {
-        //var position = DiagramModel.GetRelativeMousePoint(args.Position.X, args.Position.Y);
+        var position = DiagramModel.GetDiagramCanvasMousePoint(args.Position.X, args.Position.Y);
 
         //_ = Diagram.Nodes.Add(DiagramModel.CreateSignalProcessorNode(args.Item, position));
     }
