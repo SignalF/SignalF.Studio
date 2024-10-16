@@ -27,4 +27,10 @@
 		<ProjectReference Include="..\Scotec.Blazor.Diagrams.Core\Scotec.Blazor.Diagrams.Core.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Content Update="wwwroot\js\script.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
 </Project>

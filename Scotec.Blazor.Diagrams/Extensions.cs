@@ -39,6 +39,8 @@ public static class Extensions
                        .AddSingleton<IComponentMapping, ComponentMapping<NodeLayerModel, NodeLayer>>()
                        .AddTransient<IDiagramBehaviour, SelectionBehaviour>()
                        .AddTransient<IDiagramBehaviour, MoveBehaviour>()
+                       .AddTransient<IDiagramBehaviour, PanBehaviour>()
+                       .AddTransient<IDiagramBehaviour, ZoomBehaviour>()
                        ;
     }
 }

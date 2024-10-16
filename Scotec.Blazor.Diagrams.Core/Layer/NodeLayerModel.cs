@@ -1,9 +1,10 @@
 ﻿using Scotec.Blazor.Diagrams.Core.Behaviours;
+using Scotec.Blazor.Diagrams.Core.Geometry;
 using Scotec.Blazor.Diagrams.Core.Models;
 
 namespace Scotec.Blazor.Diagrams.Core.Layer;
 
-public class NodeLayerModel : LayerModel
+public class NodeLayerModel : LayerModel, IMovable, IZoomable
 {
     public NodeLayerModel(Func<LayerModel, IEnumerable<INodeLayerBehaviour>> behaviours) : base(behaviours)
     {
@@ -42,6 +43,13 @@ public class NodeLayerModel : LayerModel
     public IReadOnlyList<NodeModel> GetNodes() => GetModels<NodeModel>().ToList();
     public IReadOnlyList<LinkModel> GetLinks() => GetModels<LinkModel>().ToList();
 
+    public Point Position { get; private set; }
+    public virtual void SetPosition(double x, double y)
+    {
+        Position = new Point(x, y);
+    }
+
+    public double Zoom { get; set; } = 1.5;
 }
 
 public abstract class NodeLayerModel<TNodeModel, TLinkModel> : NodeLayerModel

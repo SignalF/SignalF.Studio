@@ -1,7 +1,10 @@
-﻿using System.Reflection;
+﻿using System.ComponentModel;
+using System.Reflection;
 using Scotec.Blazor.Diagrams.Core.Behaviours;
 using Scotec.Blazor.Diagrams.Core.EventArgs;
+using Scotec.Blazor.Diagrams.Core.Geometry;
 using Scotec.Blazor.Diagrams.Core.Layer;
+using Scotec.Extensions.Linq;
 
 namespace Scotec.Blazor.Diagrams.Core.Models;
 
@@ -23,6 +26,26 @@ public class DiagramModel : Model
     public event Action<Model?, PointerEventArgs>? PointerEnter;
     public event Action<Model?, PointerEventArgs>? PointerLeave;
     public event Action<Model?, PointerEventArgs>? PointerMove;
+    public event Action<WheelEventArgs>? Wheel;
+
+    public Rectangle Bounds { get; private set; } = new ();
+
+    public void SetBounds(Rectangle bounds)
+    {
+        if (bounds.Equals(Bounds))
+        {
+            return;
+        }
+        
+        Bounds = bounds;
+        Refresh();
+    }
+
+    public Point GetRelativeMousePoint(double clientX, double clientY)
+    {
+        return new Point((clientX - Bounds.Left - Pan.X)/* / Zoom*/, (clientY - Bounds.Top - Pan.Y) /*/ Zoom*/);
+    }
+    
 
     public override async Task OnInitializedAsync()
     {
@@ -42,12 +65,22 @@ public class DiagramModel : Model
 
     public IReadOnlyList<LayerModel> Layers => _layers;
 
+    
+    public double Zoom { get; set; } = 1.0;
+
+    public Point Pan { get; set; }
+
     public void AddLayer(LayerModel layer)
     {
+        if (layer is IZoomable zoomable)
+        {
+            zoomable.Zoom = Zoom;
+        }
         _layers.Add(layer);
     }
     public void AddLayers(IEnumerable<LayerModel> layers)
     {
+        layers.OfType<IZoomable>().ForAll(zoomable => zoomable.Zoom = Zoom);
         _layers.AddRange(layers);
     }
 
@@ -70,5 +103,9 @@ public class DiagramModel : Model
     public virtual void RaisePointerMoveEvent(Model? model, PointerEventArgs args)
     {
         PointerMove?.Invoke(model, args);
+    }
+    public virtual void RaiseWheelEvent(WheelEventArgs args)
+    {
+        Wheel?.Invoke(args);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Scotec.Blazor.Diagrams.Core.EventArgs;
+﻿using Scotec.Blazor.Diagrams.Core.Geometry;
+
+namespace Scotec.Blazor.Diagrams.Core.EventArgs;
 
 public record PointerEventArgs(
     double ClientX,
@@ -19,4 +21,6 @@ public record PointerEventArgs(
 )
 {
     public bool IsCancelled { get; set; }
+
+    public Point GetClientPoint() => new (ClientX, ClientY);
 }
