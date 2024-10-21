@@ -28,7 +28,11 @@ public class DiagramModel : Model
     public event Action<Model?, PointerEventArgs>? PointerMove;
     public event Action<WheelEventArgs>? Wheel;
 
-    public Rectangle Bounds { get; private set; } = new ();
+    public Rectangle Bounds
+    {
+        get => _bounds;
+        private set => SetProperty(ref _bounds, value);
+    }
 
     public void SetBounds(Rectangle bounds)
     {
@@ -38,7 +42,6 @@ public class DiagramModel : Model
         }
         
         Bounds = bounds;
-        Refresh();
     }
 
     public Point GetRelativeMousePoint(double clientX, double clientY)
@@ -68,6 +71,7 @@ public class DiagramModel : Model
     }
 
     private readonly List<LayerModel> _layers = [];
+    private Rectangle _bounds = new ();
 
     public IReadOnlyList<LayerModel> Layers => _layers;
 

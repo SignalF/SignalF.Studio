@@ -32,7 +32,7 @@ public class SelectionBehaviour : DiagramBehaviour
         if (model is null)
         {
             DeselectAll();
-            DiagramModel.Refresh();
+            //DiagramModel.Refresh();
             return;
         }
 
@@ -62,7 +62,7 @@ public class SelectionBehaviour : DiagramBehaviour
             }
         }
 
-        DiagramModel.Refresh();
+        //DiagramModel.Refresh();
     }
 
     private void DeselectAll()

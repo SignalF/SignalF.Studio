@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.ComponentModel;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Scotec.Blazor.Diagrams.Core.Models;
 using System.Xml.Linq;
@@ -24,8 +25,14 @@ public abstract class Renderer<TModel> : ComponentBase, IDisposable
         await base.OnInitializedAsync();
 
         _reference = DotNetObjectReference.Create(this);
-        Model.Changed += OnModelChanged;
+        //Model.Changed += OnModelChanged;
+        Model.PropertyChanged += ModelOnPropertyChanged;
         
+    }
+
+    private void ModelOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        ReRender();
     }
 
     protected override bool ShouldRender()
@@ -72,7 +79,8 @@ public abstract class Renderer<TModel> : ComponentBase, IDisposable
 
     protected virtual void Dispose(bool disposing)
     {
-        Model.Changed -= OnModelChanged;
+        //Model.Changed -= OnModelChanged;
+        Model.PropertyChanged -= ModelOnPropertyChanged;
         _reference?.Dispose();
 
     }

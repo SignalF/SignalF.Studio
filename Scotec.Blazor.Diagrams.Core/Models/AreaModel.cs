@@ -22,27 +22,13 @@ public class AreaModel : Model
     public Point Position
     {
         get => _position;
-        private set
-        {
-            if (_position != value)
-            {
-                _position = value;
-                Refresh();
-            }
-        }
+        private set => SetProperty(ref _position, value);
     }
 
     public Size Size
     {
         get => _size;
-        private set
-        {
-            if (_size != value)
-            {
-                _size = value;
-                Refresh();
-            }
-        }
+        private set => SetProperty(ref _size, value);
     }
 
     public virtual void SetPosition(double x, double y)

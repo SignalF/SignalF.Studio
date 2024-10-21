@@ -1,29 +1,36 @@
 @using SignalF.Studio.Designer.Components
 @inherits LayoutComponentBase
+
 @inject CookieThemeService CookieThemeService
 <RadzenComponents/>
 
 <RadzenLayout style="grid-template-areas: 'rz-sidebar rz-header' 'rz-sidebar rz-body';">
     <RadzenHeader>
         <RadzenRow JustifyContent="JustifyContent.Start" AlignItems="AlignItems.Center" Gap="0">
-            <RadzenColumn Size="5">
-                <RadzenSidebarToggle Click="@SidebarToggleClick"></RadzenSidebarToggle>
+            <RadzenColumn Size="10">
+                <RadzenStack AlignItems="AlignItems.Center" Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Start" Gap="0.5rem" class="rz-px-2">
+                    <RadzenSidebarToggle Click="@SidebarToggleClick"></RadzenSidebarToggle>
+                    <RadzenButton Click="OnCreate" Icon="playlist_add" Disabled="@(DataContext.IsOpen)"></RadzenButton>
+                    <RadzenButton Click="OnOpen" Icon="file_open" Disabled="@(DataContext.IsOpen)"></RadzenButton>
+                    <RadzenButton Click="OnSave" Icon="save" Disabled="@(!DataContext.IsOpen)"></RadzenButton>
+                    <RadzenButton Click="OnClose" Icon="close" Disabled="@(!DataContext.IsOpen)"></RadzenButton>
+                </RadzenStack>
             </RadzenColumn>
-            <RadzenColumn Size="7">
+            <RadzenColumn Size="2">
                 <RadzenStack AlignItems="AlignItems.Center" Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.End" Gap="0.5rem" class="rz-px-2">
                     <RadzenAppearanceToggle/>
                 </RadzenStack>
             </RadzenColumn>
         </RadzenRow>
     </RadzenHeader>
-    <RadzenBody Expanded="@sidebarExpanded" Style="padding: 0" >
+    <RadzenBody Expanded="@_sidebarExpanded" Style="padding: 0" >
         <RadzenRow Style="height: 100%">
             <RadzenColumn Size="12">
                 @Body
             </RadzenColumn>
         </RadzenRow>
     </RadzenBody>
-    <RadzenSidebar Expanded="@sidebarExpanded" style="z-index: 2">
+    <RadzenSidebar Expanded="@_sidebarExpanded" style="z-index: 2">
         <RadzenRow Style="display: flex; flex-direction: column; height: 100vh;">
             <RadzenColumn Size="12" Style="flex: 0 0 !important;">
                 <RadzenStack AlignItems="AlignItems.Center" class="rz-py-4 rz-py-lg-6" Style="border-bottom: var(--rz-panel-menu-item-border); padding: var(--rz-panel-menu-item-padding);">

@@ -7,7 +7,7 @@ namespace Scotec.Blazor.Diagrams.Core.Layer;
 
 public abstract class LayerModel : Model
 {
-    private readonly ModelCollection _models = [];
+    public ModelCollection Models { get; } = [];
 
     protected LayerModel(Func<LayerModel, IEnumerable<ILayerBehaviour>> behaviours)
     {
@@ -16,25 +16,32 @@ public abstract class LayerModel : Model
 
     protected void AddModel(Model model)
     {
-        _models.Add(model);
+        OnPropertyChanging(nameof(Models));
+        Models.Add(model);
+        OnPropertyChanged(nameof(Models));
+
     }
 
     protected void AddModels(IEnumerable<Model> models)
     {
+        OnPropertyChanging(nameof(Models));
         foreach (var model in models)
         {
-            _models.Add(model);
+            Models.Add(model);
         }
+        OnPropertyChanged(nameof(Models));
     }
 
     public void RemoveModel(Model model)
     {
-        _models.Remove(model.Id);
+        OnPropertyChanging(nameof(Models));
+        Models.Remove(model.Id);
+        OnPropertyChanged(nameof(Models));
     }
 
     public IReadOnlyList<TModel> GetModels<TModel>() where TModel : Model
     { 
-        return _models.OfType<TModel>().ToList();
+        return Models.OfType<TModel>().ToList();
     }
 
 

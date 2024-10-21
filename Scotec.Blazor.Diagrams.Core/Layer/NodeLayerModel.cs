@@ -10,6 +10,17 @@ public class NodeLayerModel : LayerModel, IMovable, IZoomable
     {
     }
 
+    public Point Position { get; private set; }
+
+    public virtual void SetPosition(double x, double y)
+    {
+        Position = new Point(x, y);
+    }
+
+    public bool IsMoving { get; set; }
+
+    public double Zoom { get; set; } = 1.5;
+
     public void AddNode(NodeModel node)
     {
         AddModel(node);
@@ -40,16 +51,15 @@ public class NodeLayerModel : LayerModel, IMovable, IZoomable
         RemoveModel(link);
     }
 
-    public IReadOnlyList<NodeModel> GetNodes() => GetModels<NodeModel>().ToList();
-    public IReadOnlyList<LinkModel> GetLinks() => GetModels<LinkModel>().ToList();
-
-    public Point Position { get; private set; }
-    public virtual void SetPosition(double x, double y)
+    public IReadOnlyList<NodeModel> GetNodes()
     {
-        Position = new Point(x, y);
+        return GetModels<NodeModel>().ToList();
     }
 
-    public double Zoom { get; set; } = 1.5;
+    public IReadOnlyList<LinkModel> GetLinks()
+    {
+        return GetModels<LinkModel>().ToList();
+    }
 }
 
 public abstract class NodeLayerModel<TNodeModel, TLinkModel> : NodeLayerModel
@@ -60,4 +70,3 @@ public abstract class NodeLayerModel<TNodeModel, TLinkModel> : NodeLayerModel
     {
     }
 }
-

@@ -144,6 +144,26 @@
         </SignalSink>
       </SignalSinks>
     </SignalProcessorConfiguration>
+    <SignalProcessorConfiguration xsi:type="SignalF.Datamodel.Hardware.DeviceConfigurationType" id="IDde3120c7-f0c6-4b30-9193-6e7772c0e8a3" Name="">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+      <Definition xsi:type="SignalF.Datamodel.Signals.SignalProcessorDefinitionRefType" idRef="ID66b1bd09-c420-472b-a4b2-aa9ec56afced" />
+      <SignalSources xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationListType">
+        <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationType" id="IDc7e3f1fa-ec99-43bd-9f43-5d2bbde02c53" Name="">
+          <Definition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionRefType" idRef="ID4ab9f685-681a-481b-90d8-fcbd39ef7ab1" />
+        </SignalSource>
+      </SignalSources>
+      <SignalSinks xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationListType" />
+    </SignalProcessorConfiguration>
+    <SignalProcessorConfiguration xsi:type="SignalF.Datamodel.Hardware.DeviceConfigurationType" id="IDbad4ef0e-4b62-4418-a8c4-2cb1ad0a5b18" Name="">
+      <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" />
+      <Definition xsi:type="SignalF.Datamodel.Signals.SignalProcessorDefinitionRefType" idRef="ID66b1bd09-c420-472b-a4b2-aa9ec56afced" />
+      <SignalSources xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationListType">
+        <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationType" id="IDac744555-3fbf-49ec-ad92-b49cc2b8ee7c" Name="">
+          <Definition xsi:type="SignalF.Datamodel.Signals.SignalEndpointDefinitionRefType" idRef="ID4ab9f685-681a-481b-90d8-fcbd39ef7ab1" />
+        </SignalSource>
+      </SignalSources>
+      <SignalSinks xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationListType" />
+    </SignalProcessorConfiguration>
   </SignalProcessorConfigurations>
   <HardwareConfiguration xsi:type="SignalF.Datamodel.Hardware.HardwareConfigurationType">
     <ChannelGroups xsi:type="SignalF.Datamodel.Hardware.ChannelGroupConfigurationListType">
@@ -291,7 +311,7 @@
     <Elements xsi:type="SignalF.Datamodel.Designer.DesignerElementListType">
       <DesignerElement xsi:type="SignalF.Datamodel.Designer.SignalProcessorElementType" id="IDe779317b-561f-4786-9870-1973ab37950c">
         <SignalProcessor xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefType" idRef="IDb0556fb2-aa50-4548-931e-5402eaf8f50a" />
-        <Position xsi:type="SignalF.Datamodel.Designer.PositionType" X="100" Y="100" />
+        <Position xsi:type="SignalF.Datamodel.Designer.PositionType" X="92" Y="91" />
         <Size xsi:type="SignalF.Datamodel.Designer.SizeType" Width="240" Height="300" />
       </DesignerElement>
       <DesignerElement xsi:type="SignalF.Datamodel.Designer.SignalProcessorElementType" id="ID8dbfba0d-08a1-42bd-97cd-74f17e241271">
@@ -307,6 +327,11 @@
       <DesignerElement xsi:type="SignalF.Datamodel.Designer.SignalProcessorElementType" id="IDcad64c28-c90c-4f58-a4ce-23a17489d1f5">
         <SignalProcessor xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefType" idRef="ID4cbcc7e1-51f4-44ac-a305-5c4302a670f8" />
         <Position xsi:type="SignalF.Datamodel.Designer.PositionType" X="497" Y="98" />
+        <Size xsi:type="SignalF.Datamodel.Designer.SizeType" Width="240" Height="300" />
+      </DesignerElement>
+      <DesignerElement xsi:type="SignalF.Datamodel.Designer.SignalProcessorElementType" id="ID71b8b858-ad0c-4f20-b87d-ee6c8bac0ff5">
+        <SignalProcessor xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefType" idRef="IDbad4ef0e-4b62-4418-a8c4-2cb1ad0a5b18" />
+        <Position xsi:type="SignalF.Datamodel.Designer.PositionType" X="506" Y="476" />
         <Size xsi:type="SignalF.Datamodel.Designer.SizeType" Width="240" Height="300" />
       </DesignerElement>
     </Elements>

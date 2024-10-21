@@ -1,35 +1,32 @@
-using System.Net.Http;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.Web.Virtualization;
 using Microsoft.JSInterop;
 using Radzen;
-using Radzen.Blazor;
+using SignalF.Studio.Designer;
 
-namespace SignalF.Studio.Server.Components.Pages
+namespace SignalF.Studio.Server.Components.Pages;
+
+public partial class Designer
 {
-    public partial class Designer
+    [Inject] protected IJSRuntime JSRuntime { get; set; }
+
+    [Inject] protected NavigationManager NavigationManager { get; set; }
+
+    [Inject] protected DialogService DialogService { get; set; }
+
+    [Inject] protected TooltipService TooltipService { get; set; }
+
+    [Inject] protected ContextMenuService ContextMenuService { get; set; }
+
+    [Inject] protected NotificationService NotificationService { get; set; }
+
+    [Inject] protected DataContext DataContext { get; set; }
+
+    protected override Task OnInitializedAsync()
     {
-        [Inject]
-        protected IJSRuntime JSRuntime { get; set; }
+        base.OnInitializedAsync();
 
-        [Inject]
-        protected NavigationManager NavigationManager { get; set; }
+        DataContext.PropertyChanged += (sender, args) => StateHasChanged();
 
-        [Inject]
-        protected DialogService DialogService { get; set; }
-
-        [Inject]
-        protected TooltipService TooltipService { get; set; }
-
-        [Inject]
-        protected ContextMenuService ContextMenuService { get; set; }
-
-        [Inject]
-        protected NotificationService NotificationService { get; set; }
+        return Task.CompletedTask;
     }
 }

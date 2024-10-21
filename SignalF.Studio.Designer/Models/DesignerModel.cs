@@ -8,11 +8,11 @@ namespace SignalF.Studio.Designer.Models
 {
     public class DesignerModel
     {
-        private readonly DocumentManager _documentManager;
+        private readonly DataContext _dataContext;
 
-        public DesignerModel(DocumentManager documentManager)
+        public DesignerModel(DataContext dataContext)
         {
-            _documentManager = documentManager;
+            _dataContext = dataContext;
         }
     }
 }

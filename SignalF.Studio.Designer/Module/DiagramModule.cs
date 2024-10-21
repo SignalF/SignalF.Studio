@@ -15,15 +15,15 @@ public class DiagramModule : Autofac.Module
     {
         base.Load(builder);
 
-        builder.RegisterType<DocumentManager>()
+        builder.RegisterType<DataContext>()
                .InstancePerLifetimeScope();
 
         builder.RegisterType<DesignerDiagramModel>()
-               .InstancePerLifetimeScope();
+               .InstancePerDependency();
 
         builder.RegisterType<ConfigurationLayerModel>()
                .As<LayerModel>()
-               .InstancePerLifetimeScope();
+               .InstancePerDependency();
 
         builder.RegisterType<ComponentMapping<ConfigurationLayerModel, ConfigurationLayer>>()
                .As<IComponentMapping>()

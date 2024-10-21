@@ -1,6 +1,9 @@
-﻿using Scotec.Blazor.Diagrams.Core.Geometry;
+﻿using System.Security.Cryptography;
+using Scotec.Blazor.Diagrams.Core.Geometry;
 using Scotec.Blazor.Diagrams.Core.Models;
+using SignalF.Datamodel.Designer;
 using SignalF.Datamodel.Signals;
+using Size = Scotec.Blazor.Diagrams.Core.Geometry.Size;
 
 namespace SignalF.Studio.Designer.Models;
 
@@ -8,18 +11,17 @@ public class SignalProcessorNodeModel : NodeModel<SignalProcessorPortModel>
 {
     private readonly Func<ISignalConfiguration, SignalProcessorNodeModel, Point, Size, SignalProcessorPortModel> _portModelFactory;
 
-    public SignalProcessorNodeModel(ISignalProcessorConfiguration configuration, Point position, Size size, Func<ISignalConfiguration, SignalProcessorNodeModel, Point, Size, SignalProcessorPortModel> portModelFactory)
-        : base(configuration.Id.ToString("D"), position, size)
+    public SignalProcessorNodeModel(ISignalProcessorElement designerElement, Func<ISignalConfiguration, SignalProcessorNodeModel, Point, Size, SignalProcessorPortModel> portModelFactory)
+        : base(designerElement.Id.ToString("D"), designerElement.Position.ToPoint(), designerElement.Size.ToSize())
     {
         _portModelFactory = portModelFactory;
-        Configuration = configuration;
-
+        DesignerElement = designerElement;
+        Configuration = designerElement.SignalProcessor;
 
         AddPorts();
     }
 
-    //public Size InitialSize { get; }
-
+    public ISignalProcessorElement DesignerElement { get; }
     public ISignalProcessorConfiguration Configuration { get; }
 
     public string Name
@@ -29,6 +31,20 @@ public class SignalProcessorNodeModel : NodeModel<SignalProcessorPortModel>
     }
 
     public string DefinitionName => Configuration.Definition.Name ?? Configuration.Definition.Template.Name;
+
+    public override void SetPosition(double x, double y)
+    {
+        base.SetPosition(x, y);
+        if (!IsMoving)
+        {
+            using var notificationLock = DesignerElement.Session.CreateNotificationLock();
+            using var transaction = DesignerElement.Session.CreateTransaction();
+            DesignerElement.Position.X = x;
+            DesignerElement.Position.Y = y;
+
+            transaction.Commit();
+        }
+    }
 
     private void AddPorts()
     {

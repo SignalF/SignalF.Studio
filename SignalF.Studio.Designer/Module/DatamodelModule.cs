@@ -16,20 +16,20 @@ public class DatamodelModule : Autofac.Module
                // Create default transaction handler.
                .OnActivating(handler => handler.Instance.CreateTransactionHandler(""))
                .Named<ITransactionManager>("Transactions.DefaultTransactionManager")
-               .InstancePerLifetimeScope();
+               .InstancePerDependency();
 
         builder.Register<IDataDocument>(c => new XmlDataDocument())
                .OnActivating(handler =>
                    handler.Instance.TransactionManager = handler.Context.ResolveNamed<ITransactionManager>("Transactions.DefaultTransactionManager"))
                .Named<IDataDocument>("XMLDatabase.ControllerConfigurationDataDocument")
-               .InstancePerLifetimeScope();
+               .InstancePerDependency();
 
         builder.Register<IBusinessDocument>(c =>
                    new BusinessDocument(
                        c.ResolveNamed<IDataDocument>("XMLDatabase.ControllerConfigurationDataDocument")))
                //.Named<IBusinessDocument>("XMLDatabase.ControllerConfigurationInfoBusinessDocument")
                .As<IBusinessDocument>()
-               .InstancePerLifetimeScope();
+               .InstancePerDependency();
 
         builder.RegisterType<DesignerModel>()
                .InstancePerLifetimeScope();

@@ -1,5 +1,6 @@
 ﻿using Scotec.Blazor.Diagrams.Core.Geometry;
 using SignalF.Datamodel.Configuration;
+using SignalF.Datamodel.Designer;
 using SignalF.Datamodel.Hardware;
 using SignalF.Datamodel.Signals;
 using SignalF.Studio.Designer.Models;
@@ -29,6 +30,13 @@ internal class DeviceDefinitionNodeModel : DefinitionNodeModel
 
         AddSignalSources(deviceConfiguration);
         AddSignalSinks(deviceConfiguration);
+
+        var deviceElement = controllerConfiguration.DesignerConfiguration.Elements.Create<ISignalProcessorElement>();
+        deviceElement.SignalProcessor = deviceConfiguration;
+        deviceElement.Position.X = position.X;
+        deviceElement.Position.Y = position.Y;
+        deviceElement.Size.Width = 240.0;
+        deviceElement.Size.Height = 300.0;
 
         transaction.Commit();
 

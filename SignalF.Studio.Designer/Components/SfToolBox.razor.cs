@@ -7,21 +7,29 @@ namespace SignalF.Studio.Designer.Components;
 
 public partial class SfToolBox
 {
-    private IList<DefinitionNodeModel> _calculatorDefinitions;
+    private IList<DefinitionNodeModel> _calculatorDefinitions = new List<DefinitionNodeModel>();
+    private IList<DefinitionNodeModel> _deviceDefinitions = new List<DefinitionNodeModel>();
 
-    private IList<DefinitionNodeModel> _deviceDefinitions;
-
-    [Inject] private DocumentManager DocumentManager { get; set; }
+    [Inject] private DataContext DataContext { get; set; }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        if (DocumentManager is null || !DocumentManager.IsOpen)
-        {
-            return;
-        }
+        
+        DataContext.Opened += DataContextOnOpened;
+        DataContext.Closed += DataContextOnClosed;
+    }
 
-        var configuration = DocumentManager.GetConfiguration();
+    private void DataContextOnClosed(object sender, EventArgs e)
+    {
+        _deviceDefinitions.Clear();
+        _calculatorDefinitions.Clear();
+        StateHasChanged();
+    }
+
+    private void DataContextOnOpened(object sender, EventArgs e)
+    {
+        var configuration = DataContext.GetConfiguration();
         _deviceDefinitions = configuration.SignalProcessorDefinitions
                                           .OfType<IDeviceDefinition>()
                                           .Select(DefinitionNodeModel (definition) => new DeviceDefinitionNodeModel(definition))
@@ -32,5 +40,6 @@ public partial class SfToolBox
                                               .Select(DefinitionNodeModel (definition) => new CalculatorDefinitionNodeModel(definition))
                                               .ToList();
 
+        StateHasChanged();
     }
 }

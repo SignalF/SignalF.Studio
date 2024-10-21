@@ -13,6 +13,9 @@ public class NodeModel : AreaModel, IMovable
     protected NodeModel(string id, Point position = default, Size size = default) : base(id, position, size)
     {
     }
+
+    public bool IsMoving { get; set; }
+
 }
 
 

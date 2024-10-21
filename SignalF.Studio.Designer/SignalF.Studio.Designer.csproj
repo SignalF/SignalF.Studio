@@ -22,7 +22,7 @@
 	  <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.5" />
 	  <PackageReference Include="Radzen.Blazor" Version="5.2.2" />
 	  <PackageReference Include="Scotec.Extensions.Linq" Version="1.0.3" />
-	  <PackageReference Include="SignalF.Datamodel" Version="0.8.0-dev.179" PrivateAssets="contentFiles" />
+	  <PackageReference Include="SignalF.Datamodel" Version="0.8.0-dev.188" PrivateAssets="contentFiles" />
 	  <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.8" />
 
   </ItemGroup>

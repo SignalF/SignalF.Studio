@@ -15,6 +15,7 @@ namespace Scotec.Blazor.Diagrams.Core.Behaviours
         private double _lastClientX = 0.0;
         private double _lastClientY = 0.0;
         private bool _buttonDown;
+        private bool _firstMove;
 
         public MoveBehaviour(DiagramModel diagramModel) : base(diagramModel)
         {
@@ -29,7 +30,21 @@ namespace Scotec.Blazor.Diagrams.Core.Behaviours
             {
                 return;
             }
-            
+
+            if (_firstMove)
+            {
+                _firstMove = false;
+                _movables.ForEach(movable => movable.IsMoving = true);
+            }
+
+            SetPosition(args);
+
+            _lastClientX = args.ClientX;
+            _lastClientY = args.ClientY;
+        }
+
+        private void SetPosition(PointerEventArgs args)
+        {
             var differenceX = (args.ClientX - _lastClientX) / DiagramModel.Zoom ;
             var differenceY = (args.ClientY - _lastClientY) / DiagramModel.Zoom;
 
@@ -40,15 +55,18 @@ namespace Scotec.Blazor.Diagrams.Core.Behaviours
 
                 movable.SetPosition(x, y);
             }
-           
-            _lastClientX = args.ClientX;
-            _lastClientY = args.ClientY;
         }
 
         private void OnPointerUp(Model? arg1, PointerEventArgs args)
         {
-            _buttonDown = false;
-            _movables.Clear();
+            if (_buttonDown)
+            {
+                _buttonDown = false;
+                _firstMove = false;
+                _movables.ForEach(movable => movable.IsMoving = false);
+                SetPosition(args);
+                _movables.Clear();
+            }
         }
 
         private void OnPointerDown(Model? model, PointerEventArgs args)
@@ -59,6 +77,7 @@ namespace Scotec.Blazor.Diagrams.Core.Behaviours
             }
 
             _buttonDown = true;
+            _firstMove = true;
             _lastClientX = args.ClientX;
             _lastClientY = args.ClientY;
 

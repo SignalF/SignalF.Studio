@@ -1,55 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Channels;
-using System.Threading.Tasks;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Scotec.Blazor.Diagrams.Core.Behaviours;
 
-namespace Scotec.Blazor.Diagrams.Core.Models
+namespace Scotec.Blazor.Diagrams.Core.Models;
+
+public abstract class Model : ObservableObject, ISelectable
 {
-    public abstract class Model : ISelectable
+    private bool _isSelected;
+    private string _title = string.Empty;
+    private bool _isVisible = true;
+    private bool _isLocked = false;
+
+    protected Model() : this(Guid.NewGuid().ToString("D"))
     {
-        private bool _isSelected = false;
+    }
 
-        protected Model() : this(Guid.NewGuid().ToString("D"))
-        {
-        }
+    protected Model(string id)
+    {
+        Id = id;
+    }
 
-        protected Model(string id)
-        {
-            Id = id;
-        }
+    public string Id { get; }
 
-        public string Id { get; }
+    public string Title
+    {
+        get => _title;
+        set => SetProperty(ref _title, value);
+    }
 
-        public string Title { get; set; } = string.Empty;
+    public bool IsVisible
+    {
+        get => _isVisible;
+        set => SetProperty(ref _isVisible, value);
+    }
 
-        public bool IsVisible { get; set; } = true;
+    public bool IsLocked
+    {
+        get => _isLocked;
+        set => SetProperty(ref _isLocked, value);
+    }
 
-        public bool IsLocked { get; set; } = false;
+    public bool IsSelected
+    {
+        get => _isSelected;
+        set => SetProperty(ref _isSelected, value);
+    }
 
-        public bool IsSelected
-        {
-            get => _isSelected;
-            set
-            {
-                if(_isSelected != value) 
-                {
-                    _isSelected = value;
-                    Refresh();
-                }
-            }
-        }
-
-        public virtual Task OnInitializedAsync()
-        {
-            return Task.CompletedTask;
-        }
-
-        public event Action<Model>? Changed;
-
-        public virtual void Refresh() => Changed?.Invoke(this);
-
+    public virtual Task OnInitializedAsync()
+    {
+        return Task.CompletedTask;
     }
 }
+

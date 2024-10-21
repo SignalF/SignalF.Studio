@@ -1,4 +1,8 @@
 @page "/"
 @using SignalF.Studio.Designer.Components
 
-<SfDesigner/>
+@if (DataContext is { IsOpen: true })
+{
+    <SfDesigner/>
+}
+
