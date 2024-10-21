@@ -287,4 +287,28 @@
       <Configuration xsi:type="SignalF.Datamodel.Base.ConfigurationType" Data="{}" />
     </DeviceBinding>
   </DeviceBindings>
+  <DesignerConfiguration xsi:type="SignalF.Datamodel.Designer.DesignerConfigurationType">
+    <Elements xsi:type="SignalF.Datamodel.Designer.DesignerElementListType">
+      <DesignerElement xsi:type="SignalF.Datamodel.Designer.SignalProcessorElementType" id="IDe779317b-561f-4786-9870-1973ab37950c">
+        <SignalProcessor xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefType" idRef="IDb0556fb2-aa50-4548-931e-5402eaf8f50a" />
+        <Position xsi:type="SignalF.Datamodel.Designer.PositionType" X="100" Y="100" />
+        <Size xsi:type="SignalF.Datamodel.Designer.SizeType" Width="240" Height="300" />
+      </DesignerElement>
+      <DesignerElement xsi:type="SignalF.Datamodel.Designer.SignalProcessorElementType" id="ID8dbfba0d-08a1-42bd-97cd-74f17e241271">
+        <SignalProcessor xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefType" idRef="ID400ce31c-ce1a-46fb-b98a-4099f91ddb5b" />
+        <Position xsi:type="SignalF.Datamodel.Designer.PositionType" X="914" Y="93" />
+        <Size xsi:type="SignalF.Datamodel.Designer.SizeType" Width="240" Height="300" />
+      </DesignerElement>
+      <DesignerElement xsi:type="SignalF.Datamodel.Designer.SignalProcessorElementType" id="ID5dc851ab-ed82-4289-a473-dc996a14fed2">
+        <SignalProcessor xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefType" idRef="ID66203c32-36f6-493a-8b0f-5d1584455a09" />
+        <Position xsi:type="SignalF.Datamodel.Designer.PositionType" X="104" Y="461" />
+        <Size xsi:type="SignalF.Datamodel.Designer.SizeType" Width="240" Height="300" />
+      </DesignerElement>
+      <DesignerElement xsi:type="SignalF.Datamodel.Designer.SignalProcessorElementType" id="IDcad64c28-c90c-4f58-a4ce-23a17489d1f5">
+        <SignalProcessor xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefType" idRef="ID4cbcc7e1-51f4-44ac-a305-5c4302a670f8" />
+        <Position xsi:type="SignalF.Datamodel.Designer.PositionType" X="497" Y="98" />
+        <Size xsi:type="SignalF.Datamodel.Designer.SizeType" Width="240" Height="300" />
+      </DesignerElement>
+    </Elements>
+  </DesignerConfiguration>
 </ControllerConfiguration>
