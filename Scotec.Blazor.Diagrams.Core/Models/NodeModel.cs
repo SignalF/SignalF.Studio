@@ -31,6 +31,7 @@ where TPortModel : PortModel
     protected NodeModel(string id, Point position = default, Size size = default) : base(id, position, size)
     {
     }
+
     public IReadOnlyList<TPortModel> Ports => _ports;
 
     public void AddPort(TPortModel port)

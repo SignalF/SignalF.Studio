@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Scotec.Blazor.Diagrams.Core.Geometry;
 
-namespace Scotec.Blazor.Diagrams.Core.Models
+namespace Scotec.Blazor.Diagrams.Core.Models;
+
+public class LinkModel : Model
 {
-    public abstract class LinkModel : Model
+    protected LinkModel(Point[]? vertices = default)
     {
+        Vertices = vertices ?? [];
     }
+
+    protected LinkModel(string id, Point[]? vertices = default) : base(id)
+    {
+        Vertices = vertices ?? [];
+    }
+
+    public Point[] Vertices { get; }
 }

@@ -6,4 +6,8 @@
     {
         <NodeRenderer @key="node" Model="node"/>
     }
+    @foreach (var link in LayerModel.GetLinks())
+    {
+        <LinkRenderer @key="link" Model="link"/>
+    }
 </div>

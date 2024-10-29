@@ -39,3 +39,20 @@
     background-color: red;
 }
 
+.diagram-link {
+    position: absolute;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*cursor: move;*/
+    pointer-events: all;
+}
+
+.diagram-link.selected {
+    outline: 1px solid ActiveCaption;
+}
+
+.diagram-link-error {
+    background-color: red;
+}

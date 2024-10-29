@@ -3,6 +3,7 @@ using Scotec.Blazor.Diagrams;
 using Scotec.Blazor.Diagrams.Components;
 using Scotec.Blazor.Diagrams.Core.Layer;
 using Scotec.Blazor.Diagrams.Core.Models;
+using Scotec.Blazor.Diagrams.Widgets;
 using SignalF.Studio.Designer.Components;
 using SignalF.Studio.Designer.Models;
 using SignalF.Studio.Designer.Widgets;
@@ -37,10 +38,17 @@ public class DiagramModule : Autofac.Module
                .As<IComponentMapping>()
                .SingleInstance();
 
+        builder.RegisterType<ComponentMapping<SignalProcessorLinkModel, SignalProcessorLink>>()
+               .As<IComponentMapping>()
+               .SingleInstance();
+
         builder.RegisterType<SignalProcessorNodeModel>()
                .InstancePerDependency();
 
         builder.RegisterType<SignalProcessorPortModel>()
+               .InstancePerDependency();
+
+        builder.RegisterType<SignalProcessorLinkModel>()
                .InstancePerDependency();
 
     }

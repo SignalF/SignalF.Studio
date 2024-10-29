@@ -1,5 +1,4 @@
-﻿using Microsoft.CodeAnalysis;
-using Scotec.Blazor.Diagrams.Core.Geometry;
+﻿using Point = Scotec.Blazor.Diagrams.Core.Geometry.Point;
 using SignalF.Datamodel.Designer;
 using SignalF.Datamodel.Signals;
 using Size = Scotec.Blazor.Diagrams.Core.Geometry.Size;
@@ -17,7 +16,7 @@ internal static class DatamodelExtensions
         return string.IsNullOrWhiteSpace(name) ? definition.Template.Name : name;
     }
 
-    public static Point ToPoint(this IPosition position)
+    public static Point ToPoint(this IPoint position)
     {
         return new Point(position.X, position.Y);
     }

@@ -1,4 +1,4 @@
-﻿using Scotec.Blazor.Diagrams.Core.Geometry;
+﻿using Point = Scotec.Blazor.Diagrams.Core.Geometry.Point;
 using SignalF.Datamodel.Configuration;
 using SignalF.Datamodel.Designer;
 using SignalF.Datamodel.Hardware;

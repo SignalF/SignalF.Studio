@@ -38,6 +38,7 @@ public static class Extensions
         return services.AddScoped<ComponentRegistration>()
                        .AddSingleton<IComponentMapping, ComponentMapping<NodeLayerModel, NodeLayer>>()
                        .AddTransient<IDiagramBehaviour, SelectionBehaviour>()
+                       .AddTransient<IDiagramBehaviour, ConnectBehaviour>()
                        .AddTransient<IDiagramBehaviour, MoveBehaviour>()
                        .AddTransient<IDiagramBehaviour, PanBehaviour>()
                        .AddTransient<IDiagramBehaviour, ZoomBehaviour>()

@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using Scotec.Blazor.Diagrams.Core.Geometry;
+﻿using Point = Scotec.Blazor.Diagrams.Core.Geometry.Point;
 using Scotec.Blazor.Diagrams.Core.Models;
 using SignalF.Datamodel.Designer;
 using SignalF.Datamodel.Signals;

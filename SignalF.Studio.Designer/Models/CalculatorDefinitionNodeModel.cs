@@ -1,4 +1,5 @@
 ﻿using Scotec.Blazor.Diagrams.Core.Geometry;
+using Point = Scotec.Blazor.Diagrams.Core.Geometry.Point;
 using SignalF.Datamodel.Calculation;
 using SignalF.Datamodel.Configuration;
 using SignalF.Datamodel.Designer;
@@ -20,6 +21,7 @@ internal class CalculatorDefinitionNodeModel : DefinitionNodeModel
     protected override ISignalProcessorConfiguration OnCreateItem(Point position)
     {
         // TODO: Same code in DeviceDefinitionNodeModel. Create generic base class.
+        // TODO: Probably it is sufficient to have just one generic class since the functionality is the same for all signal processor types.
         var controllerConfiguration = _calculatorDefinition.FindParent<IControllerConfiguration>();
 
         var session = controllerConfiguration.Session;

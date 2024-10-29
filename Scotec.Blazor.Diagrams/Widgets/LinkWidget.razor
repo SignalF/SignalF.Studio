@@ -1,0 +1,14 @@
+﻿<g>
+    <path d="@GetSvgPath()"
+          style="fill: none; stroke: green; stroke-width: 3"/>
+</g>
+
+@code {
+    [Parameter] public LinkModel? Link { get; set; }
+
+    private string GetSvgPath()
+    {
+        return "M150 5 L75 200 L225 200 Z";
+    }
+
+}

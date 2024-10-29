@@ -25,7 +25,6 @@ public abstract class Renderer<TModel> : ComponentBase, IDisposable
         await base.OnInitializedAsync();
 
         _reference = DotNetObjectReference.Create(this);
-        //Model.Changed += OnModelChanged;
         Model.PropertyChanged += ModelOnPropertyChanged;
         
     }
@@ -79,7 +78,6 @@ public abstract class Renderer<TModel> : ComponentBase, IDisposable
 
     protected virtual void Dispose(bool disposing)
     {
-        //Model.Changed -= OnModelChanged;
         Model.PropertyChanged -= ModelOnPropertyChanged;
         _reference?.Dispose();
 
