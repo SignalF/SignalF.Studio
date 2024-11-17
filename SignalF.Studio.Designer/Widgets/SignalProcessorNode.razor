@@ -17,7 +17,7 @@ else
             </RadzenRow>
             <RadzenRow class="sf-signal-processor-body">
                 <RadzenColumn Style="position: relative;">
-                    @foreach (var port in Node.Ports)
+                    @foreach (var port in Node.GetPorts<SignalProcessorPortModel>())
                     {
                         <PortRenderer Model="port"></PortRenderer>
                         @if (port.Alignment == PortAlignment.Left)

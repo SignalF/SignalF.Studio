@@ -37,7 +37,7 @@ public class ConfigurationLayerModel : NodeLayerModel<SignalProcessorNodeModel, 
         CreateSignalProcessorNodes(nodeElements);
 
 
-        var allPorts = GetNodes().OfType<SignalProcessorNodeModel>().SelectMany(node => node.Ports.Select(port => new{Port = port, Node = node})).ToList();
+        var allPorts = GetNodes().OfType<SignalProcessorNodeModel>().SelectMany(node => node.GetPorts<SignalProcessorPortModel>().Select(port => new{Port = port, Node = node})).ToList();
 
         var links = configuration.DesignerConfiguration.Elements.OfType<ILinkElement>().ToList();
         links.ForEach(link => configuration.DesignerConfiguration.Elements.Delete(link));

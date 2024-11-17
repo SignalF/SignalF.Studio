@@ -6,7 +6,7 @@ using Size = Scotec.Blazor.Diagrams.Core.Geometry.Size;
 
 namespace SignalF.Studio.Designer.Models;
 
-public class SignalProcessorNodeModel : NodeModel<SignalProcessorPortModel>
+public class SignalProcessorNodeModel : NodeModel
 {
     private readonly Func<ISignalConfiguration, SignalProcessorNodeModel, Point, Size, SignalProcessorPortModel> _portModelFactory;
 

@@ -94,6 +94,10 @@ namespace Scotec.Blazor.Diagrams.Core.Behaviours
                 _movables.Clear();
                 _movables.Add(movable);
             }
+
+            var anchorPoints = _movables.OfType<NodeModel>().SelectMany(node => node.GetPorts<PortModel>())
+                                        .Select(port => port.GetAnchorPoint());
+
         }
     }
 }
