@@ -37,13 +37,21 @@ namespace Scotec.Blazor.Diagrams.Renderer
             builder.OpenElement(0, "svg");
             builder.AddAttribute(1, "class", string.Join(' ', GetClasses()));
             builder.AddAttribute(2, "link-id", Model.Id);
-            builder.AddAttribute(3, "style", $"top: 0; left: 0; width: 100%; height: 100%");
-
-            
-            //builder.AddAttribute(4, "onpointerdown", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerDown));
+            //builder.AddAttribute(3, "pointer-events", "none");
+            builder.AddAttribute(4, "style", "top: 0; left: 0; width: 100%; height: 100%; background-color: transparent;pointer-events: none;");
             //builder.AddEventStopPropagationAttribute(5, "onpointerdown", true);
-            //builder.AddAttribute(6, "onpointerup", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerUp));
             //builder.AddEventStopPropagationAttribute(7, "onpointerup", true);
+            //builder.AddEventStopPropagationAttribute(9, "onmouseenter", true);
+            //builder.AddEventStopPropagationAttribute(11, "onmouseleave", true);
+            //builder.AddEventStopPropagationAttribute(13, "onmousemove", true);
+
+            builder.OpenElement(5, "g");
+            builder.AddAttribute(6, "pointer-events", "all");
+            builder.AddAttribute(7, "style", "pointer-events: all;cursor: default;");
+            builder.AddAttribute(8, "onpointerdown", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerDown));
+            builder.AddEventStopPropagationAttribute(9, "onpointerdown", true);
+            builder.AddAttribute(10, "onpointerup", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerUp));
+            builder.AddEventStopPropagationAttribute(11, "onpointerup", true);
             //builder.AddAttribute(8, "onmouseenter", EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseEnter));
             //builder.AddAttribute(9, "onmouseleave", EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseLeave));
             //builder.AddAttribute(9, "onmousemove", EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseMove));
@@ -54,6 +62,7 @@ namespace Scotec.Blazor.Diagrams.Renderer
             builder.OpenComponent(11, ComponentRegistration.GetComponentType(Model.GetType()) ?? typeof(ErrorPortWidget));
             builder.AddAttribute(12, "Link", Model);
             builder.CloseComponent();
+            builder.CloseElement();
 
             builder.CloseElement();
         }

@@ -43,4 +43,13 @@ where TPortModel : PortModel
     {
         _ports.Remove(port);
     }
+
+    public override void SetPosition(double x, double y)
+    {
+        base.SetPosition(x, y);
+
+        foreach (var port in _ports)
+        {
+        }
+    }
 }

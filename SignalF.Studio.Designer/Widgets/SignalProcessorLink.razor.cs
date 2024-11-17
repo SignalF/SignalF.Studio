@@ -54,12 +54,6 @@ namespace SignalF.Studio.Designer.Widgets
             //SvgPath = GetSvgPath();
         }
 
-        private string GetSvgPath()
-        {
-
-            return "M150 5 L75 200 L225 200 Z";
-        }
-
         [Parameter]
         public string SvgPath { get; set; }
 

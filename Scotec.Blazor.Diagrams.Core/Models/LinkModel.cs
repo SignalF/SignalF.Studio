@@ -1,4 +1,5 @@
-﻿using Scotec.Blazor.Diagrams.Core.Geometry;
+﻿using System.ComponentModel;
+using Scotec.Blazor.Diagrams.Core.Geometry;
 
 namespace Scotec.Blazor.Diagrams.Core.Models;
 
@@ -15,4 +16,15 @@ public class LinkModel : Model
     }
 
     public Point[] Vertices { get; }
+
+    void Move(Point startPoint, Point endPoint)
+    {
+        Vertices[0] = startPoint;
+        Vertices[^1] = endPoint;
+
+        OnPropertyChanged(nameof(Vertices));
+
+    }
+
+
 }

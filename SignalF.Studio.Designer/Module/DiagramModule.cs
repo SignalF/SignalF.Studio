@@ -30,7 +30,7 @@ public class DiagramModule : Autofac.Module
                .As<IComponentMapping>()
                .SingleInstance();
 
-        builder.RegisterType<ComponentMapping<SignalProcessorNodeModel, SignalProcessor>>()
+        builder.RegisterType<ComponentMapping<SignalProcessorNodeModel, SignalProcessorNode>>()
                .As<IComponentMapping>()
                .SingleInstance();
 
