@@ -49,12 +49,12 @@ public class ConfigurationLayerModel : NodeLayerModel<SignalProcessorNodeModel, 
             var sinkPort = allPorts.First(port => port.Port.SignalConfiguration == connection.SignalSink);
 
             var first = linkElement.Vertices.Create();
-            first.X = sourcePort.Port.GetAnchorPoint().X + sourcePort.Node.Position.X;
-            first.Y = sourcePort.Port.GetAnchorPoint().Y + sourcePort.Node.Position.Y + 40.0;
+            first.X = sourcePort.Port.Anchor.AnchorPoint.X;
+            first.Y = sourcePort.Port.Anchor.AnchorPoint.Y;
 
             var last = linkElement.Vertices.Create();
-            last.X = sinkPort.Port.GetAnchorPoint().X + sinkPort.Node.Position.X;
-            last.Y = sinkPort.Port.GetAnchorPoint().Y + sinkPort.Node.Position.Y + 40.0;
+            last.X = sinkPort.Port.Anchor.AnchorPoint.X;
+            last.Y = sinkPort.Port.Anchor.AnchorPoint.Y;
         }
 
         var linkElements = configuration.DesignerConfiguration.Elements.OfType<ILinkElement>();
@@ -106,9 +106,9 @@ public class ConfigurationLayerModel : NodeLayerModel<SignalProcessorNodeModel, 
     {
         AddLinks(elements.Select(element =>
         {
-            var node = CreateLink(element);
+            var link = CreateLink(element);
 
-            return node;
+            return link;
         }));
     }
 

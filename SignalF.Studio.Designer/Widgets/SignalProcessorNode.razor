@@ -16,7 +16,7 @@ else
                 <RadzenTextBox Class="sf-signal-processor-header" @onpointerdown:stopPropagation="true" @bind-Value="@Node.Name" Placeholder="@Node.DefinitionName"/>
             </RadzenRow>
             <RadzenRow class="sf-signal-processor-body">
-                <RadzenColumn Style="position: relative;">
+                <RadzenColumn Style="position: absolute;">
                     @foreach (var port in Node.GetPorts<SignalProcessorPortModel>())
                     {
                         <PortRenderer Model="port"></PortRenderer>

@@ -6,18 +6,22 @@ namespace Scotec.Blazor.Diagrams.Core.Models;
 
 public abstract class PortModel : AreaModel, IConnectable
 {
-    protected PortModel(NodeModel parent, Point position = default, Size size = default) : base(position, size)
+    private AnchorModel? _anchor;
+
+    protected PortModel(NodeModel node, Point position = default, Size size = default) : base(position, size)
     {
-        Parent = parent;
+        Node = node;
     }
 
     protected PortModel(string id, NodeModel parent, Point position = default, Size size = default) : base(id, position, size)
     {
-        Parent = parent;
+        Node = parent;
     }
 
-    public NodeModel Parent { get; }
+    public NodeModel Node { get; }
     public PortAlignment Alignment { get; set; } = PortAlignment.None;
 
-    public abstract Point GetAnchorPoint();
+    protected abstract AnchorModel GetAnchor();
+
+    public AnchorModel Anchor => _anchor ??= GetAnchor();
 }

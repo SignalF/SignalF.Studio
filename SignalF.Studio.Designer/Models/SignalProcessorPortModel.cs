@@ -6,16 +6,13 @@ namespace SignalF.Studio.Designer.Models;
 
 public class SignalProcessorPortModel : PortModel
 {
-    private AnchorPointModel _anchorPoint;
+    private readonly AnchorModel _anchor;
 
     public SignalProcessorPortModel(ISignalConfiguration signalConfiguration, SignalProcessorNodeModel parent, Point position, Size size)
         : base(parent, position, size)
     {
         SignalConfiguration = signalConfiguration;
-        _anchorPoint = new AnchorPointModel()
-        {
-            //AnchorPoint = 
-        };
+        _anchor = CreateAnchor();
     }
 
     public ISignalConfiguration SignalConfiguration { get; }
@@ -30,7 +27,11 @@ public class SignalProcessorPortModel : PortModel
 
     public PortType Type => SignalConfiguration is ISignalSourceConfiguration ? PortType.SignalSource : PortType.SignalSink;
 
-    public override Point GetAnchorPoint()
+    protected override AnchorModel GetAnchor()
+    {
+        return _anchor;
+    }
+    private AnchorModel CreateAnchor()
     {
         var x = Position.X;
         var y = Position.Y + Size.Height / 2.0;
@@ -40,7 +41,7 @@ public class SignalProcessorPortModel : PortModel
             x += Size.Width;
         }
 
-        return new Point(x, y);
+        return new AnchorModel(this, new Point(x, y));
     }
 
     //public override bool CanAttachTo(ILinkable other)
