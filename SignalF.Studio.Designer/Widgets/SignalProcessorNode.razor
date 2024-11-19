@@ -11,12 +11,9 @@ else
 {
     <div class="signal-processor-node" style="@($"width: {Node.Size.Width.ToInvariantString()}px; height: {Node.Size.Height.ToInvariantString()}px;")">
     @* <div class="signal-processor-node" style=""> *@
-        <RadzenStack Orientation="Orientation.Vertical" Style="height: 100%;" Gap="0">
-            <RadzenRow Style="" Gap="0">
-                <RadzenTextBox Class="sf-signal-processor-header" @onpointerdown:stopPropagation="true" @bind-Value="@Node.Name" Placeholder="@Node.DefinitionName"/>
-            </RadzenRow>
-            <RadzenRow class="sf-signal-processor-body">
-                <RadzenColumn Style="position: absolute;">
+        @* <RadzenStack Orientation="Orientation.Vertical" Style="height: 100%;" Gap="0"> *@
+            <RadzenRow class="sf-signal-processor-body" Style="">
+                <RadzenColumn Style="">
                     @foreach (var port in Node.GetPorts<SignalProcessorPortModel>())
                     {
                         <PortRenderer Model="port"></PortRenderer>
@@ -49,7 +46,10 @@ else
                     }
                 </RadzenColumn> *@
             </RadzenRow>
-        </RadzenStack>
+            <RadzenRow Gap="0" Style="position: absolute; top: 0; left: 0;">
+                <RadzenTextBox Class="sf-signal-processor-header" @onpointerdown:stopPropagation="true" @bind-Value="@Node.Name" Placeholder="@Node.DefinitionName"/>
+            </RadzenRow>
+        @* </RadzenStack> *@
     </div>
 }
 

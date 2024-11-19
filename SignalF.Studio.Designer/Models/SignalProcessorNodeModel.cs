@@ -48,7 +48,7 @@ public class SignalProcessorNodeModel : NodeModel
     private void AddPorts()
     {
         var offsetX = 0.0;
-        var offsetY = 20.0;
+        var offsetY = 60.0;
         foreach (var signalSink in Configuration.SignalSinks)
         {
             var port = _portModelFactory(signalSink, this, new Point(offsetX, offsetY), new Size(10, 20));
@@ -62,7 +62,7 @@ public class SignalProcessorNodeModel : NodeModel
 
         // TODO: Get port width from configuration.
         offsetX = Size.Width - 10.0;
-        offsetY = 20.0;
+        offsetY = 60.0;
         foreach (var signalSource in Configuration.SignalSources)
         {
             var port = _portModelFactory(signalSource, this, new Point(offsetX, offsetY), new Size(10, 20));

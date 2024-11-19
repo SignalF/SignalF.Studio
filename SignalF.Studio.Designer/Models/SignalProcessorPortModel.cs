@@ -6,13 +6,12 @@ namespace SignalF.Studio.Designer.Models;
 
 public class SignalProcessorPortModel : PortModel
 {
-    private readonly AnchorModel _anchor;
+    private AnchorModel _anchor;
 
     public SignalProcessorPortModel(ISignalConfiguration signalConfiguration, SignalProcessorNodeModel parent, Point position, Size size)
         : base(parent, position, size)
     {
         SignalConfiguration = signalConfiguration;
-        _anchor = CreateAnchor();
     }
 
     public ISignalConfiguration SignalConfiguration { get; }
@@ -29,7 +28,7 @@ public class SignalProcessorPortModel : PortModel
 
     protected override AnchorModel GetAnchor()
     {
-        return _anchor;
+        return _anchor ??= CreateAnchor();
     }
     private AnchorModel CreateAnchor()
     {
