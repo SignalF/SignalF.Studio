@@ -1,5 +1,6 @@
 ﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Scotec.Blazor.Diagrams.Core.Behaviours;
+using System.Threading.Channels;
 
 namespace Scotec.Blazor.Diagrams.Core.Models;
 
@@ -9,6 +10,8 @@ public abstract class Model : ObservableObject, ISelectable
     private string _title = string.Empty;
     private bool _isVisible = true;
     private bool _isLocked = false;
+
+    public event Action<Model>? Changed;
 
     protected Model() : this(Guid.NewGuid().ToString("D"))
     {
@@ -49,5 +52,13 @@ public abstract class Model : ObservableObject, ISelectable
     {
         return Task.CompletedTask;
     }
+
+    /// <summary>
+    /// Fires a <see cref="Changed"/> event.
+    /// Typically a model fires a PropertyChanged event that would result in rerendering the associated component.
+    /// However, call <see cref="Refresh"/> to force rerendering of the component.
+    /// </summary>
+    public virtual void Refresh() => Changed?.Invoke(this);
+
 }
 

@@ -47,6 +47,7 @@ public class NodeModel : AreaModel, IMovable
 
         foreach (var port in _ports)
         {
+            port.RefreshLinks();
         }
     }
 

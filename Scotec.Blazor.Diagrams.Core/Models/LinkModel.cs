@@ -18,9 +18,20 @@ public class LinkModel : Model
         Vertices = vertices ?? [];
     }
 
+    protected LinkModel(string id, AnchorModel source, AnchorModel target) : base(id)
+    {
+        _source = source;
+        _target = target;
+        Vertices = new []
+        {
+            source.AnchorPoint,
+            target.AnchorPoint
+        };
+    }
+
     public Point[] Vertices { get; }
 
-    void Move(Point startPoint, Point endPoint)
+    public void Move(Point startPoint, Point endPoint)
     {
         Vertices[0] = startPoint;
         Vertices[^1] = endPoint;
@@ -40,4 +51,13 @@ public class LinkModel : Model
         set => SetProperty(ref _target, value);
     }
 
+    public override void Refresh()
+    {
+        if (Source != null && Target != null)
+        {
+            Move(Source.AnchorPoint, Target.AnchorPoint);
+        }
+
+        base.Refresh();
+    }
 }

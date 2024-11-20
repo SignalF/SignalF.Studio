@@ -10,8 +10,9 @@ namespace SignalF.Studio.Designer.Models
 {
     public class SignalProcessorLinkModel : LinkModel
     {
-        public SignalProcessorLinkModel(ILinkElement linkElement)
-        : base(linkElement.Id.ToString("D"), linkElement.Vertices.Select(vertex => vertex.ToPoint()).ToArray())
+        public SignalProcessorLinkModel(ILinkElement linkElement, AnchorModel source, AnchorModel target)
+        //: base(linkElement.Id.ToString("D"), linkElement.Vertices.Select(vertex => vertex.ToPoint()).ToArray())
+        : base(linkElement.Id.ToString("D"), source, target)
         {
             
         }

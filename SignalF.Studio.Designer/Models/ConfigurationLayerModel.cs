@@ -1,4 +1,6 @@
-﻿using Scotec.Blazor.Diagrams.Core.Behaviours;
+﻿#define DEV_CODE
+using System.Collections.Immutable;
+using Scotec.Blazor.Diagrams.Core.Behaviours;
 using Scotec.Blazor.Diagrams.Core.Geometry;
 using Scotec.Blazor.Diagrams.Core.Layer;
 using Scotec.XMLDatabase;
@@ -16,11 +18,11 @@ public class ConfigurationLayerModel : NodeLayerModel<SignalProcessorNodeModel, 
 {
     private readonly DataContext _dataContext;
     private readonly Func<ISignalProcessorElement, SignalProcessorNodeModel> _nodeModelFactory;
-    private readonly Func<ILinkElement, SignalProcessorLinkModel> _linkModelFactory;
+    private readonly Func<ILinkElement, AnchorModel, AnchorModel, SignalProcessorLinkModel> _linkModelFactory;
 
     public ConfigurationLayerModel(Func<LayerModel, IEnumerable<INodeLayerBehaviour>> behaviours, DataContext dataContext,
                                    Func<ISignalProcessorElement, SignalProcessorNodeModel> nodeModelFactory,
-                                   Func<ILinkElement, SignalProcessorLinkModel> linkModelFactory)
+                                   Func<ILinkElement, AnchorModel, AnchorModel, SignalProcessorLinkModel> linkModelFactory)
         : base(behaviours)
     {
         _dataContext = dataContext;
@@ -36,11 +38,18 @@ public class ConfigurationLayerModel : NodeLayerModel<SignalProcessorNodeModel, 
         var nodeElements = configuration.DesignerConfiguration.Elements.OfType<ISignalProcessorElement>();
         CreateSignalProcessorNodes(nodeElements);
 
+        var ports = GetNodes().OfType<SignalProcessorNodeModel>()
+                              .SelectMany(node => node.GetPorts<SignalProcessorPortModel>())
+                              .ToImmutableList();
 
+#if DEV_CODE
         var allPorts = GetNodes().OfType<SignalProcessorNodeModel>().SelectMany(node => node.GetPorts<SignalProcessorPortModel>().Select(port => new{Port = port, Node = node})).ToList();
+
+        //TODO: Remove the deletion and creation of the link elements. This is just useful during the implementation phase while it is not possible to creates links in the UI. 
 
         var links = configuration.DesignerConfiguration.Elements.OfType<ILinkElement>().ToList();
         links.ForEach(link => configuration.DesignerConfiguration.Elements.Delete(link));
+        
         foreach (var connection in configuration.Connections)
         {
             var linkElement = configuration.DesignerConfiguration.Elements.Create<ILinkElement>();
@@ -56,9 +65,9 @@ public class ConfigurationLayerModel : NodeLayerModel<SignalProcessorNodeModel, 
             last.X = sinkPort.Port.Anchor.AnchorPoint.X;
             last.Y = sinkPort.Port.Anchor.AnchorPoint.Y;
         }
-
+#endif
         var linkElements = configuration.DesignerConfiguration.Elements.OfType<ILinkElement>();
-        CreateLinks(linkElements);
+        CreateLinks(linkElements, ports);
 
         _dataContext.Changed += DataContextOnChanged;
     }
@@ -102,20 +111,35 @@ public class ConfigurationLayerModel : NodeLayerModel<SignalProcessorNodeModel, 
 
         return node;
     }
-    private void CreateLinks(IEnumerable<ILinkElement> elements)
+    private void CreateLinks(IEnumerable<ILinkElement> elements, IReadOnlyList<SignalProcessorPortModel> ports)
     {
         AddLinks(elements.Select(element =>
         {
-            var link = CreateLink(element);
+            var sourcePort = ports.First(port => port.SignalConfiguration == element.Connection.SignalSource);
+            var targetPort = ports.First(port => port.SignalConfiguration == element.Connection.SignalSink);
+
+            var link = CreateLink(element, sourcePort, targetPort);
 
             return link;
         }));
     }
 
-    private LinkModel CreateLink(ILinkElement designerElement)
+    private LinkModel CreateLink(ILinkElement linkElement, SignalProcessorPortModel sourcePort, SignalProcessorPortModel targetPort)
     {
-        var node = _linkModelFactory(designerElement);
+        var connection = linkElement.Connection;
 
-        return node;
+        //var first = linkElement.Vertices.Create();
+        //first.X = sourcePort.Anchor.AnchorPoint.X;
+        //first.Y = sourcePort.Anchor.AnchorPoint.Y;
+
+        //var last = linkElement.Vertices.Create();
+        //last.X = targetPort.Anchor.AnchorPoint.X;
+        //last.Y = targetPort.Anchor.AnchorPoint.Y;
+        
+        //var node = _linkModelFactory(linkElement, sourcePort.Anchor, targetPort.Anchor);
+        var link = new SignalProcessorLinkModel(linkElement, sourcePort.Anchor, targetPort.Anchor);
+        sourcePort.AddLink(link);
+        targetPort.AddLink(link);
+        return link;
     }
 }
