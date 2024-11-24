@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using Scotec.Blazor.Diagrams.Core.Geometry;
+﻿using Scotec.Blazor.Diagrams.Core.Geometry;
 
 namespace Scotec.Blazor.Diagrams.Core.Models;
 
@@ -8,36 +7,21 @@ public class LinkModel : Model
     private AnchorModel? _source;
     private AnchorModel? _target;
 
-    protected LinkModel(Point[]? vertices = default)
-    {
-        Vertices = vertices ?? [];
-    }
-
-    protected LinkModel(string id, Point[]? vertices = default) : base(id)
-    {
-        Vertices = vertices ?? [];
-    }
-
     protected LinkModel(string id, AnchorModel source, AnchorModel target) : base(id)
     {
         _source = source;
         _target = target;
-        Vertices = new []
+        Vertices = new[]
         {
             source.AnchorPoint,
             target.AnchorPoint
         };
+
+        Boundaries = CalculateBoundaries();
+
     }
 
     public Point[] Vertices { get; }
-
-    public void Move(Point startPoint, Point endPoint)
-    {
-        Vertices[0] = startPoint;
-        Vertices[^1] = endPoint;
-
-        OnPropertyChanged(nameof(Vertices));
-    }
 
     public AnchorModel? Source
     {
@@ -51,6 +35,18 @@ public class LinkModel : Model
         set => SetProperty(ref _target, value);
     }
 
+    public Rectangle Boundaries { get; private set; }
+
+    public void Move(Point startPoint, Point endPoint)
+    {
+        Vertices[0] = startPoint;
+        Vertices[^1] = endPoint;
+
+        Boundaries = CalculateBoundaries();
+
+        OnPropertyChanged(nameof(Vertices));
+    }
+
     public override void Refresh()
     {
         if (Source != null && Target != null)
@@ -59,5 +55,15 @@ public class LinkModel : Model
         }
 
         base.Refresh();
+    }
+
+    private Rectangle CalculateBoundaries()
+    {
+        var minX = Vertices.Min(p => p.X);
+        var maxX = Vertices.Max(p => p.X);
+        var minY = Vertices.Min(p => p.Y);
+        var maxY = Vertices.Max(p => p.Y);
+
+        return new Rectangle(minX, minY, maxX - minX, maxY - minY);
     }
 }

@@ -31,12 +31,16 @@ namespace SignalF.Studio.Designer.Widgets
             {
                 return;
             }
-
-
+            
             var builder = new StringBuilder();
 
-            var first = Link.Vertices.First();
-            var last = Link.Vertices.Last();
+            //var startPoint = Link.Vertices[0];
+            //var relativePoints = Link.Vertices.Select(point => point - startPoint).ToList();
+
+            //var first = relativePoints[0];
+            //var last = relativePoints[^1];
+            var first = Link.Vertices[0];
+            var last = Link.Vertices[^1];
 
             builder.Append($"M{first.X.ToInvariantString()} {first.Y.ToInvariantString()} ");
 
