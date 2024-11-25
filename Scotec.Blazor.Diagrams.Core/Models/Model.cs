@@ -1,6 +1,5 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Scotec.Blazor.Diagrams.Core.Behaviours;
-using System.Threading.Channels;
+﻿using Scotec.Blazor.Diagrams.Core.Behaviours;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Scotec.Blazor.Diagrams.Core.Models;
 

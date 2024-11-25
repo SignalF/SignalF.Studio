@@ -1,5 +1,5 @@
 ﻿using System.IO.Packaging;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Scotec.XMLDatabase;
 using SignalF.Datamodel.Configuration;
 
