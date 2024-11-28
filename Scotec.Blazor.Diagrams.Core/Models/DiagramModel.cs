@@ -11,11 +11,12 @@ namespace Scotec.Blazor.Diagrams.Core.Models;
 //    public class Diagram<TLayer> where TLayer : LayerBase
 public class DiagramModel : Model
 {
-    private readonly Func<IEnumerable<LayerModel>> _layerFactory;
+    private readonly Func<DiagramModel, IEnumerable<LayerModel>> _layerFactory;
     private readonly Func<DiagramModel, IEnumerable<IDiagramBehaviour>> _behavioursFactory;
     private List<IDiagramBehaviour>? _behaviours;
 
-    public DiagramModel(Func<IEnumerable<LayerModel>> layerFactory, Func<DiagramModel, IEnumerable<IDiagramBehaviour>> behavioursFactory)
+    public DiagramModel(Func<DiagramModel, IEnumerable<LayerModel>> layerFactory, 
+                        Func<DiagramModel, IEnumerable<IDiagramBehaviour>> behavioursFactory)
     {
         _layerFactory = layerFactory;
         _behavioursFactory = behavioursFactory;
@@ -27,7 +28,6 @@ public class DiagramModel : Model
     public event Action<Model?, PointerEventArgs>? PointerLeave;
     public event Action<Model?, PointerEventArgs>? PointerMove;
     public event Action<WheelEventArgs>? Wheel;
-
     public Rectangle Bounds
     {
         get => _bounds;
@@ -61,7 +61,7 @@ public class DiagramModel : Model
         await base.OnInitializedAsync();
         _behaviours = _behavioursFactory(this).ToList();
 
-        AddLayers(_layerFactory());
+        AddLayers(_layerFactory(this));
 
         // Create a list of tasks for initialization
         var initializationTasks = _layers.Select(layer => layer.OnInitializedAsync()).ToList();
@@ -96,22 +96,32 @@ public class DiagramModel : Model
 
     public virtual void RaisePointerDownEvent(Model? model, PointerEventArgs args)
     {
+        _layers.ForAll(layer => layer.RaisePointerDownEvent(model, args));
+
         PointerDown?.Invoke(model, args);
     }
     public virtual void RaisePointerUpEvent(Model? model, PointerEventArgs args)
     {
+        _layers.ForAll(layer => layer.RaisePointerUpEvent(model, args));
+
         PointerUp?.Invoke(model, args);
     }
     public virtual void RaisePointerEnterEvent(Model? model, PointerEventArgs args)
     {
+        _layers.ForAll(layer => layer.RaisePointerEnterEvent(model, args));
+
         PointerEnter?.Invoke(model, args);
     }
     public virtual void RaisePointerLeaveEvent(Model? model, PointerEventArgs args)
     {
+        _layers.ForAll(layer => layer.RaisePointerLeaveEvent(model, args));
+
         PointerLeave?.Invoke(model, args);
     }
     public virtual void RaisePointerMoveEvent(Model? model, PointerEventArgs args)
     {
+        _layers.ForAll(layer => layer.RaisePointerMoveEvent(model, args));
+
         PointerMove?.Invoke(model, args);
     }
     public virtual void RaiseWheelEvent(WheelEventArgs args)

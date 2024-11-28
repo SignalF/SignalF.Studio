@@ -40,7 +40,7 @@ public class SignalProcessorPortModel : PortModel
             x += Size.Width;
         }
 
-        return new AnchorModel(this, new Point((int)x, (int)y));
+        return new PortAnchorModel(this, new Point((int)x, (int)y));
     }
 
     //public override bool CanAttachTo(ILinkable other)

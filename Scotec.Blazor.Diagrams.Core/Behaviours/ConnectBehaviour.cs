@@ -1,68 +1,77 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Scotec.Blazor.Diagrams.Core.EventArgs;
+﻿using Scotec.Blazor.Diagrams.Core.EventArgs;
 using Scotec.Blazor.Diagrams.Core.Geometry;
+using Scotec.Blazor.Diagrams.Core.Layer;
 using Scotec.Blazor.Diagrams.Core.Models;
 
 namespace Scotec.Blazor.Diagrams.Core.Behaviours
 {
-    public class ConnectBehaviour : DiagramBehaviour
+    public class ConnectBehaviour : LayerBehaviour<NodeLayerModel>, INodeLayerBehaviour
     {
         private List<IMovable> _movables = [];
         private double _lastClientX = 0.0;
         private double _lastClientY = 0.0;
         private bool _firstMove;
-        private IConnectable? _firstConnectable;
+        private IConnectable? _source;
+        private AnchorModel? _sourceAnchor;
+        private AnchorModel? _targetAnchor;
+        private LinkModel? _link;
 
-        public ConnectBehaviour(DiagramModel diagramModel) : base(diagramModel)
+        public ConnectBehaviour(NodeLayerModel layerModel) : base(layerModel)
         {
-            DiagramModel.PointerDown += OnPointerDown;
-            DiagramModel.PointerUp += OnPointerUp;
-            DiagramModel.PointerMove += OnPointerMove;
+            LayerModel.PointerDown += OnPointerDown;
+            LayerModel.PointerUp += OnPointerUp;
+            LayerModel.PointerMove += OnPointerMove;
         }
 
         private void OnPointerMove(Model? model, PointerEventArgs args)
         {
-            if (_firstConnectable is null)
+            if (_source is null)
             {
                 return;
             }
 
+            if (model is IConnectable target && _source != target)
+            {
+
+            }
             if (_firstMove)
             {
                 _firstMove = false;
+                return;
             }
 
-            SetPosition(args);
+            var diagramPoint = LayerModel.Diagram.GetDiagramCanvasMousePoint(args.ClientX, args.ClientY);
 
-            _lastClientX = args.ClientX;
-            _lastClientY = args.ClientY;
+            SetPosition(diagramPoint);
+
+            _lastClientX = diagramPoint.X;
+            _lastClientY = diagramPoint.Y;
         }
 
-        private void SetPosition(PointerEventArgs args)
+        private void SetPosition(Point point)
         {
-            var differenceX = (args.ClientX - _lastClientX) / DiagramModel.Zoom ;
-            var differenceY = (args.ClientY - _lastClientY) / DiagramModel.Zoom;
+            var differenceX = (point.X - _lastClientX);// / DiagramModel.Zoom;
+            var differenceY = (point.Y - _lastClientY);// / DiagramModel.Zoom;
 
-            //foreach (var movable in _movables)
-            //{
-            //    var x = movable.Position.X + differenceX;
-            //    var y = movable.Position.Y + differenceY;
+            _link.Target = new AnchorModel(_link.Target.AnchorPoint + new Point( differenceX, differenceY));
+            _link.Refresh();
 
-            //    movable.SetPosition(x, y);
-            //}
         }
 
         private void OnPointerUp(Model? model, PointerEventArgs args)
         {
-            if (_firstConnectable is not null)
+            if (_source is null)
             {
-                _firstConnectable = null;
-                _firstMove = false;
+                return;
             }
+
+
+            LayerModel.RemoveLink(_link);
+            _source = null;
+            _firstMove = false;
+            _sourceAnchor = null;
+            _targetAnchor = null;
+            _link = null;
         }
 
         private void OnPointerDown(Model? model, PointerEventArgs args)
@@ -73,10 +82,24 @@ namespace Scotec.Blazor.Diagrams.Core.Behaviours
             }
 
             _firstMove = true;
-            _firstConnectable = connectable;
-            _lastClientX = args.ClientX;
-            _lastClientY = args.ClientY;
+            _source = connectable;
 
+            var diagramPoint = LayerModel.Diagram.GetDiagramCanvasMousePoint(args.ClientX, args.ClientY);
+
+
+            _sourceAnchor = connectable.Anchor;
+            _targetAnchor = new AnchorModel(diagramPoint);
+            _link = LayerModel.CreateLink(_sourceAnchor, _targetAnchor);
+
+            LayerModel.AddLink(_link);
+
+            _lastClientX = diagramPoint.X;
+            _lastClientY = diagramPoint.Y;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
         }
     }
 }

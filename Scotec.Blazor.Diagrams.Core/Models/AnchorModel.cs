@@ -5,18 +5,18 @@ namespace Scotec.Blazor.Diagrams.Core.Models;
 public class AnchorModel : Model
 {
     private readonly Point _anchorPoint;
-    public PortModel Port { get; }
     private readonly List<LinkModel> _links = new List<LinkModel>();
 
-    public AnchorModel(PortModel port, Point anchorPoint)
+    public AnchorModel(Point anchorPoint)
     {
         _anchorPoint = anchorPoint;
-        Port = port;
     }
 
-    public Point AnchorPoint => Port.Node.Position + _anchorPoint;
+    public Point AnchorPoint => GetAnchorPoint();
 
     public IReadOnlyList<LinkModel> Links => _links;
+
+    protected virtual Point GetAnchorPoint() => _anchorPoint;
 
     public void AddLink(LinkModel link)
     {

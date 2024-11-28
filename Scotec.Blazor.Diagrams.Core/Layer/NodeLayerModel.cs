@@ -4,10 +4,21 @@ using Scotec.Blazor.Diagrams.Core.Models;
 
 namespace Scotec.Blazor.Diagrams.Core.Layer;
 
-public class NodeLayerModel : LayerModel, IMovable, IZoomable
+public abstract class NodeLayerModel : LayerModel, IMovable, IZoomable
 {
-    public NodeLayerModel(Func<LayerModel, IEnumerable<INodeLayerBehaviour>> behaviours) : base(behaviours)
+    private List<INodeLayerBehaviour>? _behaviours;
+    private readonly Func<NodeLayerModel, IEnumerable<INodeLayerBehaviour>> _behavioursFactory;
+
+    protected NodeLayerModel(DiagramModel diagramModel, Func<NodeLayerModel, IEnumerable<INodeLayerBehaviour>> behavioursFactory) 
+        : base(diagramModel)
     {
+        _behavioursFactory = behavioursFactory;
+    }
+
+    public override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        _behaviours = _behavioursFactory(this).ToList();
     }
 
     public Point Position { get; private set; }
@@ -60,13 +71,8 @@ public class NodeLayerModel : LayerModel, IMovable, IZoomable
     {
         return GetModels<LinkModel>().ToList();
     }
-}
 
-public abstract class NodeLayerModel<TNodeModel, TLinkModel> : NodeLayerModel
-    where TNodeModel : NodeModel
-    where TLinkModel : LinkModel
-{
-    protected NodeLayerModel(Func<LayerModel, IEnumerable<INodeLayerBehaviour>> behaviours) : base(behaviours)
-    {
-    }
+    public abstract LinkModel CreateLink(AnchorModel source, AnchorModel target);
+    public abstract LinkModel CreateLink(PortModel source, PortModel target);
+
 }

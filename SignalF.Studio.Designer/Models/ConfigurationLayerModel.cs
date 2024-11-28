@@ -14,16 +14,16 @@ using Point = Scotec.Blazor.Diagrams.Core.Geometry.Point;
 
 namespace SignalF.Studio.Designer.Models;
 
-public class ConfigurationLayerModel : NodeLayerModel<SignalProcessorNodeModel, SignalProcessorLinkModel>
+public class ConfigurationLayerModel : NodeLayerModel
 {
     private readonly DataContext _dataContext;
     private readonly Func<ISignalProcessorElement, SignalProcessorNodeModel> _nodeModelFactory;
     private readonly Func<ILinkElement, AnchorModel, AnchorModel, SignalProcessorLinkModel> _linkModelFactory;
 
-    public ConfigurationLayerModel(Func<LayerModel, IEnumerable<INodeLayerBehaviour>> behaviours, DataContext dataContext,
+    public ConfigurationLayerModel(DiagramModel diagramModel, Func<NodeLayerModel, IEnumerable<INodeLayerBehaviour>> behaviours, DataContext dataContext,
                                    Func<ISignalProcessorElement, SignalProcessorNodeModel> nodeModelFactory,
                                    Func<ILinkElement, AnchorModel, AnchorModel, SignalProcessorLinkModel> linkModelFactory)
-        : base(behaviours)
+        : base(diagramModel, behaviours)
     {
         _dataContext = dataContext;
         _nodeModelFactory = nodeModelFactory;
@@ -140,6 +140,13 @@ public class ConfigurationLayerModel : NodeLayerModel<SignalProcessorNodeModel, 
         var link = new SignalProcessorLinkModel(linkElement, sourcePort.Anchor, targetPort.Anchor);
         sourcePort.AddLink(link);
         targetPort.AddLink(link);
+        return link;
+    }
+
+    public override LinkModel CreateLink(AnchorModel source, AnchorModel target)
+    {
+        var link = new SignalProcessorLinkModel(source, target);
+
         return link;
     }
 }

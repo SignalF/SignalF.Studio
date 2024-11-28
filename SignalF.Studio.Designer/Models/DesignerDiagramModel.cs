@@ -14,7 +14,7 @@ public class DesignerDiagramModel : BlazorDiagramModel
 {
     private readonly DataContext _dataContext;
 
-    public DesignerDiagramModel(DataContext dataContext, Func<IEnumerable<LayerModel>> layerFactory, Func<DiagramModel, IEnumerable<IDiagramBehaviour>> behavioursFactory) 
+    public DesignerDiagramModel(DataContext dataContext, Func<DiagramModel, IEnumerable<LayerModel>> layerFactory, Func<DiagramModel, IEnumerable<IDiagramBehaviour>> behavioursFactory) 
         : base(layerFactory, behavioursFactory)
     {
         _dataContext = dataContext;
