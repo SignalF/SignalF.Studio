@@ -56,16 +56,20 @@ public class DiagramCanvas : ComponentBase
         builder.AddAttribute(sequence++, "style", "height: 100%; width: 100%;position: relative;");
 
         builder.AddAttribute(sequence++, "onpointerdown", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerDown));
+        builder.AddEventPreventDefaultAttribute(sequence++, "onpointerdown", true);
         builder.AddAttribute(sequence++, "onpointerup", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerUp));
+        builder.AddEventPreventDefaultAttribute(sequence++, "onpointerup", true);
         builder.AddAttribute(sequence++, "onpointermove", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerMove));
-        builder.AddAttribute(sequence++, "onkeydown", EventCallback.Factory.Create<KeyboardEventArgs>(this, OnKeyDown));
-        builder.AddAttribute(sequence++, "onwheel", EventCallback.Factory.Create<WheelEventArgs>(this, OnWheel));
-
+        //builder.AddEventStopPropagationAttribute(sequence++, "onpointermove", true);
         builder.AddEventPreventDefaultAttribute(sequence++, "onpointermove", true);
-        builder.AddEventStopPropagationAttribute(sequence++, "onwheel", true);
+        //builder.AddAttribute(sequence++, "onkeydown", EventCallback.Factory.Create<KeyboardEventArgs>(this, OnKeyDown));
+        //builder.AddAttribute(sequence++, "onwheel", EventCallback.Factory.Create<WheelEventArgs>(this, OnWheel));
+
+        //builder.AddEventPreventDefaultAttribute(sequence++, "onpointermove", true);
+        //builder.AddEventStopPropagationAttribute(sequence++, "onwheel", true);
 
         builder.AddElementReferenceCapture(sequence++, value => _elementReference = value);
-
+        
         var zIndex = 1;
         foreach (var layer in BlazorDiagram.Layers)
         {

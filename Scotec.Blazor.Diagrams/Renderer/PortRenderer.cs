@@ -30,19 +30,23 @@ public class PortRenderer : Renderer<PortModel>
                                          $"width: {Model.Size.Width.ToInvariantString()}px; height: {Model.Size.Height.ToInvariantString()}px;");
 
 
-        builder.AddAttribute(4, "onpointerdown", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerDown));
-        builder.AddEventStopPropagationAttribute(5, "onpointerdown", true);
-        builder.AddAttribute(6, "onpointerup", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerUp));
-        builder.AddEventStopPropagationAttribute(7, "onpointerup", true);
-        builder.AddAttribute(8, "onmouseenter", EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseEnter));
-        builder.AddAttribute(9, "onmouseleave", EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseLeave));
-        builder.AddAttribute(9, "onmousemove", EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseMove));
+        builder.AddAttribute(10, "onpointerdown", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerDown));
+        builder.AddEventPreventDefaultAttribute(12, "onpointerdown", true);
+        builder.AddEventStopPropagationAttribute(11, "onpointerdown", true);
+        builder.AddAttribute(20, "onpointerup", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerUp));
+        builder.AddEventStopPropagationAttribute(21, "onpointerup", true);
+
+        //builder.AddAttribute(30, "onmouseenter", EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseEnter));
+        //builder.AddAttribute(40, "onmouseleave", EventCallback.Factory.Create<MouseEventArgs>(this, OnMouseLeave));
+        //builder.AddAttribute(50, "onpointermove", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerMove));
+        //builder.AddEventPreventDefaultAttribute(12, "onpointermove", true);
+        //builder.AddEventStopPropagationAttribute(51, "onpointermove", true);
 
 
 
-        builder.AddElementReferenceCapture(10, value => _element = value);
-        builder.OpenComponent(11, ComponentRegistration.GetComponentType(Model.GetType()) ?? typeof(ErrorPortWidget));
-        builder.AddAttribute(12, "Port", Model);
+        builder.AddElementReferenceCapture(100, value => _element = value);
+        builder.OpenComponent(101, ComponentRegistration.GetComponentType(Model.GetType()) ?? typeof(ErrorPortWidget));
+        builder.AddAttribute(102, "Port", Model);
         builder.CloseComponent();
 
         builder.CloseElement();
@@ -53,6 +57,7 @@ public class PortRenderer : Renderer<PortModel>
         return base.GetClasses().InsertIf(0, DiagramPortClass, () => true);
     }
 
+    private bool _pointerDown;
     private void OnPointerDown(PointerEventArgs args)
     {
         DiagramModel.RaisePointerDownEvent(Model, (BlazorPointerEventArgs)args);
@@ -73,8 +78,12 @@ public class PortRenderer : Renderer<PortModel>
         DiagramModel.RaisePointerLeaveEvent(Model, (BlazorPointerEventArgs)args);
     }
 
-    private void OnMouseMove(MouseEventArgs args)
+    private void OnPointerMove(PointerEventArgs args)
     {
+        if (_pointerDown)
+        {
+
+        }
         DiagramModel.RaisePointerMoveEvent(Model, (BlazorPointerEventArgs)args);
     }
 

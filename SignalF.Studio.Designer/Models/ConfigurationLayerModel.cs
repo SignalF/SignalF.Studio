@@ -1,24 +1,20 @@
-﻿#define DEV_CODE
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using Scotec.Blazor.Diagrams.Core.Behaviours;
-using Scotec.Blazor.Diagrams.Core.Geometry;
 using Scotec.Blazor.Diagrams.Core.Layer;
+using Scotec.Blazor.Diagrams.Core.Models;
 using Scotec.XMLDatabase;
 using Scotec.XMLDatabase.ChangeNotification;
 using SignalF.Datamodel.Designer;
-using System.Xml.Linq;
-using Scotec.Blazor.Diagrams.Core.Models;
+using SignalF.Datamodel.Signals;
 using ILinkElement = SignalF.Datamodel.Designer.ILinkElement;
-using NuGet.Protocol.Plugins;
-using Point = Scotec.Blazor.Diagrams.Core.Geometry.Point;
 
 namespace SignalF.Studio.Designer.Models;
 
 public class ConfigurationLayerModel : NodeLayerModel
 {
     private readonly DataContext _dataContext;
-    private readonly Func<ISignalProcessorElement, SignalProcessorNodeModel> _nodeModelFactory;
     private readonly Func<ILinkElement, AnchorModel, AnchorModel, SignalProcessorLinkModel> _linkModelFactory;
+    private readonly Func<ISignalProcessorElement, SignalProcessorNodeModel> _nodeModelFactory;
 
     public ConfigurationLayerModel(DiagramModel diagramModel, Func<NodeLayerModel, IEnumerable<INodeLayerBehaviour>> behaviours, DataContext dataContext,
                                    Func<ISignalProcessorElement, SignalProcessorNodeModel> nodeModelFactory,
@@ -34,51 +30,37 @@ public class ConfigurationLayerModel : NodeLayerModel
     {
         await base.OnInitializedAsync();
         var configuration = _dataContext.GetConfiguration();
-        
+
         var nodeElements = configuration.DesignerConfiguration.Elements.OfType<ISignalProcessorElement>();
         CreateSignalProcessorNodes(nodeElements);
 
-        var ports = GetNodes().OfType<SignalProcessorNodeModel>()
-                              .SelectMany(node => node.GetPorts<SignalProcessorPortModel>())
-                              .ToImmutableList();
+        var ports = GetAllPorts();
 
-#if DEV_CODE
-        var allPorts = GetNodes().OfType<SignalProcessorNodeModel>().SelectMany(node => node.GetPorts<SignalProcessorPortModel>().Select(port => new{Port = port, Node = node})).ToList();
-
-        //TODO: Remove the deletion and creation of the link elements. This is just useful during the implementation phase while it is not possible to creates links in the UI. 
-
-        var links = configuration.DesignerConfiguration.Elements.OfType<ILinkElement>().ToList();
-        links.ForEach(link => configuration.DesignerConfiguration.Elements.Delete(link));
-        
-        foreach (var connection in configuration.Connections)
-        {
-            var linkElement = configuration.DesignerConfiguration.Elements.Create<ILinkElement>();
-            linkElement.Connection = connection;
-            var sourcePort = allPorts.First(port => port.Port.SignalConfiguration == connection.SignalSource);
-            var sinkPort = allPorts.First(port => port.Port.SignalConfiguration == connection.SignalSink);
-
-            var first = linkElement.Vertices.Create();
-            first.X = sourcePort.Port.Anchor.AnchorPoint.X;
-            first.Y = sourcePort.Port.Anchor.AnchorPoint.Y;
-
-            var last = linkElement.Vertices.Create();
-            last.X = sinkPort.Port.Anchor.AnchorPoint.X;
-            last.Y = sinkPort.Port.Anchor.AnchorPoint.Y;
-        }
-#endif
         var linkElements = configuration.DesignerConfiguration.Elements.OfType<ILinkElement>();
         CreateLinks(linkElements, ports);
 
         _dataContext.Changed += DataContextOnChanged;
     }
 
+    private ImmutableList<SignalProcessorPortModel> GetAllPorts()
+    {
+        var ports = GetNodes().OfType<SignalProcessorNodeModel>()
+                              .SelectMany(node => node.GetPorts<SignalProcessorPortModel>())
+                              .ToImmutableList();
+        return ports;
+    }
+
     private void DataContextOnChanged(object sender, DataChangedEventArgs args)
     {
-        var newElements = args.GetChanges<ISignalProcessorElement>()
+        var newSignalProcessorElements = args.GetChanges<ISignalProcessorElement>()
                               .Where(change => change.ChangeType == EChangeNotificationType.Added)
                               .Select(newElement => (ISignalProcessorElement)newElement.BusinessObject);
-        CreateSignalProcessorNodes(newElements);
+        CreateSignalProcessorNodes(newSignalProcessorElements);
 
+        var newLinkElements = args.GetChanges<ILinkElement>()
+                              .Where(change => change.ChangeType == EChangeNotificationType.Added)
+                              .Select(newElement => (ILinkElement)newElement.BusinessObject);
+        CreateLinks(newLinkElements, GetAllPorts());
     }
 
     private void DataContextOnOpened(object sender, EventArgs e)
@@ -87,8 +69,6 @@ public class ConfigurationLayerModel : NodeLayerModel
 
         var elements = configuration.DesignerConfiguration.Elements.OfType<ISignalProcessorElement>();
         CreateSignalProcessorNodes(elements);
-
-        
     }
 
     private void DataContextOnClosed(object sender, EventArgs e)
@@ -111,6 +91,7 @@ public class ConfigurationLayerModel : NodeLayerModel
 
         return node;
     }
+
     private void CreateLinks(IEnumerable<ILinkElement> elements, IReadOnlyList<SignalProcessorPortModel> ports)
     {
         AddLinks(elements.Select(element =>
@@ -128,14 +109,6 @@ public class ConfigurationLayerModel : NodeLayerModel
     {
         var connection = linkElement.Connection;
 
-        //var first = linkElement.Vertices.Create();
-        //first.X = sourcePort.Anchor.AnchorPoint.X;
-        //first.Y = sourcePort.Anchor.AnchorPoint.Y;
-
-        //var last = linkElement.Vertices.Create();
-        //last.X = targetPort.Anchor.AnchorPoint.X;
-        //last.Y = targetPort.Anchor.AnchorPoint.Y;
-        
         //var node = _linkModelFactory(linkElement, sourcePort.Anchor, targetPort.Anchor);
         var link = new SignalProcessorLinkModel(linkElement, sourcePort.Anchor, targetPort.Anchor);
         sourcePort.AddLink(link);
@@ -143,10 +116,32 @@ public class ConfigurationLayerModel : NodeLayerModel
         return link;
     }
 
-    public override LinkModel CreateLink(AnchorModel source, AnchorModel target)
+    public override LinkModel CreateDraftLink(AnchorModel source, AnchorModel target)
     {
         var link = new SignalProcessorLinkModel(source, target);
 
         return link;
+    }
+
+    public override void CreateLink(PortModel sourcePort, PortModel targetPort)
+    {
+        if (sourcePort is not SignalProcessorPortModel source || targetPort is not SignalProcessorPortModel target)
+        {
+            throw new InvalidCastException();
+        }
+
+        var session = _dataContext.GetConfiguration().Session;
+        using var changeLock = session.CreateNotificationLock();
+        using var transaction = session.CreateTransaction();
+
+        var configuration = _dataContext.GetConfiguration();
+        var connection = configuration.Connections.Create();
+        connection.SignalSource = (ISignalSourceConfiguration)source.SignalConfiguration;
+        connection.SignalSink = (ISignalSinkConfiguration)target.SignalConfiguration;
+
+        var linkElement = configuration.DesignerConfiguration.Elements.Create<ILinkElement>();
+        linkElement.Connection = connection;
+
+        transaction.Commit();
     }
 }

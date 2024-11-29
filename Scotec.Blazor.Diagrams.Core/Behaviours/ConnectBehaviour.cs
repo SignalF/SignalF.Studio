@@ -55,7 +55,6 @@ namespace Scotec.Blazor.Diagrams.Core.Behaviours
 
             _link.Target = new AnchorModel(_link.Target.AnchorPoint + new Point( differenceX, differenceY));
             _link.Refresh();
-
         }
 
         private void OnPointerUp(Model? model, PointerEventArgs args)
@@ -64,9 +63,14 @@ namespace Scotec.Blazor.Diagrams.Core.Behaviours
             {
                 return;
             }
-
-
             LayerModel.RemoveLink(_link);
+
+            if (model is IConnectable target && _source != target)
+            {
+                LayerModel.CreateLink((PortModel)_source, (PortModel)target);
+
+            }
+            
             _source = null;
             _firstMove = false;
             _sourceAnchor = null;
@@ -85,12 +89,11 @@ namespace Scotec.Blazor.Diagrams.Core.Behaviours
             _source = connectable;
 
             var diagramPoint = LayerModel.Diagram.GetDiagramCanvasMousePoint(args.ClientX, args.ClientY);
-
-
+            
             _sourceAnchor = connectable.Anchor;
             _targetAnchor = new AnchorModel(diagramPoint);
-            _link = LayerModel.CreateLink(_sourceAnchor, _targetAnchor);
-
+            _link = LayerModel.CreateDraftLink(_sourceAnchor, _targetAnchor);
+            _link.IsDraft = true;
             LayerModel.AddLink(_link);
 
             _lastClientX = diagramPoint.X;

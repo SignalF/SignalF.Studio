@@ -72,7 +72,7 @@ public abstract class NodeLayerModel : LayerModel, IMovable, IZoomable
         return GetModels<LinkModel>().ToList();
     }
 
-    public abstract LinkModel CreateLink(AnchorModel source, AnchorModel target);
-    public abstract LinkModel CreateLink(PortModel source, PortModel target);
+    public abstract LinkModel CreateDraftLink(AnchorModel source, AnchorModel target);
+    public abstract void CreateLink(PortModel source, PortModel target);
 
 }

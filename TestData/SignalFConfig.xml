@@ -264,6 +264,10 @@
       <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationRefType" idRef="ID98b9ed3e-faf7-4393-992c-51e411880728" />
       <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationRefType" idRef="IDcd58a976-1416-4081-b1c6-70847dc5c495" />
     </Connection>
+    <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionType" id="ID8b25095a-839d-4136-b89e-7fb9ca1f958a">
+      <SignalSource xsi:type="SignalF.Datamodel.Signals.SignalSourceConfigurationRefType" idRef="IDac744555-3fbf-49ec-ad92-b49cc2b8ee7c" />
+      <SignalSink xsi:type="SignalF.Datamodel.Signals.SignalSinkConfigurationRefType" idRef="IDcd58a976-1416-4081-b1c6-70847dc5c495" />
+    </Connection>
   </Connections>
   <ChannelToDeviceMappings xsi:type="SignalF.Datamodel.Hardware.ChannelToDevicesMappingListType">
     <Mapping xsi:type="SignalF.Datamodel.Hardware.ChannelToDevicesMappingType">
@@ -316,7 +320,7 @@
       </DesignerElement>
       <DesignerElement xsi:type="SignalF.Datamodel.Designer.SignalProcessorElementType" id="ID8dbfba0d-08a1-42bd-97cd-74f17e241271">
         <SignalProcessor xsi:type="SignalF.Datamodel.Signals.SignalProcessorConfigurationRefType" idRef="ID400ce31c-ce1a-46fb-b98a-4099f91ddb5b" />
-        <Position xsi:type="SignalF.Datamodel.Designer.PointType" X="1071" Y="223" />
+        <Position xsi:type="SignalF.Datamodel.Designer.PointType" X="1147" Y="171" />
         <Size xsi:type="SignalF.Datamodel.Designer.SizeType" Width="240" Height="300" />
       </DesignerElement>
       <DesignerElement xsi:type="SignalF.Datamodel.Designer.SignalProcessorElementType" id="ID5dc851ab-ed82-4289-a473-dc996a14fed2">
@@ -334,40 +338,29 @@
         <Position xsi:type="SignalF.Datamodel.Designer.PointType" X="506" Y="476" />
         <Size xsi:type="SignalF.Datamodel.Designer.SizeType" Width="240" Height="300" />
       </DesignerElement>
-      <DesignerElement xsi:type="SignalF.Datamodel.Designer.LinkElementType" id="IDb50dfa1e-21c7-4cee-bdb3-43c1ffabef18">
+      <DesignerElement xsi:type="SignalF.Datamodel.Designer.LinkElementType" id="ID495c4bbe-33d3-4b35-8eef-4389ef3a2c2f">
         <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionRefType" idRef="ID014907f9-dcd5-484d-8e19-70c50822d966" />
-        <Vertices xsi:type="SignalF.Datamodel.Designer.PointListType">
-          <Point xsi:type="SignalF.Datamodel.Designer.PointType" X="332" Y="161" />
-          <Point xsi:type="SignalF.Datamodel.Designer.PointType" X="497" Y="168" />
-        </Vertices>
+        <Vertices xsi:type="SignalF.Datamodel.Designer.PointListType" />
       </DesignerElement>
-      <DesignerElement xsi:type="SignalF.Datamodel.Designer.LinkElementType" id="IDe0cbe3ff-0148-4bea-81c0-6e47da9b327c">
+      <DesignerElement xsi:type="SignalF.Datamodel.Designer.LinkElementType" id="IDe2118f3c-2d5d-4ee5-94d1-8688f393938d">
         <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionRefType" idRef="IDd817aa27-a8f6-41ed-8f01-d554bee942f8" />
-        <Vertices xsi:type="SignalF.Datamodel.Designer.PointListType">
-          <Point xsi:type="SignalF.Datamodel.Designer.PointType" X="737" Y="168" />
-          <Point xsi:type="SignalF.Datamodel.Designer.PointType" X="992" Y="264" />
-        </Vertices>
+        <Vertices xsi:type="SignalF.Datamodel.Designer.PointListType" />
       </DesignerElement>
-      <DesignerElement xsi:type="SignalF.Datamodel.Designer.LinkElementType" id="ID3c1acc87-5e76-45b2-88cd-6c0c71219cb7">
+      <DesignerElement xsi:type="SignalF.Datamodel.Designer.LinkElementType" id="ID4e0a0495-45a1-4747-a616-e1f88d97b1f4">
         <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionRefType" idRef="ID1070db74-066d-4dfc-a5b3-429526fd129c" />
-        <Vertices xsi:type="SignalF.Datamodel.Designer.PointListType">
-          <Point xsi:type="SignalF.Datamodel.Designer.PointType" X="737" Y="208" />
-          <Point xsi:type="SignalF.Datamodel.Designer.PointType" X="992" Y="304" />
-        </Vertices>
+        <Vertices xsi:type="SignalF.Datamodel.Designer.PointListType" />
       </DesignerElement>
-      <DesignerElement xsi:type="SignalF.Datamodel.Designer.LinkElementType" id="ID47d59c0f-786d-4f4f-a654-4b571500639c">
+      <DesignerElement xsi:type="SignalF.Datamodel.Designer.LinkElementType" id="IDf2e2dde7-19dd-4b87-956a-36fbdb1d6ee4">
         <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionRefType" idRef="ID7b158b2e-0a28-4433-9380-255b827ed650" />
-        <Vertices xsi:type="SignalF.Datamodel.Designer.PointListType">
-          <Point xsi:type="SignalF.Datamodel.Designer.PointType" X="737" Y="248" />
-          <Point xsi:type="SignalF.Datamodel.Designer.PointType" X="992" Y="344" />
-        </Vertices>
+        <Vertices xsi:type="SignalF.Datamodel.Designer.PointListType" />
       </DesignerElement>
-      <DesignerElement xsi:type="SignalF.Datamodel.Designer.LinkElementType" id="ID3d5a99b0-1645-40fb-bded-2d95939dec43">
+      <DesignerElement xsi:type="SignalF.Datamodel.Designer.LinkElementType" id="ID82d5110d-15f2-437b-a338-ca472d2ed0ff">
         <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionRefType" idRef="ID243da407-f21b-4672-8925-c7cc3cb2e32b" />
-        <Vertices xsi:type="SignalF.Datamodel.Designer.PointListType">
-          <Point xsi:type="SignalF.Datamodel.Designer.PointType" X="737" Y="288" />
-          <Point xsi:type="SignalF.Datamodel.Designer.PointType" X="992" Y="384" />
-        </Vertices>
+        <Vertices xsi:type="SignalF.Datamodel.Designer.PointListType" />
+      </DesignerElement>
+      <DesignerElement xsi:type="SignalF.Datamodel.Designer.LinkElementType" id="ID218d8005-d606-4784-b926-025ef10ae713">
+        <Connection xsi:type="SignalF.Datamodel.Signals.SignalConnectionRefType" idRef="ID8b25095a-839d-4136-b89e-7fb9ca1f958a" />
+        <Vertices xsi:type="SignalF.Datamodel.Designer.PointListType" />
       </DesignerElement>
     </Elements>
   </DesignerConfiguration>

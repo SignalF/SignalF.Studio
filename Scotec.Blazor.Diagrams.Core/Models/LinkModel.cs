@@ -21,6 +21,8 @@ public class LinkModel : Model
 
     }
 
+    public bool IsDraft { get; set; }
+
     public Point[] Vertices { get; }
 
     public AnchorModel? Source
