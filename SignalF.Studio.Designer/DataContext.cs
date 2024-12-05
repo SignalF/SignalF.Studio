@@ -19,6 +19,8 @@ public class DataContext : ObservableObject, IDisposable
         _documentFactory = documentFactory;
     }
 
+    public IBusinessSession Session => _document?.GetSession(_sessionId);
+
     public bool IsOpen
     {
         get => _isOpen;
