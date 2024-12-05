@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Reflection;
-using Scotec.Blazor.Diagrams.Core.Behaviours;
+﻿using Scotec.Blazor.Diagrams.Core.Behaviours;
 using Scotec.Blazor.Diagrams.Core.EventArgs;
 using Scotec.Blazor.Diagrams.Core.Geometry;
 using Scotec.Blazor.Diagrams.Core.Layer;
@@ -11,28 +9,39 @@ namespace Scotec.Blazor.Diagrams.Core.Models;
 //    public class Diagram<TLayer> where TLayer : LayerBase
 public class DiagramModel : Model
 {
-    private readonly Func<DiagramModel, IEnumerable<LayerModel>> _layerFactory;
     private readonly Func<DiagramModel, IEnumerable<IDiagramBehaviour>> _behavioursFactory;
-    private List<IDiagramBehaviour>? _behaviours;
+    private readonly Func<DiagramModel, IEnumerable<LayerModel>> _layerFactory;
 
-    public DiagramModel(Func<DiagramModel, IEnumerable<LayerModel>> layerFactory, 
+    private readonly List<LayerModel> _layers = [];
+    private List<IDiagramBehaviour>? _behaviours;
+    private Rectangle _bounds = new();
+
+    public DiagramModel(Func<DiagramModel, IEnumerable<LayerModel>> layerFactory,
                         Func<DiagramModel, IEnumerable<IDiagramBehaviour>> behavioursFactory)
     {
         _layerFactory = layerFactory;
         _behavioursFactory = behavioursFactory;
     }
 
-    public event Action<Model?, PointerEventArgs>? PointerDown;
-    public event Action<Model?, PointerEventArgs>? PointerUp;
-    public event Action<Model?, PointerEventArgs>? PointerEnter;
-    public event Action<Model?, PointerEventArgs>? PointerLeave;
-    public event Action<Model?, PointerEventArgs>? PointerMove;
-    public event Action<WheelEventArgs>? Wheel;
     public Rectangle Bounds
     {
         get => _bounds;
         private set => SetProperty(ref _bounds, value);
     }
+
+    public IReadOnlyList<LayerModel> Layers => _layers;
+
+    public double Zoom { get; set; } = 1.0;
+
+    public Point Pan { get; set; }
+
+    public event Action<Model?, PointerEventArgs>? PointerDown;
+    public event Action<Model?, PointerEventArgs>? PointerUp;
+    public event Action<Model?, PointerEventArgs>? PointerEnter;
+    public event Action<Model?, PointerEventArgs>? PointerLeave;
+    public event Action<Model?, PointerEventArgs>? PointerMove;
+    public event Action<Model?, KeyboardEventArgs>? KeyDown;
+    public event Action<WheelEventArgs>? Wheel;
 
     public void SetBounds(Rectangle bounds)
     {
@@ -40,21 +49,19 @@ public class DiagramModel : Model
         {
             return;
         }
-        
+
         Bounds = bounds;
     }
 
     public Point GetRelativeMousePoint(double clientX, double clientY)
     {
-        return new Point((clientX - Bounds.Left - Pan.X)/* / Zoom*/, (clientY - Bounds.Top - Pan.Y) /*/ Zoom*/);
+        return new Point(clientX - Bounds.Left - Pan.X /* / Zoom*/, clientY - Bounds.Top - Pan.Y /*/ Zoom*/);
     }
-    
 
     public Point GetDiagramCanvasMousePoint(double clientX, double clientY)
     {
         return new Point((clientX - Bounds.Left - Pan.X) / Zoom, (clientY - Bounds.Top - Pan.Y) / Zoom);
     }
-    
 
     public override async Task OnInitializedAsync()
     {
@@ -70,24 +77,16 @@ public class DiagramModel : Model
         await Task.WhenAll(initializationTasks);
     }
 
-    private readonly List<LayerModel> _layers = [];
-    private Rectangle _bounds = new ();
-
-    public IReadOnlyList<LayerModel> Layers => _layers;
-
-    
-    public double Zoom { get; set; } = 1.0;
-
-    public Point Pan { get; set; }
-
     public void AddLayer(LayerModel layer)
     {
         if (layer is IZoomable zoomable)
         {
             zoomable.Zoom = Zoom;
         }
+
         _layers.Add(layer);
     }
+
     public void AddLayers(IEnumerable<LayerModel> layers)
     {
         layers.OfType<IZoomable>().ForAll(zoomable => zoomable.Zoom = Zoom);
@@ -100,30 +99,42 @@ public class DiagramModel : Model
 
         PointerDown?.Invoke(model, args);
     }
+
     public virtual void RaisePointerUpEvent(Model? model, PointerEventArgs args)
     {
         _layers.ForAll(layer => layer.RaisePointerUpEvent(model, args));
 
         PointerUp?.Invoke(model, args);
     }
+
     public virtual void RaisePointerEnterEvent(Model? model, PointerEventArgs args)
     {
         _layers.ForAll(layer => layer.RaisePointerEnterEvent(model, args));
 
         PointerEnter?.Invoke(model, args);
     }
+
     public virtual void RaisePointerLeaveEvent(Model? model, PointerEventArgs args)
     {
         _layers.ForAll(layer => layer.RaisePointerLeaveEvent(model, args));
 
         PointerLeave?.Invoke(model, args);
     }
+
     public virtual void RaisePointerMoveEvent(Model? model, PointerEventArgs args)
     {
         _layers.ForAll(layer => layer.RaisePointerMoveEvent(model, args));
 
         PointerMove?.Invoke(model, args);
     }
+
+    public virtual void RaiseKeyDownEvent(Model? model, KeyboardEventArgs args)
+    {
+        _layers.ForAll(layer => layer.RaiseKeyDownEvent(model, args));
+
+        KeyDown?.Invoke(model, args);
+    }
+
     public virtual void RaiseWheelEvent(WheelEventArgs args)
     {
         Wheel?.Invoke(args);

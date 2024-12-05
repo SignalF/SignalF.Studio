@@ -1,6 +1,7 @@
 ﻿using Scotec.Blazor.Diagrams.Core.Behaviours;
 using Scotec.Blazor.Diagrams.Core.EventArgs;
 using Scotec.Blazor.Diagrams.Core.Models;
+using Scotec.Extensions.Linq;
 
 namespace Scotec.Blazor.Diagrams.Core.Layer;
 
@@ -30,18 +31,22 @@ public abstract class LayerModel : Model
     protected void AddModels(IEnumerable<Model> models)
     {
         OnPropertyChanging(nameof(Models));
-        foreach (var model in models)
-        {
-            Models.Add(model);
-        }
+        models.ForAll(Models.Add);
 
         OnPropertyChanged(nameof(Models));
     }
 
-    public void RemoveModel(Model model)
+    protected void RemoveModel(Model model)
     {
         OnPropertyChanging(nameof(Models));
         Models.Remove(model.Id);
+        OnPropertyChanged(nameof(Models));
+    }
+
+    protected void RemoveModels(IEnumerable<Model> models)
+    {
+        OnPropertyChanging(nameof(Models));
+        models.ForAll(model => Models.Remove(model.Id));
         OnPropertyChanged(nameof(Models));
     }
 
@@ -56,6 +61,7 @@ public abstract class LayerModel : Model
     public event Action<Model?, PointerEventArgs>? PointerEnter;
     public event Action<Model?, PointerEventArgs>? PointerLeave;
     public event Action<Model?, PointerEventArgs>? PointerMove;
+    public event Action<Model?, KeyboardEventArgs>? KeyDown;
 
     public virtual void RaisePointerDownEvent(Model? model, PointerEventArgs args)
     {
@@ -81,4 +87,10 @@ public abstract class LayerModel : Model
     {
         PointerMove?.Invoke(model, args);
     }
+
+    public virtual void RaiseKeyDownEvent(Model? model, KeyboardEventArgs args)
+    {
+        KeyDown?.Invoke(model, args);
+    }
+
 }

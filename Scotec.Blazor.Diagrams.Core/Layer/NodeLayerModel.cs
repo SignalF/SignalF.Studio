@@ -8,17 +8,21 @@ public abstract class NodeLayerModel : LayerModel, IMovable, IZoomable
 {
     private List<INodeLayerBehaviour>? _behaviours;
     private readonly Func<NodeLayerModel, IEnumerable<INodeLayerBehaviour>> _behavioursFactory;
+    private readonly INodeLayerBehaviour.Factory _testFactory;
 
-    protected NodeLayerModel(DiagramModel diagramModel, Func<NodeLayerModel, IEnumerable<INodeLayerBehaviour>> behavioursFactory) 
+    protected NodeLayerModel(DiagramModel diagramModel, Func<NodeLayerModel, IEnumerable<INodeLayerBehaviour>> behavioursFactory, INodeLayerBehaviour.Factory testFactory) 
         : base(diagramModel)
     {
         _behavioursFactory = behavioursFactory;
+        _testFactory = testFactory;
     }
 
     public override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
         _behaviours = _behavioursFactory(this).ToList();
+       
+        var x = _testFactory(this);
     }
 
     public Point Position { get; private set; }
@@ -37,29 +41,44 @@ public abstract class NodeLayerModel : LayerModel, IMovable, IZoomable
         AddModel(node);
     }
 
-    public void AddNodes(IEnumerable<NodeModel> nodes)
+    public virtual void AddNodes(NodeModel node)
+    {
+        AddModel(node);
+    }
+
+    public virtual void AddNodes(IEnumerable<NodeModel> nodes)
     {
         AddModels(nodes);
     }
 
-    public void RemoveNode(NodeModel node)
+    public virtual void RemoveNode(NodeModel node)
     {
         RemoveModel(node);
     }
 
-    public void AddLink(LinkModel link)
+    public virtual void RemoveNodes(IEnumerable<NodeModel> nodes)
+    {
+        RemoveModels(nodes);
+    }
+
+    public virtual void AddLink(LinkModel link)
     {
         AddModel(link);
     }
 
-    public void AddLinks(IEnumerable<LinkModel> links)
+    public virtual void AddLinks(IEnumerable<LinkModel> links)
     {
         AddModels(links);
     }
 
-    public void RemoveLink(LinkModel link)
+    public virtual void RemoveLink(LinkModel link)
     {
         RemoveModel(link);
+    }
+
+    public virtual void RemoveLinks(IEnumerable<LinkModel> links)
+    {
+        RemoveModels(links);
     }
 
     public IReadOnlyList<NodeModel> GetNodes()
@@ -73,6 +92,7 @@ public abstract class NodeLayerModel : LayerModel, IMovable, IZoomable
     }
 
     public abstract LinkModel CreateDraftLink(AnchorModel source, AnchorModel target);
+
     public abstract void CreateLink(PortModel source, PortModel target);
 
 }

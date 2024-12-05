@@ -8,9 +8,11 @@ namespace SignalF.Studio.Designer.Models;
 
 public class SignalProcessorNodeModel : NodeModel
 {
-    private readonly Func<ISignalConfiguration, SignalProcessorNodeModel, Point, Size, SignalProcessorPortModel> _portModelFactory;
+    public delegate SignalProcessorNodeModel Factory(ISignalProcessorElement designerElement);
 
-    public SignalProcessorNodeModel(ISignalProcessorElement designerElement, Func<ISignalConfiguration, SignalProcessorNodeModel, Point, Size, SignalProcessorPortModel> portModelFactory)
+    private readonly SignalProcessorPortModel.Factory _portModelFactory;
+
+    public SignalProcessorNodeModel(ISignalProcessorElement designerElement, SignalProcessorPortModel.Factory portModelFactory)
         : base(designerElement.Id.ToString("D"), designerElement.Position.ToPoint(), designerElement.Size.ToSize())
     {
         _portModelFactory = portModelFactory;

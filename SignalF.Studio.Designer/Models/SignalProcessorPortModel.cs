@@ -6,6 +6,8 @@ namespace SignalF.Studio.Designer.Models;
 
 public class SignalProcessorPortModel : PortModel
 {
+    public delegate SignalProcessorPortModel Factory(ISignalConfiguration signalConfiguration, SignalProcessorNodeModel parent, Point position, Size size);
+
     private AnchorModel _anchor;
 
     public SignalProcessorPortModel(ISignalConfiguration signalConfiguration, SignalProcessorNodeModel parent, Point position, Size size)

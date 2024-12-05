@@ -60,8 +60,12 @@ public class DiagramCanvas : ComponentBase
         builder.AddAttribute(sequence++, "onpointerup", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerUp));
         builder.AddEventPreventDefaultAttribute(sequence++, "onpointerup", true);
         builder.AddAttribute(sequence++, "onpointermove", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerMove));
-        //builder.AddEventStopPropagationAttribute(sequence++, "onpointermove", true);
         builder.AddEventPreventDefaultAttribute(sequence++, "onpointermove", true);
+        builder.AddAttribute(sequence++, "onkeydown", EventCallback.Factory.Create<KeyboardEventArgs>(this, OnKeyDown));
+        builder.AddEventPreventDefaultAttribute(sequence++, "onpointermove", true);
+
+
+        //builder.AddEventStopPropagationAttribute(sequence++, "onpointermove", true);
         //builder.AddAttribute(sequence++, "onkeydown", EventCallback.Factory.Create<KeyboardEventArgs>(this, OnKeyDown));
         //builder.AddAttribute(sequence++, "onwheel", EventCallback.Factory.Create<WheelEventArgs>(this, OnWheel));
 
@@ -146,6 +150,8 @@ public class DiagramCanvas : ComponentBase
 
     private void OnKeyDown(KeyboardEventArgs e)
     {
+        BlazorDiagram.RaiseKeyDownEvent(null, (BlazorKeyboardEventArgs)e);
+
     }
 
     private void OnWheel(WheelEventArgs e)

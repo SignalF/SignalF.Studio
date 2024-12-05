@@ -13,13 +13,16 @@ namespace SignalF.Studio.Designer.Models;
 public class ConfigurationLayerModel : NodeLayerModel
 {
     private readonly DataContext _dataContext;
-    private readonly Func<ILinkElement, AnchorModel, AnchorModel, SignalProcessorLinkModel> _linkModelFactory;
-    private readonly Func<ISignalProcessorElement, SignalProcessorNodeModel> _nodeModelFactory;
+    private readonly SignalProcessorLinkModel.Factory _linkModelFactory;
+    private readonly SignalProcessorNodeModel.Factory _nodeModelFactory;
 
-    public ConfigurationLayerModel(DiagramModel diagramModel, Func<NodeLayerModel, IEnumerable<INodeLayerBehaviour>> behaviours, DataContext dataContext,
-                                   Func<ISignalProcessorElement, SignalProcessorNodeModel> nodeModelFactory,
-                                   Func<ILinkElement, AnchorModel, AnchorModel, SignalProcessorLinkModel> linkModelFactory)
-        : base(diagramModel, behaviours)
+    public ConfigurationLayerModel(DiagramModel diagramModel, 
+                                   Func<NodeLayerModel, IEnumerable<INodeLayerBehaviour>> behaviours,
+                                   DataContext dataContext, 
+                                   SignalProcessorNodeModel.Factory nodeModelFactory,
+                                   SignalProcessorLinkModel.Factory linkModelFactory,
+                                   INodeLayerBehaviour.Factory testFactory)
+        : base(diagramModel, behaviours, testFactory)
     {
         _dataContext = dataContext;
         _nodeModelFactory = nodeModelFactory;
@@ -109,8 +112,7 @@ public class ConfigurationLayerModel : NodeLayerModel
     {
         var connection = linkElement.Connection;
 
-        //var node = _linkModelFactory(linkElement, sourcePort.Anchor, targetPort.Anchor);
-        var link = new SignalProcessorLinkModel(linkElement, sourcePort.Anchor, targetPort.Anchor);
+        var link = _linkModelFactory(linkElement, sourcePort.Anchor, targetPort.Anchor);
         sourcePort.AddLink(link);
         targetPort.AddLink(link);
         return link;
