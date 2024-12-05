@@ -6,6 +6,7 @@ using Scotec.Blazor.Diagrams.Core.Models;
 using Scotec.Blazor.Diagrams.Widgets;
 using SignalF.Studio.Designer.Components;
 using SignalF.Studio.Designer.Models;
+using SignalF.Studio.Designer.Services;
 using SignalF.Studio.Designer.Widgets;
 
 namespace SignalF.Studio.Designer.Module;
@@ -17,6 +18,9 @@ public class DiagramModule : Autofac.Module
         base.Load(builder);
 
         builder.RegisterType<DataContext>()
+               .InstancePerLifetimeScope();
+
+        builder.RegisterType<DomainService>()
                .InstancePerLifetimeScope();
 
         builder.RegisterType<DesignerDiagramModel>()

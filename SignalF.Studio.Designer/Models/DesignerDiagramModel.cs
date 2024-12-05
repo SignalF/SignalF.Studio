@@ -1,5 +1,5 @@
 ﻿using Scotec.Blazor.Diagrams;
-using Scotec.Blazor.Diagrams.Core.Behaviours;
+using Scotec.Blazor.Diagrams.Core.Behaviours.Diagram;
 using Scotec.Blazor.Diagrams.Core.Geometry;
 using Scotec.Blazor.Diagrams.Core.Layer;
 using Scotec.Blazor.Diagrams.Core.Models;

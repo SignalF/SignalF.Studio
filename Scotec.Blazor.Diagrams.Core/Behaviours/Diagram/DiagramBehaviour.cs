@@ -1,6 +1,6 @@
 ﻿using Scotec.Blazor.Diagrams.Core.Models;
 
-namespace Scotec.Blazor.Diagrams.Core.Behaviours;
+namespace Scotec.Blazor.Diagrams.Core.Behaviours.Diagram;
 
 public abstract class DiagramBehaviour : IDiagramBehaviour
 {

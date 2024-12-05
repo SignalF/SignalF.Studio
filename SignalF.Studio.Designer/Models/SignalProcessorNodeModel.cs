@@ -2,6 +2,7 @@
 using Scotec.Blazor.Diagrams.Core.Models;
 using SignalF.Datamodel.Designer;
 using SignalF.Datamodel.Signals;
+using SignalF.Studio.Designer.Services;
 using Size = Scotec.Blazor.Diagrams.Core.Geometry.Size;
 
 namespace SignalF.Studio.Designer.Models;
@@ -10,11 +11,13 @@ public class SignalProcessorNodeModel : NodeModel
 {
     public delegate SignalProcessorNodeModel Factory(ISignalProcessorElement designerElement);
 
+    private readonly DomainService _domainService;
     private readonly SignalProcessorPortModel.Factory _portModelFactory;
 
-    public SignalProcessorNodeModel(ISignalProcessorElement designerElement, SignalProcessorPortModel.Factory portModelFactory)
+    public SignalProcessorNodeModel(ISignalProcessorElement designerElement, DomainService domainService, SignalProcessorPortModel.Factory portModelFactory)
         : base(designerElement.Id.ToString("D"), designerElement.Position.ToPoint(), designerElement.Size.ToSize())
     {
+        _domainService = domainService;
         _portModelFactory = portModelFactory;
         DesignerElement = designerElement;
         Configuration = designerElement.SignalProcessor;

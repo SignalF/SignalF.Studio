@@ -6,7 +6,7 @@ public interface IMovable
 {
     Point Position { get; }
 
-    void SetPosition(double x, double y);
-
     bool IsMoving { get; set; }
+
+    void SetPosition(double x, double y);
 }

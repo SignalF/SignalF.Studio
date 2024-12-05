@@ -1,6 +1,6 @@
 ﻿using Scotec.Blazor.Diagrams.Core.Layer;
 
-namespace Scotec.Blazor.Diagrams.Core.Behaviours;
+namespace Scotec.Blazor.Diagrams.Core.Behaviours.Layer;
 
 public interface INodeLayerBehaviour : ILayerBehaviour
 {

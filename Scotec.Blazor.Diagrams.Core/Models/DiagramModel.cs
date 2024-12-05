@@ -1,4 +1,5 @@
 ﻿using Scotec.Blazor.Diagrams.Core.Behaviours;
+using Scotec.Blazor.Diagrams.Core.Behaviours.Diagram;
 using Scotec.Blazor.Diagrams.Core.EventArgs;
 using Scotec.Blazor.Diagrams.Core.Geometry;
 using Scotec.Blazor.Diagrams.Core.Layer;

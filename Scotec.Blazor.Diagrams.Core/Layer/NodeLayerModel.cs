@@ -1,4 +1,5 @@
 ﻿using Scotec.Blazor.Diagrams.Core.Behaviours;
+using Scotec.Blazor.Diagrams.Core.Behaviours.Layer;
 using Scotec.Blazor.Diagrams.Core.Geometry;
 using Scotec.Blazor.Diagrams.Core.Models;
 
@@ -22,7 +23,7 @@ public abstract class NodeLayerModel : LayerModel, IMovable, IZoomable
         await base.OnInitializedAsync();
         _behaviours = _behavioursFactory(this).ToList();
        
-        var x = _testFactory(this);
+        //var x = _testFactory(this);
     }
 
     public Point Position { get; private set; }

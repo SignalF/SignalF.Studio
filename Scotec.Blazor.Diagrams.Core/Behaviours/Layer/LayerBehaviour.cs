@@ -1,6 +1,6 @@
 ﻿using Scotec.Blazor.Diagrams.Core.Layer;
 
-namespace Scotec.Blazor.Diagrams.Core.Behaviours;
+namespace Scotec.Blazor.Diagrams.Core.Behaviours.Layer;
 
 public abstract class LayerBehaviour<TLayerModel> : ILayerBehaviour
     where TLayerModel : LayerModel
@@ -12,16 +12,16 @@ public abstract class LayerBehaviour<TLayerModel> : ILayerBehaviour
 
     public TLayerModel LayerModel { get; }
 
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
     protected virtual void Dispose(bool disposing)
     {
         if (disposing)
         {
         }
-    }
-
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
     }
 }

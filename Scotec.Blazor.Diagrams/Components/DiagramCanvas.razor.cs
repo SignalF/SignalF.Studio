@@ -62,7 +62,7 @@ public class DiagramCanvas : ComponentBase
         builder.AddAttribute(sequence++, "onpointermove", EventCallback.Factory.Create<PointerEventArgs>(this, OnPointerMove));
         builder.AddEventPreventDefaultAttribute(sequence++, "onpointermove", true);
         builder.AddAttribute(sequence++, "onkeydown", EventCallback.Factory.Create<KeyboardEventArgs>(this, OnKeyDown));
-        builder.AddEventPreventDefaultAttribute(sequence++, "onpointermove", true);
+        builder.AddEventPreventDefaultAttribute(sequence++, "onkeydown", true);
 
 
         //builder.AddEventStopPropagationAttribute(sequence++, "onpointermove", true);

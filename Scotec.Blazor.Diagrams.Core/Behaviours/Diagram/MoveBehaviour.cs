@@ -2,16 +2,16 @@
 using Scotec.Blazor.Diagrams.Core.EventArgs;
 using Scotec.Blazor.Diagrams.Core.Models;
 
-namespace Scotec.Blazor.Diagrams.Core.Behaviours;
+namespace Scotec.Blazor.Diagrams.Core.Behaviours.Diagram;
 
 public class MoveBehaviour : DiagramBehaviour
 {
+    private IReadOnlyList<AnchorModel>? _anchors;
     private bool _buttonDown;
     private bool _firstMove;
     private double _lastClientX;
     private double _lastClientY;
     private List<IMovable> _movables = [];
-    private IReadOnlyList<AnchorModel>? _anchors;
 
     public MoveBehaviour(DiagramModel diagramModel) : base(diagramModel)
     {

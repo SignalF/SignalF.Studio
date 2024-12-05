@@ -2,7 +2,7 @@
 using Scotec.Blazor.Diagrams.Core.Geometry;
 using Scotec.Blazor.Diagrams.Core.Models;
 
-namespace Scotec.Blazor.Diagrams.Core.Behaviours;
+namespace Scotec.Blazor.Diagrams.Core.Behaviours.Diagram;
 
 public class SelectionBehaviour : DiagramBehaviour
 {

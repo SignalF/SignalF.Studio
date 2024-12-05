@@ -1,11 +1,9 @@
 ﻿using System.Collections.Immutable;
-using Scotec.Blazor.Diagrams.Core.Behaviours;
+using Scotec.Blazor.Diagrams.Core.Behaviours.Layer;
 using Scotec.Blazor.Diagrams.Core.Layer;
 using Scotec.Blazor.Diagrams.Core.Models;
 using Scotec.XMLDatabase;
-using Scotec.XMLDatabase.ChangeNotification;
-using SignalF.Datamodel.Designer;
-using SignalF.Datamodel.Signals;
+using SignalF.Studio.Designer.Services;
 using ILinkElement = SignalF.Datamodel.Designer.ILinkElement;
 
 namespace SignalF.Studio.Designer.Models;
@@ -14,19 +12,20 @@ public class ConfigurationLayerModel : NodeLayerModel
 {
     private readonly DataContext _dataContext;
     private readonly SignalProcessorLinkModel.Factory _linkModelFactory;
-    private readonly SignalProcessorNodeModel.Factory _nodeModelFactory;
+    private readonly DomainService _domainService;
+    //private readonly SignalProcessorNodeModel.Factory _nodeModelFactory;
 
     public ConfigurationLayerModel(DiagramModel diagramModel, 
                                    Func<NodeLayerModel, IEnumerable<INodeLayerBehaviour>> behaviours,
                                    DataContext dataContext, 
-                                   SignalProcessorNodeModel.Factory nodeModelFactory,
                                    SignalProcessorLinkModel.Factory linkModelFactory,
-                                   INodeLayerBehaviour.Factory testFactory)
+                                   INodeLayerBehaviour.Factory testFactory,
+                                   DomainService domainService)
         : base(diagramModel, behaviours, testFactory)
     {
         _dataContext = dataContext;
-        _nodeModelFactory = nodeModelFactory;
         _linkModelFactory = linkModelFactory;
+        _domainService = domainService;
     }
 
     public override async Task OnInitializedAsync()
@@ -34,9 +33,7 @@ public class ConfigurationLayerModel : NodeLayerModel
         await base.OnInitializedAsync();
         var configuration = _dataContext.GetConfiguration();
 
-        var nodeElements = configuration.DesignerConfiguration.Elements.OfType<ISignalProcessorElement>();
-        CreateSignalProcessorNodes(nodeElements);
-
+        AddNodes(_domainService.GetAllSignalProcessors());
         var ports = GetAllPorts();
 
         var linkElements = configuration.DesignerConfiguration.Elements.OfType<ILinkElement>();
@@ -55,44 +52,19 @@ public class ConfigurationLayerModel : NodeLayerModel
 
     private void DataContextOnChanged(object sender, DataChangedEventArgs args)
     {
-        var newSignalProcessorElements = args.GetChanges<ISignalProcessorElement>()
-                              .Where(change => change.ChangeType == EChangeNotificationType.Added)
-                              .Select(newElement => (ISignalProcessorElement)newElement.BusinessObject);
-        CreateSignalProcessorNodes(newSignalProcessorElements);
+        //var newSignalProcessorElements = args.GetChanges<ISignalProcessorElement>()
+        //                      .Where(change => change.ChangeType == EChangeNotificationType.Added)
+        //                      .Select(newElement => (ISignalProcessorElement)newElement.BusinessObject);
+        //CreateSignalProcessorNodes(newSignalProcessorElements);
 
-        var newLinkElements = args.GetChanges<ILinkElement>()
-                              .Where(change => change.ChangeType == EChangeNotificationType.Added)
-                              .Select(newElement => (ILinkElement)newElement.BusinessObject);
-        CreateLinks(newLinkElements, GetAllPorts());
-    }
-
-    private void DataContextOnOpened(object sender, EventArgs e)
-    {
-        var configuration = _dataContext.GetConfiguration();
-
-        var elements = configuration.DesignerConfiguration.Elements.OfType<ISignalProcessorElement>();
-        CreateSignalProcessorNodes(elements);
+        //var newLinkElements = args.GetChanges<ILinkElement>()
+        //                      .Where(change => change.ChangeType == EChangeNotificationType.Added)
+        //                      .Select(newElement => (ILinkElement)newElement.BusinessObject);
+        //CreateLinks(newLinkElements, GetAllPorts());
     }
 
     private void DataContextOnClosed(object sender, EventArgs e)
     {
-    }
-
-    private void CreateSignalProcessorNodes(IEnumerable<ISignalProcessorElement> elements)
-    {
-        AddNodes(elements.Select(element =>
-        {
-            var node = CreateSignalProcessorNode(element);
-
-            return node;
-        }));
-    }
-
-    private SignalProcessorNodeModel CreateSignalProcessorNode(ISignalProcessorElement designerElement)
-    {
-        var node = _nodeModelFactory(designerElement);
-
-        return node;
     }
 
     private void CreateLinks(IEnumerable<ILinkElement> elements, IReadOnlyList<SignalProcessorPortModel> ports)
@@ -131,19 +103,7 @@ public class ConfigurationLayerModel : NodeLayerModel
         {
             throw new InvalidCastException();
         }
-
-        var session = _dataContext.GetConfiguration().Session;
-        using var changeLock = session.CreateNotificationLock();
-        using var transaction = session.CreateTransaction();
-
-        var configuration = _dataContext.GetConfiguration();
-        var connection = configuration.Connections.Create();
-        connection.SignalSource = (ISignalSourceConfiguration)source.SignalConfiguration;
-        connection.SignalSink = (ISignalSinkConfiguration)target.SignalConfiguration;
-
-        var linkElement = configuration.DesignerConfiguration.Elements.Create<ILinkElement>();
-        linkElement.Connection = connection;
-
-        transaction.Commit();
+        
+        _domainService.CreateLink(source, target);
     }
 }

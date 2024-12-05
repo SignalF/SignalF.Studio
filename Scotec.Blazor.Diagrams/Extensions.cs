@@ -1,7 +1,8 @@
 ﻿using System.Globalization;
 using Microsoft.Extensions.DependencyInjection;
 using Scotec.Blazor.Diagrams.Components;
-using Scotec.Blazor.Diagrams.Core.Behaviours;
+using Scotec.Blazor.Diagrams.Core.Behaviours.Diagram;
+using Scotec.Blazor.Diagrams.Core.Behaviours.Layer;
 using Scotec.Blazor.Diagrams.Core.Layer;
 
 namespace Scotec.Blazor.Diagrams;
@@ -41,7 +42,7 @@ public static class Extensions
                        .AddTransient<IDiagramBehaviour, MoveBehaviour>()
                        .AddTransient<IDiagramBehaviour, PanBehaviour>()
                        .AddTransient<IDiagramBehaviour, ZoomBehaviour>()
-                       .AddTransient<INodeLayerBehaviour, ConnectBehaviour>()
+                       .AddTransient<INodeLayerBehaviour, NodeLayerConnectBehaviour>()
                        ;
     }
 }

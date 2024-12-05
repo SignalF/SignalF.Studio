@@ -1,5 +1,4 @@
-﻿using Scotec.Blazor.Diagrams.Core.Behaviours;
-using Scotec.Blazor.Diagrams.Core.EventArgs;
+﻿using Scotec.Blazor.Diagrams.Core.EventArgs;
 using Scotec.Blazor.Diagrams.Core.Models;
 using Scotec.Extensions.Linq;
 
@@ -7,19 +6,19 @@ namespace Scotec.Blazor.Diagrams.Core.Layer;
 
 public abstract class LayerModel : Model
 {
-    public DiagramModel Diagram { get; }
-
     protected LayerModel(DiagramModel diagram)
     {
         Diagram = diagram;
     }
 
+    public DiagramModel Diagram { get; }
+
+    public ModelCollection Models { get; } = [];
+
     public override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
     }
-
-    public ModelCollection Models { get; } = [];
 
     protected void AddModel(Model model)
     {
@@ -92,5 +91,4 @@ public abstract class LayerModel : Model
     {
         KeyDown?.Invoke(model, args);
     }
-
 }
