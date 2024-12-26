@@ -12,7 +12,7 @@ public class DataContext : ObservableObject, IDisposable
     private bool _isOpen;
     private Guid _sessionId;
 
-    private const string FileName = @"D:\Projects\scotec\SignalF\SignalF.Studio\TestData\SignalFConfig.xml";
+    private const string FileName = @"C:\Projects\scotec\SignalF\SignalF.Studio\TestData\SignalFConfig.xml";
 
     public DataContext(Func<IBusinessDocument> documentFactory)
     {

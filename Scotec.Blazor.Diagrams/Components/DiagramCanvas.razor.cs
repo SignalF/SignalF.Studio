@@ -67,10 +67,11 @@ public class DiagramCanvas : ComponentBase
 
         //builder.AddEventStopPropagationAttribute(sequence++, "onpointermove", true);
         //builder.AddAttribute(sequence++, "onkeydown", EventCallback.Factory.Create<KeyboardEventArgs>(this, OnKeyDown));
-        //builder.AddAttribute(sequence++, "onwheel", EventCallback.Factory.Create<WheelEventArgs>(this, OnWheel));
+        builder.AddAttribute(sequence++, "onwheel", EventCallback.Factory.Create<WheelEventArgs>(this, OnWheel));
 
         //builder.AddEventPreventDefaultAttribute(sequence++, "onpointermove", true);
-        //builder.AddEventStopPropagationAttribute(sequence++, "onwheel", true);
+        builder.AddEventStopPropagationAttribute(sequence++, "onwheel", true);
+        //builder.AddEventPreventDefaultAttribute(sequence++, "onwheel", true);
 
         builder.AddElementReferenceCapture(sequence++, value => _elementReference = value);
         
